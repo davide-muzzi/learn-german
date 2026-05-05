@@ -1,26 +1,5 @@
-# German Lessons
+# Vue 3 + Vite
 
-A structured collection of German language learning materials, from beginner (A1) to advanced (C2).
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Levels
-
-| Level | Description | Status |
-|-------|-------------|--------|
-| A1 | Beginner | In progress |
-| A2 | Elementary | Planned |
-| B1 | Intermediate | Planned |
-| B2 | Upper Intermediate | Planned |
-| C1 | Advanced | Planned |
-| C2 | Mastery | Planned |
-
-## How to use this site
-
-Each level is divided into chapters. Within each chapter you'll find:
-
-- **Theory** — explanations and rules
-- **Vocabulary** — words and phrases
-- **Grammar** — conjugation tables and structures
-- **Exercises** — practice questions
-- **Solutions** — answers to the exercises
-
-Use the navigation on the left to browse by level and topic, or use the search bar to find specific content.
+Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
