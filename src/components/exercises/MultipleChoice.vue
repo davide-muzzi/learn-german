@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { MC_QS } from '../data/index.js'
+import { MC_QS } from '../../data/index.js'
 
 const mcDone = ref({})
 const mcCorrect = ref(0)
@@ -33,11 +33,8 @@ const scoreDisplay = computed(() => {
 </script>
 
 <template>
-  <div class="page-header">
-    <h1>Multiple Choice</h1>
-    <p class="sub">Exercise 2 of 3 — Choose the correct form of sein or haben</p>
-  </div>
   <div class="card">
+    <div class="card-title">Multiple Choice</div>
     <div class="ex-instruction">
       Click the correct option to fill each gap. You'll get instant feedback.
     </div>

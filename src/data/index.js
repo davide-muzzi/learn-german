@@ -96,7 +96,7 @@ export const HABEN = [
   ['Sie (form.)', 'haben', 'you have (form.)'],
 ]
 
-export const ROADMAP = [
+export const CHAPTERS = [
   { n: 1, title: 'Basics', active: true, topics: ['Greetings', 'Names & origin', 'Numbers 0-20', 'sein & haben', 'Pronouns', 'Basic sentence structure'] },
   { n: 2, title: 'Personal Info & Questions', active: false, topics: ['Age', 'Nationalities', 'Countries & languages', 'Professions', 'W-questions', 'Forming questions'] },
   { n: 3, title: 'Daily Life', active: false, topics: ['Hobbies', 'Daily routine', 'Time', 'Days of the week', 'Months', 'Modal verbs'] },

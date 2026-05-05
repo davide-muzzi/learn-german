@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { TRANSLATIONS } from '../data/index.js'
+import { TRANSLATIONS } from '../../data/index.js'
 
 const visible = ref({})
 
@@ -10,11 +10,8 @@ function toggle(qi) {
 </script>
 
 <template>
-  <div class="page-header">
-    <h1>Translation</h1>
-    <p class="sub">Exercise 3 of 3 — Translate from English to German</p>
-  </div>
   <div class="card">
+    <div class="card-title">Translation</div>
     <div class="ex-instruction">
       Translate each sentence into German mentally (or jot it down), then reveal the answer to check.
     </div>
