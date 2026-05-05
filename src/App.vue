@@ -1,7 +1,10 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import AppSidebar from './components/AppSidebar.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <AppSidebar />
+  <main class="main">
+    <RouterView />
+  </main>
 </template>
