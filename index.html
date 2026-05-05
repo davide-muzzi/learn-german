@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch A1 — Basics</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h1>🇩🇪 Deutsch A1</h1>
+    <p>Interactive Lesson Book</p>
+  </div>
+  <div class="sidebar-body">
+
+    <div class="nav-section">
+      <div class="nav-item top" onclick="go('roadmap')" id="n-roadmap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        A1 Roadmap
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Chapter 1: Basics</div>
+
+      <div class="nav-group-label">Theory</div>
+      <div class="nav-item sub" onclick="go('alphabet')" id="n-alphabet">
+        <span class="nav-dot"></span> Alphabet
+      </div>
+
+      <div class="nav-group-label">Vocabulary</div>
+      <div class="nav-item sub" onclick="go('v-greetings')" id="n-v-greetings">
+        <span class="nav-dot"></span> Greetings
+      </div>
+      <div class="nav-item sub" onclick="go('v-name')" id="n-v-name">
+        <span class="nav-dot"></span> Saying Your Name
+      </div>
+      <div class="nav-item sub" onclick="go('v-from')" id="n-v-from">
+        <span class="nav-dot"></span> Where You're From
+      </div>
+      <div class="nav-item sub" onclick="go('v-expr')" id="n-v-expr">
+        <span class="nav-dot"></span> Common Expressions
+      </div>
+      <div class="nav-item sub" onclick="go('v-numbers')" id="n-v-numbers">
+        <span class="nav-dot"></span> Numbers 0–20
+      </div>
+
+      <div class="nav-group-label">Grammar</div>
+      <div class="nav-item sub" onclick="go('g-sein')" id="n-g-sein">
+        <span class="nav-dot"></span> sein &mdash; to be
+      </div>
+      <div class="nav-item sub" onclick="go('g-haben')" id="n-g-haben">
+        <span class="nav-dot"></span> haben &mdash; to have
+      </div>
+
+      <div class="nav-group-label">Exercises</div>
+      <div class="nav-item sub" onclick="go('ex-fill')" id="n-ex-fill">
+        <span class="nav-dot"></span> Fill in the Gaps
+      </div>
+      <div class="nav-item sub" onclick="go('ex-mc')" id="n-ex-mc">
+        <span class="nav-dot"></span> Multiple Choice
+      </div>
+      <div class="nav-item sub" onclick="go('ex-translate')" id="n-ex-translate">
+        <span class="nav-dot"></span> Translation
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── CONTENT ── -->
+<main class="main" id="content"></main>
+
+<script src="app.js"></script>
+</body>
+</html>
