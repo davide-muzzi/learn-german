@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock } from '@lucide/vue'
+import { Languages, Lock, Layers } from '@lucide/vue'
 import { CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 
 defineProps({ open: Boolean })
@@ -33,6 +33,12 @@ const currentSection = computed(() =>
           <div class="nav-item top" :class="{ active: isExactActive }" @click="navigate" role="link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             A1 Overview
+          </div>
+        </RouterLink>
+        <RouterLink to="/flashcards" custom v-slot="{ navigate, isExactActive }">
+          <div class="nav-item top" :class="{ active: isExactActive }" @click="navigate" role="link">
+            <Layers :size="14" />
+            Flashcards
           </div>
         </RouterLink>
       </div>

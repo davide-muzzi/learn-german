@@ -1,5 +1,5 @@
 <script setup>
-import { Cookie, ChartNoAxesColumn, UserX, Server, ShieldCheck } from '@lucide/vue'
+import { Cookie, ChartNoAxesColumn, UserX, Server, ShieldCheck, HardDrive } from '@lucide/vue'
 </script>
 
 <template>
@@ -54,6 +54,19 @@ import { Cookie, ChartNoAxesColumn, UserX, Server, ShieldCheck } from '@lucide/v
         <div class="privacy-row-title">No backend — fully client-side</div>
         <p>This app runs entirely in your browser. There is no backend server and no database.
         Your answers and interactions never leave your device, and are gone when you close the tab.</p>
+      </div>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-row">
+      <HardDrive :size="20" class="privacy-icon" />
+      <div>
+        <div class="privacy-row-title">Local storage — flashcard preferences only</div>
+        <p>The flashcard feature saves your selected sets and language direction to your browser's
+        <code>localStorage</code> so your preferences are remembered across visits. This data never
+        leaves your device and is not shared with anyone. You can clear it at any time via your
+        browser's storage settings.</p>
       </div>
     </div>
   </div>
