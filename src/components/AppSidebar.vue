@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { Languages, Lock, Layers } from '@lucide/vue'
 import { CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
+import { flashcardResetSignal } from '../composables/flashcardBus.js'
 
 defineProps({ open: Boolean })
 defineEmits(['close'])
@@ -36,7 +37,7 @@ const currentSection = computed(() =>
           </div>
         </RouterLink>
         <RouterLink to="/flashcards" custom v-slot="{ navigate, isExactActive }">
-          <div class="nav-item top" :class="{ active: isExactActive }" @click="navigate" role="link">
+          <div class="nav-item top" :class="{ active: isExactActive }" @click="isExactActive ? flashcardResetSignal++ : navigate()" role="link">
             <Layers :size="14" />
             Flashcards
           </div>

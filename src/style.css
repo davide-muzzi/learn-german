@@ -956,6 +956,21 @@ tbody tr:hover td { background: #fafafa; }
 .fc-resume-stats { font-size: 13px; color: var(--muted); display: flex; gap: 4px; flex-wrap: wrap; }
 
 /* session */
+.fc-session-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.fc-nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 0;
+  transition: color 0.15s;
+}
+.fc-nav-link:hover { color: var(--text); }
 .fc-progress-wrap { margin-bottom: 20px; }
 .fc-progress-top {
   display: flex;

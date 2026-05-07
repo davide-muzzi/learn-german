@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { FLASHCARD_SETS } from '../data/index.js'
+import { flashcardResetSignal } from '../composables/flashcardBus.js'
 
 const STORAGE_KEY = 'fc-prefs'
 
@@ -143,6 +144,8 @@ function onKey(e) {
   else if (e.code === 'ArrowLeft' && flipped.value) answer(false)
 }
 
+watch(flashcardResetSignal, backToSetup)
+
 onMounted(() => window.addEventListener('keydown', onKey))
 onUnmounted(() => window.removeEventListener('keydown', onKey))
 </script>
@@ -204,6 +207,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 
   <!-- ── SESSION ── -->
   <template v-else-if="phase === 'session'">
+    <div class="fc-session-nav">
+      <button class="fc-nav-link" @click="backToSetup">← Overview</button>
+      <button class="fc-nav-link" @click="startSession()">Restart ↺</button>
+    </div>
+
     <div class="fc-progress-wrap">
       <div class="fc-progress-top">
         <span class="fc-progress-text">{{ idx + 1 }} / {{ deck.length }}</span>
@@ -269,7 +277,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
         <button v-if="unknownCards.length" class="btn-primary" @click="retryUnknown">
           Retry missed ({{ unknownCards.length }})
         </button>
-        <button class="btn-secondary" @click="backToSetup">Back to setup</button>
+        <button class="btn-secondary" @click="startSession()">Restart</button>
+        <button class="btn-secondary" @click="backToSetup">Back to overview</button>
       </div>
     </div>
   </template>
