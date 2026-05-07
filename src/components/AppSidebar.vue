@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import { Languages, Lock } from '@lucide/vue'
 import { CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 
 defineProps({ open: Boolean })
@@ -20,7 +21,7 @@ const currentSection = computed(() =>
   <nav class="sidebar" :class="{ 'is-open': open }">
     <div class="sidebar-logo">
       <div>
-        <h1>🇩🇪 Deutsch A1</h1>
+        <h1><Languages :size="17" /> Deutsch A1</h1>
         <p>Interactive Lesson Book</p>
       </div>
       <button class="sidebar-close" @click="$emit('close')" aria-label="Close menu">✕</button>
@@ -49,7 +50,7 @@ const currentSection = computed(() =>
             >
               <span class="ch-nav-n">{{ ch.n }}</span>
               <span class="ch-nav-title">{{ ch.title }}</span>
-              <span v-if="!ch.active" class="ch-nav-lock">🔒</span>
+              <Lock v-if="!ch.active" :size="11" class="ch-nav-lock" />
             </div>
           </RouterLink>
 

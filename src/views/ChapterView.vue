@@ -1,11 +1,14 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { BookOpen, MessageSquare, Type, PenLine, Lock, Hammer } from '@lucide/vue'
 import {
   CHAPTERS, CHAPTER_SECTIONS,
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS,
   ALPHABET, UMLAUTS, DIPHTHONGS, SEIN, HABEN,
 } from '../data/index.js'
+
+const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
 import VocabTable from '../components/VocabTable.vue'
 import ConjugTable from '../components/ConjugTable.vue'
 import FillGaps from '../components/exercises/FillGaps.vue'
@@ -48,7 +51,7 @@ function backToChapter() {
             class="section-card"
             @click="goToSection(s.key)"
           >
-            <div class="section-card-icon">{{ s.icon }}</div>
+            <div class="section-card-icon"><component :is="sectionIcons[s.key]" :size="22" /></div>
             <div class="section-card-label">{{ s.label }}</div>
             <div class="section-card-desc">{{ s.desc }}</div>
             <div class="section-card-arrow">→</div>
@@ -58,7 +61,7 @@ function backToChapter() {
 
       <template v-else>
         <div class="card coming-soon-card">
-          <div class="coming-soon-icon">🔒</div>
+          <div class="coming-soon-icon"><Lock :size="36" /></div>
           <h2>Coming Soon</h2>
           <p>Chapter {{ n }} · <strong>{{ chapter.title }}</strong> is not yet available.</p>
           <ul v-if="chapter.topics?.length">
@@ -170,7 +173,7 @@ function backToChapter() {
       <!-- Other chapters not yet implemented -->
       <template v-else>
         <div class="card coming-soon-card">
-          <div class="coming-soon-icon">🚧</div>
+          <div class="coming-soon-icon"><Hammer :size="36" /></div>
           <h2>Content Coming Soon</h2>
           <p>The content for this chapter is being prepared.</p>
         </div>

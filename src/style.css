@@ -58,6 +58,9 @@ body {
   font-weight: 700;
   color: var(--gold);
   letter-spacing: -.3px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 .sidebar-logo p {
   font-size: 11px;
@@ -463,7 +466,7 @@ tbody tr:hover td { background: #fafafa; }
   box-shadow: 0 4px 20px rgba(0,0,0,.1);
   border-color: var(--gold);
 }
-.section-card-icon { font-size: 22px; margin-bottom: 4px; }
+.section-card-icon { margin-bottom: 4px; display: flex; align-items: center; color: var(--gold-dark); }
 .section-card-label { font-size: 16px; font-weight: 700; color: var(--text); }
 .section-card-desc { font-size: 13px; color: var(--muted); line-height: 1.4; flex: 1; }
 .section-card-arrow { font-size: 16px; color: var(--gold); margin-top: 10px; }
@@ -549,7 +552,7 @@ tbody tr:hover td { background: #fafafa; }
   text-align: center;
   padding: 56px 32px;
 }
-.coming-soon-icon { font-size: 40px; margin-bottom: 16px; }
+.coming-soon-icon { margin-bottom: 16px; display: flex; justify-content: center; color: var(--muted); }
 .coming-soon-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
 .coming-soon-card p { color: var(--muted); margin-bottom: 20px; }
 .coming-soon-card ul {
@@ -615,6 +618,9 @@ tbody tr:hover td { background: #fafafa; }
     font-size: 15px;
     font-weight: 700;
     color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 7px;
   }
   .hamburger {
     background: none;

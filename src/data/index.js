@@ -109,10 +109,10 @@ export const CHAPTERS = [
 
 export const CHAPTER_SECTIONS = {
   1: [
-    { key: 'theory',    label: 'Theory',     icon: '📖', desc: 'Alphabet & special characters' },
-    { key: 'vocab',     label: 'Vocabulary', icon: '💬', desc: 'Greetings, names, expressions & numbers' },
-    { key: 'grammar',   label: 'Grammar',    icon: '🔤', desc: 'sein & haben conjugations' },
-    { key: 'exercises', label: 'Exercises',  icon: '✏️', desc: 'Fill the gaps, multiple choice, translation' },
+    { key: 'theory',    label: 'Theory',     desc: 'Alphabet & special characters' },
+    { key: 'vocab',     label: 'Vocabulary', desc: 'Greetings, names, expressions & numbers' },
+    { key: 'grammar',   label: 'Grammar',    desc: 'sein & haben conjugations' },
+    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },
   ],
 }
 
