@@ -1,12 +1,15 @@
 <script setup>
 import { computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun } from '@lucide/vue'
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 import { flashcardResetSignal } from '../composables/flashcardBus.js'
+import { useTheme } from '../composables/useTheme.js'
 
 defineProps({ open: Boolean })
 defineEmits(['close'])
+
+const { dark, toggleTheme } = useTheme()
 
 const route = useRoute()
 
@@ -150,6 +153,13 @@ onUnmounted(() => {
 
       </div>
 
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="theme-toggle" @click="toggleTheme">
+        <component :is="dark ? Sun : Moon" :size="14" />
+        {{ dark ? 'Light mode' : 'Dark mode' }}
+      </button>
     </div>
 
     <!-- Drag handle (desktop only via CSS) -->
