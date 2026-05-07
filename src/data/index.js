@@ -107,6 +107,15 @@ export const CHAPTERS = [
   { n: 8, title: 'Exam Prep', active: false, topics: ['Review Ch. 1-7', 'Goethe A1 exam format'] },
 ]
 
+export const CHAPTER_SECTIONS = {
+  1: [
+    { key: 'theory',    label: 'Theory',     icon: '📖', desc: 'Alphabet & special characters' },
+    { key: 'vocab',     label: 'Vocabulary', icon: '💬', desc: 'Greetings, names, expressions & numbers' },
+    { key: 'grammar',   label: 'Grammar',    icon: '🔤', desc: 'sein & haben conjugations' },
+    { key: 'exercises', label: 'Exercises',  icon: '✏️', desc: 'Fill the gaps, multiple choice, translation' },
+  ],
+}
+
 export const FILL_GAPS = [
   { parts: ['Hallo! Ich ', ['bin'], ' Dave.'] },
   { parts: ['Ich ', ['bin'], ' neunzehn Jahre alt.'] },

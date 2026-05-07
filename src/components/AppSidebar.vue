@@ -1,11 +1,15 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { CHAPTERS } from '../data/index.js'
+import { CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 
 const route = useRoute()
+
 const currentChapterN = computed(() =>
-  route.name === 'chapter' ? parseInt(route.params.n) : null
+  (route.name === 'chapter' || route.name === 'section') ? parseInt(route.params.n) : null
+)
+const currentSection = computed(() =>
+  route.name === 'section' ? route.params.section : null
 )
 </script>
 
@@ -28,24 +32,42 @@ const currentChapterN = computed(() =>
 
       <div class="nav-section">
         <div class="nav-section-label">Level A1</div>
-        <RouterLink
-          v-for="ch in CHAPTERS"
-          :key="ch.n"
-          :to="`/a1/ch/${ch.n}`"
-          custom
-          v-slot="{ navigate }"
-        >
-          <div
-            class="nav-item sub ch-nav-item"
-            :class="{ active: currentChapterN === ch.n, locked: !ch.active }"
-            @click="navigate"
-            role="link"
-          >
-            <span class="ch-nav-n">{{ ch.n }}</span>
-            <span class="ch-nav-title">{{ ch.title }}</span>
-            <span v-if="!ch.active" class="ch-nav-lock">🔒</span>
-          </div>
-        </RouterLink>
+
+        <div v-for="ch in CHAPTERS" :key="ch.n">
+          <RouterLink :to="`/a1/ch/${ch.n}`" custom v-slot="{ navigate }">
+            <div
+              class="nav-item sub ch-nav-item"
+              :class="{ active: currentChapterN === ch.n, locked: !ch.active }"
+              @click="navigate"
+              role="link"
+            >
+              <span class="ch-nav-n">{{ ch.n }}</span>
+              <span class="ch-nav-title">{{ ch.title }}</span>
+              <span v-if="!ch.active" class="ch-nav-lock">🔒</span>
+            </div>
+          </RouterLink>
+
+          <!-- Section sub-items: only for the active chapter -->
+          <template v-if="currentChapterN === ch.n && ch.active && CHAPTER_SECTIONS[ch.n]">
+            <RouterLink
+              v-for="sec in CHAPTER_SECTIONS[ch.n]"
+              :key="sec.key"
+              :to="`/a1/ch/${ch.n}/${sec.key}`"
+              custom
+              v-slot="{ navigate }"
+            >
+              <div
+                class="nav-item section-sub"
+                :class="{ active: currentSection === sec.key }"
+                @click="navigate"
+                role="link"
+              >
+                <span class="nav-dot"></span> {{ sec.label }}
+              </div>
+            </RouterLink>
+          </template>
+        </div>
+
       </div>
 
     </div>

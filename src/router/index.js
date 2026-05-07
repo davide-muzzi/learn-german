@@ -7,7 +7,8 @@ export default createRouter({
   routes: [
     { path: '/',           redirect: '/a1' },
     { path: '/a1',         name: 'level-a1', component: LevelView },
-    { path: '/a1/ch/:n',   name: 'chapter',  component: ChapterView },
+    { path: '/a1/ch/:n',           name: 'chapter', component: ChapterView },
+    { path: '/a1/ch/:n/:section', name: 'section', component: ChapterView },
   ],
   scrollBehavior: () => ({ top: 0 }),
 })
