@@ -6,6 +6,7 @@ import AboutView from '../views/AboutView.vue'
 import PrivacyView from '../views/PrivacyView.vue'
 import ContactView from '../views/ContactView.vue'
 import FlashcardsView from '../views/FlashcardsView.vue'
+import SettingsView from '../views/SettingsView.vue'
 
 const LEVEL_RE = 'a1|a2|b1|b2|c1|c2'
 
@@ -14,6 +15,7 @@ export default createRouter({
   routes: [
     { path: '/',                                        name: 'home',      component: HomeView },
     { path: '/flashcards',                              name: 'flashcards', component: FlashcardsView },
+    { path: '/settings',                                name: 'settings',   component: SettingsView },
     { path: '/about',                                   name: 'about',     component: AboutView },
     { path: '/privacy',                                 name: 'privacy',   component: PrivacyView },
     { path: '/contact',                                 name: 'contact',   component: ContactView },

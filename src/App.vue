@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import { Languages } from '@lucide/vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppFooter from './components/AppFooter.vue'
+import AppNotesPanel from './components/AppNotesPanel.vue'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
@@ -30,4 +31,6 @@ watch(() => route.fullPath, () => { sidebarOpen.value = false })
     </div>
     <AppFooter />
   </main>
+
+  <AppNotesPanel />
 </template>

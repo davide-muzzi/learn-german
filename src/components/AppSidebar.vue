@@ -1,15 +1,18 @@
 <script setup>
 import { computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers, Moon, Sun } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote } from '@lucide/vue'
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 import { flashcardResetSignal } from '../composables/flashcardBus.js'
 import { useTheme } from '../composables/useTheme.js'
+import { useUsername } from '../composables/useUsername.js'
+import { toggleNotes } from '../composables/useNotesOpen.js'
 
 defineProps({ open: Boolean })
 defineEmits(['close'])
 
 const { dark, toggleTheme } = useTheme()
+const { username } = useUsername()
 
 const route = useRoute()
 
@@ -84,6 +87,7 @@ onUnmounted(() => {
       <button class="sidebar-close" @click="$emit('close')" aria-label="Close menu">✕</button>
     </div>
     <div class="sidebar-body">
+      <div v-if="username.trim()" class="sidebar-greeting">Hi, {{ username.trim() }}!</div>
 
       <div class="nav-section">
         <RouterLink to="/flashcards" custom v-slot="{ navigate, isExactActive }">
@@ -92,6 +96,10 @@ onUnmounted(() => {
             Flashcards
           </div>
         </RouterLink>
+        <div class="nav-item top" @click="toggleNotes" role="button">
+          <StickyNote :size="14" />
+          Notes
+        </div>
       </div>
 
       <div class="nav-section">
@@ -156,6 +164,12 @@ onUnmounted(() => {
     </div>
 
     <div class="sidebar-footer">
+      <RouterLink to="/settings" custom v-slot="{ navigate, isExactActive }">
+        <button class="theme-toggle" :class="{ 'toggle-active': isExactActive }" @click="navigate">
+          <Settings :size="14" />
+          Settings
+        </button>
+      </RouterLink>
       <button class="theme-toggle" @click="toggleTheme">
         <component :is="dark ? Sun : Moon" :size="14" />
         {{ dark ? 'Light mode' : 'Dark mode' }}
