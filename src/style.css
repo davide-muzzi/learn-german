@@ -1503,7 +1503,8 @@ tbody tr:hover td { background: var(--surface); }
 }
 .notes-panel {
   pointer-events: auto;
-  width: 360px;
+  position: relative;
+  width: var(--notes-w, 360px);
   max-width: 100%;
   background: var(--card);
   border-left: 1px solid var(--border);
@@ -1511,6 +1512,20 @@ tbody tr:hover td { background: var(--surface); }
   display: flex;
   flex-direction: column;
 }
+.notes-resizer {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 20;
+  border-radius: 4px 0 0 4px;
+  transition: background .15s;
+}
+.notes-resizer:hover,
+.notes-resizer:active { background: rgba(240,180,41,.35); }
+@media (max-width: 768px) { .notes-resizer { display: none; } }
 .notes-header {
   display: flex;
   align-items: center;
@@ -1614,6 +1629,18 @@ tbody tr:hover td { background: var(--surface); }
   transition: opacity .15s;
 }
 .notes-save-btn:hover { opacity: .82; }
+
+/* Export notes row */
+.export-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.export-label { font-size: 13px; color: var(--muted); font-weight: 500; }
+.export-btns { display: flex; gap: 8px; }
 
 /* Notes slide transition */
 .notes-slide-enter-active,

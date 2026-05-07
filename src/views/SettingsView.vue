@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { RotateCcw, Trash2 } from '@lucide/vue'
+import { RotateCcw, Trash2, Download } from '@lucide/vue'
 import { useTheme } from '../composables/useTheme.js'
 import { useUsername } from '../composables/useUsername.js'
 
@@ -10,6 +10,7 @@ const { username } = useUsername()
 const KEY_LABELS = {
   'theme':      'Theme',
   'sidebar-w':  'Sidebar width',
+  'notes-w':    'Notes panel width',
   'username':   'Your name',
   'notes-data': 'Notes',
 }
@@ -36,6 +37,32 @@ function formatValue(val) {
   if (val === null || val === undefined) return '—'
   if (val.length > 70) return val.slice(0, 67) + '…'
   return val
+}
+
+const hasNotes = computed(() => {
+  v.value
+  try {
+    const d = JSON.parse(localStorage.getItem('notes-data') || '{}')
+    return !!(d.global?.trim() || Object.values(d.pages || {}).some(c => c?.trim()))
+  } catch { return false }
+})
+
+function exportNotes(format) {
+  let data
+  try { data = JSON.parse(localStorage.getItem('notes-data') || '{}') }
+  catch { data = {} }
+  const parts = []
+  if (data.global?.trim()) parts.push('# Global Notes\n\n' + data.global.trim())
+  for (const [key, content] of Object.entries(data.pages || {})) {
+    if (content?.trim()) parts.push(`# ${key}\n\n` + content.trim())
+  }
+  const blob = new Blob([parts.join('\n\n---\n\n')], { type: format === 'txt' ? 'text/plain' : 'text/markdown' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `deutsch-notes.${format}`
+  a.click()
+  URL.revokeObjectURL(url)
 }
 </script>
 
@@ -85,6 +112,14 @@ function formatValue(val) {
         <button class="storage-delete" @click="deleteEntry(e.key)" :title="`Delete ${e.key}`">
           <Trash2 :size="13" />
         </button>
+      </div>
+    </div>
+
+    <div v-if="hasNotes" class="export-row">
+      <span class="export-label">Export notes</span>
+      <div class="export-btns">
+        <button class="link-btn" @click="exportNotes('md')"><Download :size="12" /> .md</button>
+        <button class="link-btn" @click="exportNotes('txt')"><Download :size="12" /> .txt</button>
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { X, Eye, Edit2 } from '@lucide/vue'
 import { marked } from 'marked'
 import { useNotes } from '../composables/useNotes.js'
@@ -22,6 +22,55 @@ function switchTab(t) {
   tab.value = t
   preview.value = false
 }
+
+// ── Resize ───────────────────────────────────────────────────────
+const RESIZE_KEY = 'notes-w'
+const MIN_W = 280
+const MAX_W = 600
+
+function applyWidth(w) {
+  document.documentElement.style.setProperty('--notes-w', w + 'px')
+}
+
+let dragging = false
+let startX = 0
+let startW = 0
+
+function onResizerMouseDown(e) {
+  dragging = true
+  startX = e.clientX
+  startW = parseInt(localStorage.getItem(RESIZE_KEY)) || 360
+  document.body.style.cursor = 'col-resize'
+  document.body.style.userSelect = 'none'
+  e.preventDefault()
+}
+
+function onMouseMove(e) {
+  if (!dragging) return
+  const w = Math.min(MAX_W, Math.max(MIN_W, startW - (e.clientX - startX)))
+  applyWidth(w)
+}
+
+function onMouseUp() {
+  if (!dragging) return
+  dragging = false
+  document.body.style.cursor = ''
+  document.body.style.userSelect = ''
+  const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--notes-w'))
+  localStorage.setItem(RESIZE_KEY, w)
+}
+
+onMounted(() => {
+  const saved = parseInt(localStorage.getItem(RESIZE_KEY))
+  if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved)
+  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mouseup', onMouseUp)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('mouseup', onMouseUp)
+})
 </script>
 
 <template>
@@ -29,6 +78,7 @@ function switchTab(t) {
     <Transition name="notes-slide">
       <div v-if="notesOpen" class="notes-overlay" @click.self="notesOpen = false">
         <div class="notes-panel">
+          <div class="notes-resizer" @mousedown="onResizerMouseDown" />
 
           <div class="notes-header">
             <div class="notes-tabs">
