@@ -986,7 +986,7 @@ tbody tr:hover td { background: #fafafa; }
 }
 .fc-set-row:hover { background: var(--bg); }
 
-/* custom checkbox */
+/* custom checkbox — SVG background avoids ::after unreliability on <input> */
 .fc-checkbox {
   appearance: none;
   -webkit-appearance: none;
@@ -994,11 +994,10 @@ tbody tr:hover td { background: #fafafa; }
   height: 17px;
   border: 2px solid #d4d4d8;
   border-radius: 5px;
-  background: #fff;
+  background: #fff no-repeat center / 65%;
   flex-shrink: 0;
   cursor: pointer;
-  position: relative;
-  transition: border-color .15s, background .15s, box-shadow .15s;
+  transition: border-color .15s, background-color .15s, box-shadow .15s;
 }
 .fc-checkbox:hover {
   border-color: var(--gold);
@@ -1006,33 +1005,14 @@ tbody tr:hover td { background: #fafafa; }
 }
 .fc-checkbox:checked,
 .fc-checkbox:indeterminate {
-  background: var(--gold-dark);
+  background-color: var(--gold-dark);
   border-color: var(--gold-dark);
 }
-/* checkmark */
-.fc-checkbox:checked::after {
-  content: '';
-  position: absolute;
-  left: 3px;
-  top: 0px;
-  width: 5px;
-  height: 9px;
-  border: 2px solid #fff;
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg);
+.fc-checkbox:checked {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5 5L4 7.5 8.5 2.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
 }
-/* dash for indeterminate */
-.fc-checkbox:indeterminate::after {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 50%;
-  width: 9px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  transform: translateY(-50%);
+.fc-checkbox:indeterminate {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5h6' stroke='white' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
 }
 .fc-set-name { flex: 1; font-weight: 500; }
 .fc-set-count {
