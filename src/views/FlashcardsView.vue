@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { FLASHCARD_SETS } from '../data/index.js'
+import { ArrowLeft, RotateCcw, X, Check, RefreshCw } from '@lucide/vue'
+import { FLASHCARD_SETS, CHAPTERS } from '../data/index.js'
 import { flashcardResetSignal } from '../composables/flashcardBus.js'
 
 const STORAGE_KEY = 'fc-prefs'
@@ -29,6 +30,45 @@ function toggleAll() {
 const totalCards = computed(() =>
   FLASHCARD_SETS.filter(s => selectedIds.value.includes(s.id)).reduce((n, s) => n + s.data.length, 0)
 )
+
+// Group sets by level > chapter for the hierarchy UI
+const grouped = computed(() => {
+  const levelMap = {}
+  for (const set of FLASHCARD_SETS) {
+    if (!levelMap[set.level]) levelMap[set.level] = { name: set.level, chapters: {} }
+    const chs = levelMap[set.level].chapters
+    if (!chs[set.chapter]) {
+      const ch = CHAPTERS.find(c => c.n === set.chapter)
+      chs[set.chapter] = { n: set.chapter, title: ch?.title ?? `Chapter ${set.chapter}`, sets: [] }
+    }
+    chs[set.chapter].sets.push(set)
+  }
+  return Object.values(levelMap).map(lvl => ({
+    ...lvl,
+    chapters: Object.values(lvl.chapters),
+  }))
+})
+
+function chapterIds(ch) { return ch.sets.map(s => s.id) }
+function levelIds(lvl) { return lvl.chapters.flatMap(ch => chapterIds(ch)) }
+
+function selectionState(ids) {
+  const n = ids.filter(id => selectedIds.value.includes(id)).length
+  if (n === 0) return false
+  if (n === ids.length) return true
+  return 'indeterminate'
+}
+const chapterState = ch => selectionState(chapterIds(ch))
+const levelState   = lvl => selectionState(levelIds(lvl))
+
+function toggleGroup(ids) {
+  const allSel = ids.every(id => selectedIds.value.includes(id))
+  selectedIds.value = allSel
+    ? selectedIds.value.filter(id => !ids.includes(id))
+    : [...new Set([...selectedIds.value, ...ids])]
+}
+const toggleChapter = ch  => toggleGroup(chapterIds(ch))
+const toggleLevel   = lvl => toggleGroup(levelIds(lvl))
 
 function buildDeck(fromCards) {
   if (fromCards) return [...fromCards].sort(() => Math.random() - 0.5)
@@ -190,12 +230,36 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
           {{ allSelected ? 'Deselect all' : 'Select all' }}
         </button>
       </div>
-      <div class="fc-sets-list">
-        <label v-for="set in FLASHCARD_SETS" :key="set.id" class="fc-set-row">
-          <input type="checkbox" :value="set.id" v-model="selectedIds" class="fc-checkbox" />
-          <span class="fc-set-name">{{ set.title }}</span>
-          <span class="fc-set-count">{{ set.data.length }}</span>
+      <div v-for="lvl in grouped" :key="lvl.name" class="fc-level-group">
+        <label class="fc-group-row">
+          <input type="checkbox"
+            :checked="levelState(lvl) === true"
+            :indeterminate="levelState(lvl) === 'indeterminate'"
+            @change="toggleLevel(lvl)"
+            class="fc-checkbox"
+          />
+          <span class="fc-level-label">Level {{ lvl.name }}</span>
+          <span class="fc-set-count">{{ levelIds(lvl).length }}</span>
         </label>
+
+        <div v-for="ch in lvl.chapters" :key="ch.n" class="fc-chapter-group">
+          <label class="fc-group-row">
+            <input type="checkbox"
+              :checked="chapterState(ch) === true"
+              :indeterminate="chapterState(ch) === 'indeterminate'"
+              @change="toggleChapter(ch)"
+              class="fc-checkbox"
+            />
+            <span class="fc-chapter-label">Ch. {{ ch.n }} · {{ ch.title }}</span>
+            <span class="fc-set-count">{{ chapterIds(ch).length }}</span>
+          </label>
+
+          <label v-for="set in ch.sets" :key="set.id" class="fc-set-row">
+            <input type="checkbox" :value="set.id" v-model="selectedIds" class="fc-checkbox" />
+            <span class="fc-set-name">{{ set.title }}</span>
+            <span class="fc-set-count">{{ set.data.length }}</span>
+          </label>
+        </div>
       </div>
     </div>
 
@@ -208,8 +272,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
   <!-- ── SESSION ── -->
   <template v-else-if="phase === 'session'">
     <div class="fc-session-nav">
-      <button class="fc-nav-link" @click="backToSetup">← Overview</button>
-      <button class="fc-nav-link" @click="startSession()">Restart ↺</button>
+      <button class="fc-nav-link" @click="backToSetup"><ArrowLeft :size="13" /> Overview</button>
+      <button class="fc-nav-link" @click="startSession()">Restart <RotateCcw :size="13" /></button>
     </div>
 
     <div class="fc-progress-wrap">
@@ -248,8 +312,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 
     <Transition name="fc-actions-fade">
       <div v-if="flipped" class="fc-actions">
-        <button class="fc-btn fc-btn-no" @click="answer(false)">← Didn't know</button>
-        <button class="fc-btn fc-btn-yes" @click="answer(true)">Got it →</button>
+        <button class="fc-btn fc-btn-no" @click="answer(false)"><X :size="16" /> Didn't know</button>
+        <button class="fc-btn fc-btn-yes" @click="answer(true)">Got it <Check :size="16" /></button>
       </div>
     </Transition>
 
@@ -275,10 +339,10 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
       </div>
       <div class="fc-done-actions">
         <button v-if="unknownCards.length" class="btn-primary" @click="retryUnknown">
-          Retry missed ({{ unknownCards.length }})
+          <RefreshCw :size="14" /> Retry missed ({{ unknownCards.length }})
         </button>
-        <button class="btn-secondary" @click="startSession()">Restart</button>
-        <button class="btn-secondary" @click="backToSetup">Back to overview</button>
+        <button class="btn-secondary" @click="startSession()"><RotateCcw :size="14" /> Restart</button>
+        <button class="btn-secondary" @click="backToSetup"><ArrowLeft :size="14" /> Back to overview</button>
       </div>
     </div>
   </template>

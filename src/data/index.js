@@ -117,13 +117,13 @@ export const CHAPTER_SECTIONS = {
 }
 
 export const FLASHCARD_SETS = [
-  { id: 'greetings',   title: 'Begrüssungen / Greetings',                data: GREETINGS,   type: 'vocab'  },
-  { id: 'your-name',   title: 'Deinen Namen sagen / Saying Your Name',    data: YOUR_NAME,   type: 'vocab'  },
-  { id: 'where-from',  title: "Woher kommst du? / Where You're From",     data: WHERE_FROM,  type: 'vocab'  },
-  { id: 'expressions', title: 'Häufige Ausdrücke / Common Expressions',   data: EXPRESSIONS, type: 'vocab'  },
-  { id: 'numbers',     title: 'Zahlen 0–20 / Numbers 0–20',              data: NUMBERS,     type: 'numbers'},
-  { id: 'sein',        title: 'sein — to be',                             data: SEIN,        type: 'conjug' },
-  { id: 'haben',       title: 'haben — to have',                          data: HABEN,       type: 'conjug' },
+  { id: 'greetings',   title: 'Begrüssungen / Greetings',                data: GREETINGS,   type: 'vocab',   level: 'A1', chapter: 1 },
+  { id: 'your-name',   title: 'Deinen Namen sagen / Saying Your Name',    data: YOUR_NAME,   type: 'vocab',   level: 'A1', chapter: 1 },
+  { id: 'where-from',  title: "Woher kommst du? / Where You're From",     data: WHERE_FROM,  type: 'vocab',   level: 'A1', chapter: 1 },
+  { id: 'expressions', title: 'Häufige Ausdrücke / Common Expressions',   data: EXPRESSIONS, type: 'vocab',   level: 'A1', chapter: 1 },
+  { id: 'numbers',     title: 'Zahlen 0–20 / Numbers 0–20',              data: NUMBERS,     type: 'numbers', level: 'A1', chapter: 1 },
+  { id: 'sein',        title: 'sein — to be',                             data: SEIN,        type: 'conjug',  level: 'A1', chapter: 1 },
+  { id: 'haben',       title: 'haben — to have',                          data: HABEN,       type: 'conjug',  level: 'A1', chapter: 1 },
 ]
 
 export const FILL_GAPS = [
