@@ -118,8 +118,8 @@ function exportNotes(format) {
     <div v-if="hasNotes" class="export-row">
       <span class="export-label">Export notes</span>
       <div class="export-btns">
-        <button class="link-btn" @click="exportNotes('md')"><Download :size="12" /> .md</button>
-        <button class="link-btn" @click="exportNotes('txt')"><Download :size="12" /> .txt</button>
+        <button class="download-btn" @click="exportNotes('md')"><Download :size="13" /> Download .md</button>
+        <button class="download-btn" @click="exportNotes('txt')"><Download :size="13" /> Download .txt</button>
       </div>
     </div>
 
