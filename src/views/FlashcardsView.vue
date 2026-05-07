@@ -57,6 +57,8 @@ function buildDeck(fromCards) {
   return cards.sort(() => Math.random() - 0.5)
 }
 
+const SESSION_KEY = 'fc-session'
+
 const phase = ref('setup')
 const deck = ref([])
 const idx = ref(0)
@@ -64,6 +66,35 @@ const flipped = ref(false)
 const known = ref(0)
 const unknown = ref(0)
 const unknownCards = ref([])
+
+// Restore in-progress session on mount
+const _saved = (() => {
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY)) } catch { return null }
+})()
+if (_saved && (_saved.phase === 'session' || _saved.phase === 'done')) {
+  phase.value = _saved.phase
+  deck.value = _saved.deck ?? []
+  idx.value = _saved.idx ?? 0
+  known.value = _saved.known ?? 0
+  unknown.value = _saved.unknown ?? 0
+  unknownCards.value = _saved.unknownCards ?? []
+}
+
+// Persist session state; clear it when back at setup
+watch([phase, deck, idx, known, unknown, unknownCards], () => {
+  if (phase.value === 'setup') {
+    localStorage.removeItem(SESSION_KEY)
+  } else {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({
+      phase: phase.value,
+      deck: deck.value,
+      idx: idx.value,
+      known: known.value,
+      unknown: unknown.value,
+      unknownCards: unknownCards.value,
+    }))
+  }
+}, { deep: true })
 
 const card = computed(() => deck.value[idx.value])
 
