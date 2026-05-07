@@ -1,25 +1,58 @@
 <template>
   <div class="page-header">
     <h1>About</h1>
-    <p class="sub">What this app is and how it was built.</p>
+    <p class="sub">What this is, why it exists, and where it's going.</p>
   </div>
 
   <div class="card">
-    <div class="card-title">What is Deutsch A1?</div>
-    <p>Deutsch A1 is a free, interactive German language learning app covering the A1 level of the
-    <strong>CEFR framework</strong> — the standard used by the Goethe-Institut exam. It is designed
-    for absolute beginners who want to build a solid foundation from scratch.</p>
+    <div class="card-title">What is this?</div>
+    <p>Deutsch A1–C2 is a free, interactive German learning app built for casual learners — no exams,
+    no pressure, no account required. The content follows the <strong>CEFR framework</strong> as a
+    structural guide, but the goal is simply to make learning German approachable and enjoyable at
+    your own pace.</p>
   </div>
 
   <div class="card">
-    <div class="card-title">What you'll learn</div>
+    <div class="card-title">Why it was built</div>
+    <p>It started as a small personal project for my girlfriend learning German. A friend joined in,
+    the scope grew, and at some point it made more sense to turn it into a proper website than to
+    keep it to a shared doc. Eventually it became an open-source project — because if it's useful to
+    a couple of people, it might be useful to more.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">What's covered — and what's planned</div>
+    <p>Right now, <strong>A1</strong> is live and actively developed. The long-term goal is to work
+    through all levels up to <strong>C2</strong>, but this is a side project maintained by one
+    person in their spare time — so progress is honest rather than promised. Levels will be added
+    as they're ready.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">What you'll learn (A1)</div>
     <ul class="about-list">
       <li>Greetings, introductions, and everyday expressions</li>
       <li>Numbers, the alphabet, and German pronunciation</li>
       <li>Core grammar — <em>sein</em>, <em>haben</em>, pronouns, and sentence structure</li>
       <li>Vocabulary for daily life: family, food, places, and more</li>
-      <li>Enough to pass the Goethe A1 exam</li>
     </ul>
+  </div>
+
+  <div class="card about-disclaimer">
+    <div class="card-title">Disclaimer</div>
+    <p>This app was handcrafted by a student — a personal project born out of genuine curiosity, not
+    a polished commercial product. The content reflects someone learning both German and web
+    development at the same time, so occasional errors or rough edges are part of the deal. If you
+    spot a mistake, please do open an issue on GitHub.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Contribute or report an issue</div>
+    <p>The project is fully open source. If you'd like to suggest content, fix a mistake, or just
+    follow along, the repository is open on GitHub.</p>
+    <a class="about-github-link" href="https://github.com/davide-muzzi/learn-german" target="_blank" rel="noopener">
+      github.com/davide-muzzi/learn-german
+    </a>
   </div>
 
   <div class="card">

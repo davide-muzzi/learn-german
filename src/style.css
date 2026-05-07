@@ -754,6 +754,20 @@ tbody tr:hover td { background: #fafafa; }
 }
 
 /* ── ABOUT PAGE ── */
+.about-disclaimer {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 14px;
+}
+.about-github-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--gold-dark);
+  font-weight: 500;
+  text-decoration: none;
+  word-break: break-all;
+}
+.about-github-link:hover { text-decoration: underline; }
 .about-list {
   padding-left: 18px;
   line-height: 2;
