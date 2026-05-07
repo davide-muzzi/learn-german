@@ -209,6 +209,46 @@ tbody tr:hover td { background: #fafafa; }
 .b-std  { background: #d1fae5; color: #065f46; }
 .b-pl   { background: #e0f2fe; color: #075985; }
 
+/* ── SIDEBAR LOGO LINK ── */
+.sidebar-logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.sidebar-logo-link:hover h1 { opacity: .85; }
+
+/* ── HOME: LEVEL GRID ── */
+.lvl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 4px;
+}
+.lvl-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  background: white;
+  transition: box-shadow .18s;
+}
+.lvl-card.lvl-active {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, #fffbeb 0%, #fefce8 100%);
+  cursor: pointer;
+}
+.lvl-card.lvl-active:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.lvl-code {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--muted);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.lvl-card.lvl-active .lvl-code { color: var(--gold-dark); }
+.lvl-card h3 { font-size: 14px; font-weight: 700; margin: 4px 0 8px; }
+.lvl-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
 /* ── ROADMAP ── */
 .roadmap-grid {
   display: grid;

@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
 import LevelView from '../views/LevelView.vue'
 import ChapterView from '../views/ChapterView.vue'
 import AboutView from '../views/AboutView.vue'
@@ -9,7 +10,7 @@ import FlashcardsView from '../views/FlashcardsView.vue'
 export default createRouter({
   history: createWebHashHistory(),
   routes: [
-    { path: '/',                    redirect: '/a1' },
+    { path: '/',                    name: 'home',        component: HomeView },
     { path: '/a1',                  name: 'level-a1',    component: LevelView },
     { path: '/a1/ch/:n',            name: 'chapter',     component: ChapterView },
     { path: '/a1/ch/:n/:section',   name: 'section',     component: ChapterView },
