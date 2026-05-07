@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { Languages } from '@lucide/vue'
 import AppSidebar from './components/AppSidebar.vue'
+import AppFooter from './components/AppFooter.vue'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
@@ -24,6 +25,9 @@ watch(() => route.fullPath, () => { sidebarOpen.value = false })
   <AppSidebar :open="sidebarOpen" @close="sidebarOpen = false" />
 
   <main class="main">
-    <RouterView />
+    <div class="main-content">
+      <RouterView />
+    </div>
+    <AppFooter />
   </main>
 </template>

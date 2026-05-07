@@ -1,14 +1,20 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LevelView from '../views/LevelView.vue'
 import ChapterView from '../views/ChapterView.vue'
+import AboutView from '../views/AboutView.vue'
+import PrivacyView from '../views/PrivacyView.vue'
+import ContactView from '../views/ContactView.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
   routes: [
-    { path: '/',           redirect: '/a1' },
-    { path: '/a1',         name: 'level-a1', component: LevelView },
-    { path: '/a1/ch/:n',           name: 'chapter', component: ChapterView },
-    { path: '/a1/ch/:n/:section', name: 'section', component: ChapterView },
+    { path: '/',                    redirect: '/a1' },
+    { path: '/a1',                  name: 'level-a1', component: LevelView },
+    { path: '/a1/ch/:n',            name: 'chapter',  component: ChapterView },
+    { path: '/a1/ch/:n/:section',   name: 'section',  component: ChapterView },
+    { path: '/about',               name: 'about',    component: AboutView },
+    { path: '/privacy',             name: 'privacy',  component: PrivacyView },
+    { path: '/contact',             name: 'contact',  component: ContactView },
   ],
   scrollBehavior: () => ({ top: 0 }),
 })
