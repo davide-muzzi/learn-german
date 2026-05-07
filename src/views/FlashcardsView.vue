@@ -67,24 +67,17 @@ const known = ref(0)
 const unknown = ref(0)
 const unknownCards = ref([])
 
-// Restore in-progress session on mount
-const _saved = (() => {
-  try { return JSON.parse(localStorage.getItem(SESSION_KEY)) } catch { return null }
-})()
-if (_saved && (_saved.phase === 'session' || _saved.phase === 'done')) {
-  phase.value = _saved.phase
-  deck.value = _saved.deck ?? []
-  idx.value = _saved.idx ?? 0
-  known.value = _saved.known ?? 0
-  unknown.value = _saved.unknown ?? 0
-  unknownCards.value = _saved.unknownCards ?? []
-}
+// Load saved session snapshot for the "Continue" prompt — do NOT auto-restore
+const savedSession = ref((() => {
+  try {
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY))
+    return (s?.phase === 'session' || s?.phase === 'done') ? s : null
+  } catch { return null }
+})())
 
-// Persist session state; clear it when back at setup
+// Persist session state whenever it changes
 watch([phase, deck, idx, known, unknown, unknownCards], () => {
-  if (phase.value === 'setup') {
-    localStorage.removeItem(SESSION_KEY)
-  } else {
+  if (phase.value === 'session' || phase.value === 'done') {
     localStorage.setItem(SESSION_KEY, JSON.stringify({
       phase: phase.value,
       deck: deck.value,
@@ -98,7 +91,21 @@ watch([phase, deck, idx, known, unknown, unknownCards], () => {
 
 const card = computed(() => deck.value[idx.value])
 
+function continueSession() {
+  const s = savedSession.value
+  phase.value = s.phase
+  deck.value = s.deck ?? []
+  idx.value = s.idx ?? 0
+  known.value = s.known ?? 0
+  unknown.value = s.unknown ?? 0
+  unknownCards.value = s.unknownCards ?? []
+  flipped.value = false
+  savedSession.value = null
+}
+
 function startSession(fromCards) {
+  localStorage.removeItem(SESSION_KEY)
+  savedSession.value = null
   deck.value = buildDeck(fromCards)
   idx.value = 0
   flipped.value = false
@@ -110,6 +117,12 @@ function startSession(fromCards) {
 
 function retryUnknown() {
   startSession(unknownCards.value)
+}
+
+function backToSetup() {
+  localStorage.removeItem(SESSION_KEY)
+  savedSession.value = null
+  phase.value = 'setup'
 }
 
 function flip() {
@@ -141,6 +154,18 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
     <div class="page-header">
       <h1>Flashcards</h1>
       <p class="sub">Select sets to practise, then start.</p>
+    </div>
+
+    <div v-if="savedSession" class="card fc-resume-card">
+      <div class="fc-resume-info">
+        <div class="fc-resume-title">Session in progress</div>
+        <div class="fc-resume-stats">
+          Card {{ savedSession.idx + 1 }} of {{ savedSession.deck.length }}
+          <span class="fc-count-yes">· ✓ {{ savedSession.known }}</span>
+          <span class="fc-count-no">· ✗ {{ savedSession.unknown }}</span>
+        </div>
+      </div>
+      <button class="btn-primary" @click="continueSession">Continue</button>
     </div>
 
     <div class="card">
@@ -244,7 +269,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
         <button v-if="unknownCards.length" class="btn-primary" @click="retryUnknown">
           Retry missed ({{ unknownCards.length }})
         </button>
-        <button class="btn-secondary" @click="phase = 'setup'">Back to setup</button>
+        <button class="btn-secondary" @click="backToSetup">Back to setup</button>
       </div>
     </div>
   </template>

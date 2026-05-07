@@ -943,6 +943,18 @@ tbody tr:hover td { background: #fafafa; }
 }
 .fc-total-label { color: var(--muted); font-size: 14px; }
 
+/* resume card */
+.fc-resume-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-color: var(--gold);
+  background: #fefce8;
+}
+.fc-resume-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.fc-resume-stats { font-size: 13px; color: var(--muted); display: flex; gap: 4px; flex-wrap: wrap; }
+
 /* session */
 .fc-progress-wrap { margin-bottom: 20px; }
 .fc-progress-top {
