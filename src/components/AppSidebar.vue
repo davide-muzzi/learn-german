@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { Languages, Lock, Layers } from '@lucide/vue'
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
@@ -21,6 +21,54 @@ const currentChapterN = computed(() =>
 const currentSection = computed(() =>
   route.name === 'section' ? route.params.section : null
 )
+
+// ── Sidebar resize ──────────────────────────────────────────────
+const RESIZE_KEY = 'sidebar-w'
+const MIN_W = 190
+const MAX_W = 420
+
+function applyWidth(w) {
+  document.documentElement.style.setProperty('--sidebar-w', w + 'px')
+}
+
+let dragging = false
+let startX = 0
+let startW = 0
+
+function onResizerMouseDown(e) {
+  dragging = true
+  startX = e.clientX
+  startW = parseInt(localStorage.getItem(RESIZE_KEY)) || 252
+  document.body.style.cursor = 'col-resize'
+  document.body.style.userSelect = 'none'
+  e.preventDefault()
+}
+
+function onMouseMove(e) {
+  if (!dragging) return
+  const w = Math.min(MAX_W, Math.max(MIN_W, startW + e.clientX - startX))
+  applyWidth(w)
+}
+
+function onMouseUp() {
+  if (!dragging) return
+  dragging = false
+  document.body.style.cursor = ''
+  document.body.style.userSelect = ''
+  const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-w'))
+  localStorage.setItem(RESIZE_KEY, w)
+}
+
+onMounted(() => {
+  const saved = parseInt(localStorage.getItem(RESIZE_KEY))
+  if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved)
+  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mouseup', onMouseUp)
+})
+onUnmounted(() => {
+  window.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('mouseup', onMouseUp)
+})
 </script>
 
 <template>
@@ -103,5 +151,8 @@ const currentSection = computed(() =>
       </div>
 
     </div>
+
+    <!-- Drag handle (desktop only via CSS) -->
+    <div class="sidebar-resizer" @mousedown="onResizerMouseDown" />
   </nav>
 </template>

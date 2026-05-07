@@ -209,6 +209,22 @@ tbody tr:hover td { background: #fafafa; }
 .b-std  { background: #d1fae5; color: #065f46; }
 .b-pl   { background: #e0f2fe; color: #075985; }
 
+/* ── SIDEBAR RESIZE HANDLE ── */
+.sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 20;
+  border-radius: 0 4px 4px 0;
+  transition: background .15s;
+}
+.sidebar-resizer:hover,
+.sidebar-resizer:active { background: rgba(240, 180, 41, .35); }
+@media (max-width: 768px) { .sidebar-resizer { display: none; } }
+
 /* ── SIDEBAR LOGO LINK ── */
 .sidebar-logo-link {
   text-decoration: none;
