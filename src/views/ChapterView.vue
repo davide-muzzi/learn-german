@@ -18,6 +18,7 @@ import Translation from '../components/exercises/Translation.vue'
 const route = useRoute()
 const router = useRouter()
 
+const levelParam = computed(() => route.params.level || 'a1')
 const n = computed(() => parseInt(route.params.n))
 const section = computed(() => route.params.section || null)
 const chapter = computed(() => CHAPTERS.find(c => c.n === n.value))
@@ -25,10 +26,10 @@ const sections = computed(() => CHAPTER_SECTIONS[n.value] || [])
 const currentSection = computed(() => sections.value.find(s => s.key === section.value))
 
 function goToSection(key) {
-  router.push(`/a1/ch/${n.value}/${key}`)
+  router.push(`/${levelParam.value}/ch/${n.value}/${key}`)
 }
 function backToChapter() {
-  router.push(`/a1/ch/${n.value}`)
+  router.push(`/${levelParam.value}/ch/${n.value}`)
 }
 </script>
 
@@ -38,7 +39,7 @@ function backToChapter() {
     <!-- ── No section selected: show section picker ── -->
     <template v-if="!section">
       <div class="page-header">
-        <div class="chapter-eyebrow">A1 · Chapter {{ n }}</div>
+        <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }}</div>
         <h1>{{ chapter.title }}</h1>
         <p class="sub">Select a section to study.</p>
       </div>
@@ -74,7 +75,7 @@ function backToChapter() {
     <!-- ── Section selected: show content ── -->
     <template v-else>
       <div class="page-header">
-        <div class="chapter-eyebrow">A1 · Chapter {{ n }} · {{ chapter.title }}</div>
+        <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }} · {{ chapter.title }}</div>
         <h1>{{ currentSection?.label || section }}</h1>
       </div>
       <div class="back-link" @click="backToChapter">← Chapter overview</div>
