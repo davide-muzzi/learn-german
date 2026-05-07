@@ -3,6 +3,9 @@ import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 
+defineProps({ open: Boolean })
+defineEmits(['close'])
+
 const route = useRoute()
 
 const currentChapterN = computed(() =>
@@ -14,10 +17,13 @@ const currentSection = computed(() =>
 </script>
 
 <template>
-  <nav class="sidebar">
+  <nav class="sidebar" :class="{ 'is-open': open }">
     <div class="sidebar-logo">
-      <h1>🇩🇪 Deutsch A1</h1>
-      <p>Interactive Lesson Book</p>
+      <div>
+        <h1>🇩🇪 Deutsch A1</h1>
+        <p>Interactive Lesson Book</p>
+      </div>
+      <button class="sidebar-close" @click="$emit('close')" aria-label="Close menu">✕</button>
     </div>
     <div class="sidebar-body">
 

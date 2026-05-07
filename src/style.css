@@ -580,9 +580,122 @@ tbody tr:hover td { background: #fafafa; }
 /* ── LEVEL VIEW: all chapter cards are clickable ── */
 .ch-card { cursor: pointer; }
 
+/* ── MOBILE HEADER (hidden on desktop) ── */
+.mobile-header { display: none; }
+
+.sidebar-logo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.sidebar-close { display: none; }
+
+/* ── OVERLAY TRANSITION ── */
+.overlay-fade-enter-active,
+.overlay-fade-leave-active { transition: opacity 0.2s ease; }
+.overlay-fade-enter-from,
+.overlay-fade-leave-to { opacity: 0; }
+
 /* ── RESPONSIVE ── */
-@media (max-width: 700px) {
-  :root { --sidebar-w: 0px; }
-  .sidebar { display: none; }
-  .main { margin-left: 0; padding: 20px 16px; max-width: 100%; }
+@media (max-width: 768px) {
+  /* Mobile header */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: var(--sidebar);
+    padding: 0 16px;
+    z-index: 30;
+    flex-shrink: 0;
+  }
+  .mobile-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #e4e4e7;
+    border-radius: 2px;
+    transition: background .12s;
+  }
+  .hamburger:hover span { background: var(--gold); }
+
+  /* Sidebar: slide-in drawer */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 25;
+  }
+  .sidebar.is-open { transform: translateX(0); }
+
+  /* Sidebar X close button */
+  .sidebar-close {
+    display: block;
+    background: none;
+    border: none;
+    color: #52525b;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 4px;
+    flex-shrink: 0;
+    transition: color .12s;
+  }
+  .sidebar-close:hover { color: #e4e4e7; }
+
+  /* Overlay backdrop */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 20;
+  }
+
+  /* Main content */
+  .main {
+    margin-left: 0;
+    padding: calc(52px + 20px) 16px 24px;
+    max-width: 100%;
+  }
+
+  /* Page header */
+  .page-header h1 { font-size: 22px; }
+
+  /* Cards */
+  .card { padding: 18px 16px; }
+
+  /* Tables: horizontal scroll */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Section picker: 1 column */
+  .section-grid { grid-template-columns: 1fr; }
+
+  /* Chapter roadmap grid: single column on very small screens */
+  .roadmap-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+  /* Numbers grid: tighter */
+  .numbers-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+
+  /* Reduce coming-soon padding */
+  .coming-soon-card { padding: 36px 20px; }
 }
