@@ -89,7 +89,7 @@ function backToChapter() {
         <template v-if="section === 'theory'">
           <div class="card">
             <div class="card-title">Alphabet &amp; Special Characters</div>
-            <p class="card-sub">The German alphabet shares 26 letters with English, plus 3 umlauts and the ß (Eszett).</p>
+            <p class="card-sub">The German alphabet has 26 letters plus 3 umlauts. Swiss German always writes <strong>ss</strong> — the ß (Eszett) is used in Germany and Austria but not in Switzerland.</p>
             <div class="alpha-grid">
               <div v-for="([l, p]) in ALPHABET" :key="l" class="alpha-card">
                 <div class="alpha-letter">{{ l }}</div>

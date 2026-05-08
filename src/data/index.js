@@ -120,7 +120,7 @@ export const NUMBERS_21_100 = [
   [21, 'einundzwanzig'], [22, 'zweiundzwanzig'], [23, 'dreiundzwanzig'],
   [24, 'vierundzwanzig'], [25, 'fünfundzwanzig'], [26, 'sechsundzwanzig'],
   [27, 'siebenundzwanzig'], [28, 'achtundzwanzig'], [29, 'neunundzwanzig'],
-  [30, 'dreißig'], [40, 'vierzig'], [50, 'fünfzig'],
+  [30, 'dreissig'], [40, 'vierzig'], [50, 'fünfzig'],
   [60, 'sechzig'], [70, 'siebzig'], [80, 'achtzig'],
   [90, 'neunzig'], [100, 'hundert'],
 ]
