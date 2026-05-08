@@ -105,7 +105,7 @@ function applyFormat(type) {
 // ── Resize ───────────────────────────────────────────────────────
 const RESIZE_KEY = 'notes-w'
 const MIN_W = 280
-const MAX_W = 600
+const maxW = () => Math.floor(window.innerWidth / 3)
 
 function applyWidth(w) {
   document.documentElement.style.setProperty('--notes-w', w + 'px')
@@ -126,7 +126,7 @@ function onResizerMouseDown(e) {
 
 function onMouseMove(e) {
   if (!dragging) return
-  const w = Math.min(MAX_W, Math.max(MIN_W, startW - (e.clientX - startX)))
+  const w = Math.min(maxW(), Math.max(MIN_W, startW - (e.clientX - startX)))
   applyWidth(w)
 }
 
@@ -141,7 +141,7 @@ function onMouseUp() {
 
 onMounted(() => {
   const saved = parseInt(localStorage.getItem(RESIZE_KEY))
-  if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved)
+  if (saved >= MIN_W && saved <= maxW()) applyWidth(saved)
   window.addEventListener('mousemove', onMouseMove)
   window.addEventListener('mouseup', onMouseUp)
 })
