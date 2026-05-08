@@ -2,7 +2,12 @@
 import { ref, reactive, computed } from 'vue'
 import { FILL_GAPS } from '../../data/index.js'
 
-const questions = FILL_GAPS.map((q, qi) => {
+const props = defineProps({
+  data:        { type: Array,  default: () => FILL_GAPS },
+  instruction: { type: String, default: 'Fill each blank with the correct conjugation of <strong>sein</strong> (to be) or <strong>haben</strong> (to have).' },
+})
+
+const questions = props.data.map((q, qi) => {
   let bi = 0
   return {
     qi,
@@ -73,7 +78,7 @@ const scoreDisplay = computed(() => {
   <div class="card">
     <div class="card-title">Fill in the Gaps</div>
     <div class="ex-instruction">
-      Fill each blank with the correct conjugation of <strong>sein</strong> (to be) or <strong>haben</strong> (to have).<br>
+      <span v-html="instruction"></span><br>
       <span style="font-size:12px;opacity:.8;">Tip: answers are case-insensitive.</span>
     </div>
 

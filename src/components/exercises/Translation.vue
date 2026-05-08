@@ -2,6 +2,10 @@
 import { ref } from 'vue'
 import { TRANSLATIONS } from '../../data/index.js'
 
+const props = defineProps({
+  data: { type: Array, default: () => TRANSLATIONS },
+})
+
 const visible = ref({})
 
 function toggle(qi) {
@@ -16,7 +20,7 @@ function toggle(qi) {
       Translate each sentence into German mentally (or jot it down), then reveal the answer to check.
     </div>
 
-    <div v-for="(q, qi) in TRANSLATIONS" :key="qi" class="tr-block">
+    <div v-for="(q, qi) in data" :key="qi" class="tr-block">
       <span class="q-label">Sentence {{ qi + 1 }}</span>
       <div class="tr-en">{{ q.en }}</div>
       <button class="reveal-btn" @click="toggle(qi)">

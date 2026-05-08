@@ -6,6 +6,9 @@ import {
   CHAPTERS, CHAPTER_SECTIONS,
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS,
   ALPHABET, UMLAUTS, DIPHTHONGS, SEIN, HABEN,
+  AGE_PHRASES, NUMBERS_21_100, NATIONALITIES, COUNTRIES_LANGUAGES,
+  PROFESSIONS, W_QUESTION_WORDS, FORMING_QUESTIONS, W_QUESTION_TABLE,
+  FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2,
 } from '../data/index.js'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
@@ -163,6 +166,103 @@ function backToChapter() {
           <FillGaps />
           <MultipleChoice />
           <Translation />
+        </template>
+
+        <template v-else>
+          <div class="card"><p>Section "{{ section }}" not found.</p></div>
+        </template>
+
+      </template>
+
+      <!-- Chapter 2 sections -->
+      <template v-else-if="n === 2">
+
+        <template v-if="section === 'vocab'">
+          <div class="card">
+            <div class="card-title">Alter / Age</div>
+            <p class="card-sub">Phrases for talking about age and birthdays.</p>
+            <VocabTable :rows="AGE_PHRASES" />
+          </div>
+          <div class="card">
+            <div class="card-title">Zahlen 21–100 / Numbers 21–100</div>
+            <p class="card-sub">Building on 0–20 from Chapter 1 — notice the pattern: units + und + tens.</p>
+            <div class="numbers-grid">
+              <div v-for="([num, word]) in NUMBERS_21_100" :key="num" class="num-cell">
+                <span class="num-n">{{ num }}</span>
+                <span class="num-word">{{ word }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Nationalitäten / Nationalities</div>
+            <p class="card-sub">Nationality adjectives change depending on gender — most add -in for feminine.</p>
+            <VocabTable :rows="NATIONALITIES" />
+          </div>
+          <div class="card">
+            <div class="card-title">Länder & Sprachen / Countries & Languages</div>
+            <p class="card-sub">Country names and their languages. Note: country names have no article unless marked (die Schweiz, die Türkei, die USA).</p>
+            <VocabTable :rows="COUNTRIES_LANGUAGES" />
+          </div>
+          <div class="card">
+            <div class="card-title">Berufe / Professions</div>
+            <p class="card-sub">In German you say "Ich bin Arzt" (no article!) — not "Ich bin ein Arzt".</p>
+            <VocabTable :rows="PROFESSIONS" />
+          </div>
+          <div class="card">
+            <div class="card-title">W-Fragen / W-Question Words</div>
+            <p class="card-sub">These are the building blocks of every question in German.</p>
+            <VocabTable :rows="W_QUESTION_WORDS" />
+          </div>
+          <div class="card">
+            <div class="card-title">Fragen bilden / Forming Questions</div>
+            <p class="card-sub">W-questions and yes/no questions in context.</p>
+            <VocabTable :rows="FORMING_QUESTIONS" />
+          </div>
+        </template>
+
+        <template v-else-if="section === 'grammar'">
+          <div class="card">
+            <div class="card-title">W-Fragen — Question Words</div>
+            <p class="card-sub">W-question words always come first, followed by the verb, then the subject.</p>
+            <table class="special-table">
+              <thead><tr><th>Word</th><th>Meaning</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr v-for="([word, meaning, example]) in W_QUESTION_TABLE" :key="word">
+                  <td class="de" style="font-size:15px;font-weight:700;">{{ word }}</td>
+                  <td style="font-weight:600;color:#1d4ed8;">{{ meaning }}</td>
+                  <td class="en-col">{{ example }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-title">Fragestruktur / Question Structure <span class="tag">Word order</span></div>
+            <p class="card-sub">German questions follow two patterns:</p>
+            <table class="special-table">
+              <thead><tr><th>Type</th><th>Structure</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:700;">W-question</td>
+                  <td style="font-weight:600;color:#1d4ed8;">W-word + verb + subject + …</td>
+                  <td class="en-col">Woher <strong>kommst</strong> du? — Where are you from?</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;">Yes/No question</td>
+                  <td style="font-weight:600;color:#1d4ed8;">Verb + subject + …</td>
+                  <td class="en-col"><strong>Bist</strong> du Student? — Are you a student?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </template>
+
+        <template v-else-if="section === 'exercises'">
+          <FillGaps
+            :data="FILL_GAPS_CH2"
+            instruction="Fill each blank with the correct W-question word or verb form."
+          />
+          <MultipleChoice :data="MC_QS_CH2" />
+          <Translation :data="TRANSLATIONS_CH2" />
         </template>
 
         <template v-else>

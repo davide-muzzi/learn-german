@@ -96,6 +96,175 @@ export const HABEN = [
   ['Sie (form.)', 'haben', 'you have (form.)'],
 ]
 
+// ── Chapter 2 ───────────────────────────────────────────────────────────────
+
+export const AGE_PHRASES = [
+  ['Wie alt bist du?', 'How old are you?', ''],
+  ['Wie alt sind Sie?', 'How old are you?', 'form.'],
+  ['Ich bin … Jahre alt.', 'I am … years old.', ''],
+  ['Er / Sie ist … Jahre alt.', 'He / She is … years old.', ''],
+  ['Wie alt ist er / sie?', 'How old is he / she?', ''],
+  ['Wann bist du geboren?', 'When were you born?', ''],
+  ['Wann sind Sie geboren?', 'When were you born?', 'form.'],
+  ['Ich bin am … geboren.', 'I was born on the …', '(+ date)'],
+  ['Ich bin … geboren.', 'I was born in …', '(+ year)'],
+  ['Mein Geburtstag ist am…', 'My birthday is on the…', ''],
+  ['Wann hast du Geburtstag?', 'When is your birthday?', ''],
+  ['alt', 'old', ''],
+  ['jung', 'young', ''],
+  ['das Jahr / die Jahre', 'year / years', ''],
+  ['der Geburtstag / die Geburtstage', 'birthday / birthdays', ''],
+]
+
+export const NUMBERS_21_100 = [
+  [21, 'einundzwanzig'], [22, 'zweiundzwanzig'], [23, 'dreiundzwanzig'],
+  [24, 'vierundzwanzig'], [25, 'fünfundzwanzig'], [26, 'sechsundzwanzig'],
+  [27, 'siebenundzwanzig'], [28, 'achtundzwanzig'], [29, 'neunundzwanzig'],
+  [30, 'dreißig'], [40, 'vierzig'], [50, 'fünfzig'],
+  [60, 'sechzig'], [70, 'siebzig'], [80, 'achtzig'],
+  [90, 'neunzig'], [100, 'hundert'],
+]
+
+export const NATIONALITIES = [
+  ['die Nationalität', 'nationality', ''],
+  ['Was ist deine Nationalität?', 'What is your nationality?', ''],
+  ['Welche Nationalität hast du?', 'What nationality do you have?', ''],
+  ['Ich bin Schweizer / Schweizerin.', 'I am Swiss. (m / f)', ''],
+  ['Ich bin Deutscher / Deutsche.', 'I am German. (m / f)', ''],
+  ['Ich bin Österreicher / Österreicherin.', 'I am Austrian. (m / f)', ''],
+  ['Ich bin Engländer / Engländerin.', 'I am English. (m / f)', ''],
+  ['Ich bin Franzose / Französin.', 'I am French. (m / f)', ''],
+  ['Ich bin Italiener / Italienerin.', 'I am Italian. (m / f)', ''],
+  ['Ich bin Spanier / Spanierin.', 'I am Spanish. (m / f)', ''],
+  ['Ich bin Amerikaner / Amerikanerin.', 'I am American. (m / f)', ''],
+  ['Ich bin Türke / Türkin.', 'I am Turkish. (m / f)', ''],
+  ['Ich bin Russe / Russin.', 'I am Russian. (m / f)', ''],
+  ['Ich bin Chinese / Chinesin.', 'I am Chinese. (m / f)', ''],
+  ['Ich bin Japaner / Japanerin.', 'I am Japanese. (m / f)', ''],
+]
+
+export const COUNTRIES_LANGUAGES = [
+  ['die Schweiz', 'Switzerland', ''],
+  ['Deutschland', 'Germany', ''],
+  ['Österreich', 'Austria', ''],
+  ['England / Grossbritannien', 'England / Great Britain', ''],
+  ['Frankreich', 'France', ''],
+  ['Italien', 'Italy', ''],
+  ['Spanien', 'Spain', ''],
+  ['die USA / Amerika', 'the USA / America', ''],
+  ['die Türkei', 'Turkey', ''],
+  ['Russland', 'Russia', ''],
+  ['China', 'China', ''],
+  ['Japan', 'Japan', ''],
+  ['Deutsch', 'German', 'language'],
+  ['Englisch', 'English', 'language'],
+  ['Französisch', 'French', 'language'],
+  ['Italienisch', 'Italian', 'language'],
+  ['Spanisch', 'Spanish', 'language'],
+  ['Welche Sprache sprichst du?', 'Which language do you speak?', ''],
+  ['Ich spreche…', 'I speak…', ''],
+]
+
+export const PROFESSIONS = [
+  ['der Beruf / die Berufe', 'profession / professions', ''],
+  ['Was machst du beruflich?', 'What do you do for work?', ''],
+  ['Was bist du von Beruf?', 'What is your profession?', ''],
+  ['Ich bin … (von Beruf).', 'I am a… (by profession).', ''],
+  ['der Arzt / die Ärztin', 'doctor (m / f)', ''],
+  ['der Lehrer / die Lehrerin', 'teacher (m / f)', ''],
+  ['der Student / die Studentin', 'university student (m / f)', ''],
+  ['der Schüler / die Schülerin', 'school pupil (m / f)', ''],
+  ['der Ingenieur / die Ingenieurin', 'engineer (m / f)', ''],
+  ['der Kaufmann / die Kauffrau', 'businessman / businesswoman', ''],
+  ['der Koch / die Köchin', 'chef / cook (m / f)', ''],
+  ['der Kellner / die Kellnerin', 'waiter / waitress', ''],
+  ['der Anwalt / die Anwältin', 'lawyer (m / f)', ''],
+  ['der Polizist / die Polizistin', 'police officer (m / f)', ''],
+  ['der Architekt / die Architektin', 'architect (m / f)', ''],
+  ['arbeiten', 'to work', ''],
+]
+
+export const W_QUESTION_WORDS = [
+  ['wer', 'who', ''],
+  ['was', 'what', ''],
+  ['wo', 'where', ''],
+  ['woher', 'where from', ''],
+  ['wohin', 'where to', ''],
+  ['wie', 'how / what', ''],
+  ['wie viel', 'how much', ''],
+  ['wie viele', 'how many', ''],
+  ['wann', 'when', ''],
+  ['warum / weshalb', 'why', ''],
+  ['welcher / welche / welches', 'which (m / f / n)', ''],
+  ['wessen', 'whose', ''],
+  ['wem', 'to whom', 'dative'],
+  ['wen', 'whom', 'accusative'],
+]
+
+export const FORMING_QUESTIONS = [
+  ['Wer bist du?', 'Who are you?', ''],
+  ['Was machst du?', 'What are you doing / What do you do?', ''],
+  ['Was bist du von Beruf?', 'What is your profession?', ''],
+  ['Wo wohnst du?', 'Where do you live?', ''],
+  ['Woher kommst du?', 'Where are you from?', ''],
+  ['Wohin gehst du?', 'Where are you going?', ''],
+  ['Wie heisst du?', 'What is your name?', ''],
+  ['Wie alt bist du?', 'How old are you?', ''],
+  ['Wie viele Geschwister hast du?', 'How many siblings do you have?', ''],
+  ['Wann hast du Geburtstag?', 'When is your birthday?', ''],
+  ['Warum lernst du Deutsch?', 'Why are you learning German?', ''],
+  ['Welche Sprache sprichst du?', 'Which language do you speak?', ''],
+  ['Hast du Geschwister?', 'Do you have siblings?', 'yes/no Q'],
+  ['Bist du Student / Studentin?', 'Are you a student? (m / f)', 'yes/no Q'],
+  ['Arbeitest du?', 'Do you work?', 'yes/no Q'],
+  ['Kommst du aus Deutschland?', 'Are you from Germany?', 'yes/no Q'],
+]
+
+export const W_QUESTION_TABLE = [
+  ['wer', 'who', 'Wer bist du? — Who are you?'],
+  ['was', 'what', 'Was machst du? — What do you do?'],
+  ['wo', 'where', 'Wo wohnst du? — Where do you live?'],
+  ['woher', 'where from', 'Woher kommst du? — Where are you from?'],
+  ['wohin', 'where to', 'Wohin gehst du? — Where are you going?'],
+  ['wie', 'how / what', 'Wie heisst du? — What is your name?'],
+  ['wann', 'when', 'Wann hast du Geburtstag? — When is your birthday?'],
+  ['warum', 'why', 'Warum lernst du Deutsch? — Why are you learning German?'],
+  ['wie viel', 'how much', 'Wie viel kostet das? — How much does that cost?'],
+  ['wie viele', 'how many', 'Wie viele Sprachen sprichst du? — How many languages do you speak?'],
+  ['welcher / welche / welches', 'which', 'Welche Sprache sprichst du? — Which language do you speak?'],
+]
+
+export const FILL_GAPS_CH2 = [
+  { parts: ['Wie alt ', ['bist'], ' du? — Ich ', ['bin'], ' zwanzig Jahre alt.'] },
+  { parts: ['', ['Woher'], ' kommst du? — Ich komme aus Deutschland.'] },
+  { parts: ['Was ', ['bist'], ' du von Beruf? — Ich ', ['bin'], ' Ärztin.'] },
+  { parts: ['', ['Welche'], ' Sprache sprichst du? — Ich ', ['spreche'], ' Englisch.'] },
+  { parts: ['', ['Wann'], ' hast du Geburtstag? — Am fünfzehnten Juni.'] },
+  { parts: ['', ['Warum'], ' lernst du Deutsch? — Weil ich es interessant finde.'] },
+  { parts: ['', ['Wo'], ' wohnst du? — Ich wohne in Luzern.'] },
+]
+
+export const MC_QS_CH2 = [
+  { text: '___ kommst du? — Ich komme aus Japan.', opts: ['Woher', 'Wohin'], ans: ['Woher'] },
+  { text: '___ alt bist du? — Ich bin 25 Jahre alt.', opts: ['Wie', 'Was'], ans: ['Wie'] },
+  { text: 'Was ___ du von Beruf? — Ich bin Arzt.', opts: ['bist', 'hast'], ans: ['bist'] },
+  { text: '___ wohnst du? — Ich wohne in Berlin.', opts: ['Wo', 'Wann'], ans: ['Wo'] },
+  { text: 'Ich ___ Spanisch und Englisch.', opts: ['spreche', 'bin'], ans: ['spreche'] },
+  { text: '___ lernst du Deutsch?', opts: ['Warum', 'Wer'], ans: ['Warum'] },
+  { text: 'Welche Sprache ___ du?', opts: ['sprichst', 'bist'], ans: ['sprichst'] },
+  { text: '___ gehst du? — Ich gehe nach Hause.', opts: ['Wohin', 'Woher'], ans: ['Wohin'] },
+  { text: '___ ist dein Name? — Ich heisse Lea.', opts: ['Wie', 'Was'], ans: ['Wie'] },
+  { text: '___ hast du Geburtstag? — Am dritten Mai.', opts: ['Wann', 'Wer'], ans: ['Wann'] },
+]
+
+export const TRANSLATIONS_CH2 = [
+  { en: 'How old are you? — I am 28 years old.', de: 'Wie alt bist du? — Ich bin 28 Jahre alt.' },
+  { en: 'What is your profession? — I am a teacher.', de: 'Was bist du von Beruf? — Ich bin Lehrer / Lehrerin.' },
+  { en: 'Where are you from? — I come from France.', de: 'Woher kommst du? — Ich komme aus Frankreich.' },
+  { en: 'Which languages do you speak? — I speak German, French, and English.', de: 'Welche Sprachen sprichst du? — Ich spreche Deutsch, Französisch und Englisch.' },
+  { en: 'When is your birthday? — My birthday is on the 15th of June.', de: 'Wann hast du Geburtstag? — Mein Geburtstag ist am fünfzehnten Juni.' },
+]
+
 export const LEVELS = [
   { code: 'A1', name: 'Beginner',           desc: 'Greetings, numbers, introductions — the very first steps.',          active: true,  path: '/a1' },
   { code: 'A2', name: 'Elementary',         desc: 'Everyday life — shopping, family, simple conversations.',             active: false, path: '/a2' },
@@ -107,7 +276,7 @@ export const LEVELS = [
 
 export const CHAPTERS = [
   { n: 1, title: 'Basics', active: true, topics: ['Greetings', 'Names & origin', 'Numbers 0-20', 'sein & haben', 'Pronouns', 'Basic sentence structure'] },
-  { n: 2, title: 'Personal Info & Questions', active: false, topics: ['Age', 'Nationalities', 'Countries & languages', 'Professions', 'W-questions', 'Forming questions'] },
+  { n: 2, title: 'Personal Info & Questions', active: true, topics: ['Age', 'Nationalities', 'Countries & languages', 'Professions', 'W-questions', 'Forming questions'] },
   { n: 3, title: 'Daily Life', active: false, topics: ['Hobbies', 'Daily routine', 'Time', 'Days of the week', 'Months', 'Modal verbs'] },
   { n: 4, title: 'Family & Relationships', active: false, topics: ['Family members', 'Describing people', 'Possessives', 'Plural nouns', 'Negations'] },
   { n: 5, title: 'Food & Ordering', active: false, topics: ['Food & drinks', 'Restaurant phrases', 'Shopping', 'haben im Konjunktiv'] },
@@ -123,6 +292,11 @@ export const CHAPTER_SECTIONS = {
     { key: 'grammar',   label: 'Grammar',    desc: 'sein & haben conjugations' },
     { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },
   ],
+  2: [
+    { key: 'vocab',     label: 'Vocabulary', desc: 'Age, nationalities, countries & languages, professions, questions' },
+    { key: 'grammar',   label: 'Grammar',    desc: 'W-question words and question formation' },
+    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },
+  ],
 }
 
 export const FLASHCARD_SETS = [
@@ -131,8 +305,14 @@ export const FLASHCARD_SETS = [
   { id: 'where-from',  title: "Woher kommst du? / Where You're From",     data: WHERE_FROM,  type: 'vocab',   level: 'A1', chapter: 1 },
   { id: 'expressions', title: 'Häufige Ausdrücke / Common Expressions',   data: EXPRESSIONS, type: 'vocab',   level: 'A1', chapter: 1 },
   { id: 'numbers',     title: 'Zahlen 0–20 / Numbers 0–20',              data: NUMBERS,     type: 'numbers', level: 'A1', chapter: 1 },
-  { id: 'sein',        title: 'sein — to be',                             data: SEIN,        type: 'conjug',  level: 'A1', chapter: 1 },
-  { id: 'haben',       title: 'haben — to have',                          data: HABEN,       type: 'conjug',  level: 'A1', chapter: 1 },
+  { id: 'sein',                title: 'sein — to be',                                       data: SEIN,                type: 'conjug', level: 'A1', chapter: 1 },
+  { id: 'haben',               title: 'haben — to have',                                     data: HABEN,               type: 'conjug', level: 'A1', chapter: 1 },
+  { id: 'age',                 title: 'Alter / Age',                                          data: AGE_PHRASES,         type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'nationalities',       title: 'Nationalitäten / Nationalities',                       data: NATIONALITIES,       type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'countries-languages', title: 'Länder & Sprachen / Countries & Languages',            data: COUNTRIES_LANGUAGES, type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'professions',         title: 'Berufe / Professions',                                 data: PROFESSIONS,         type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'w-questions',         title: 'W-Fragen / W-Question Words',                          data: W_QUESTION_WORDS,    type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'forming-questions',   title: 'Fragen bilden / Forming Questions',                    data: FORMING_QUESTIONS,   type: 'vocab',  level: 'A1', chapter: 2 },
 ]
 
 export const FILL_GAPS = [
