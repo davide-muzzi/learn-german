@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose } from '@lucide/vue'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
@@ -9,9 +9,12 @@ import { flashcardResetSignal } from '../composables/flashcardBus.js'
 import { useTheme } from '../composables/useTheme.js'
 import { useUsername } from '../composables/useUsername.js'
 import { toggleNotes } from '../composables/useNotesOpen.js'
+import { useSidebarCollapsed } from '../composables/useSidebarCollapsed.js'
 
 defineProps({ open: Boolean })
 defineEmits(['close'])
+
+const { collapsed } = useSidebarCollapsed()
 
 const { dark, toggleTheme } = useTheme()
 const { username } = useUsername()
@@ -33,7 +36,7 @@ const currentSection = computed(() =>
 // ── Sidebar resize ──────────────────────────────────────────────
 const RESIZE_KEY = 'sidebar-w'
 const MIN_W = 190
-const MAX_W = 420
+const MAX_W = 480
 
 function applyWidth(w) {
   document.documentElement.style.setProperty('--sidebar-w', w + 'px')
@@ -86,6 +89,9 @@ onUnmounted(() => {
         <h1><Languages :size="17" /> Deutsch A1</h1>
         <p>Interactive Lesson Book</p>
       </RouterLink>
+      <button class="sidebar-collapse-btn" @click="collapsed = true" title="Collapse sidebar" aria-label="Collapse sidebar">
+        <PanelLeftClose :size="16" />
+      </button>
       <button class="sidebar-close" @click="$emit('close')" aria-label="Close menu">✕</button>
     </div>
     <div class="sidebar-body">

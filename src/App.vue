@@ -1,14 +1,17 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Languages } from '@lucide/vue'
+import { Languages, PanelLeftOpen } from '@lucide/vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppFooter from './components/AppFooter.vue'
 import AppNotesPanel from './components/AppNotesPanel.vue'
+import { useSidebarCollapsed } from './composables/useSidebarCollapsed.js'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
 watch(() => route.fullPath, () => { sidebarOpen.value = false })
+
+const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
 </script>
 
 <template>
@@ -23,9 +26,15 @@ watch(() => route.fullPath, () => { sidebarOpen.value = false })
     <div v-if="sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false" />
   </Transition>
 
-  <AppSidebar :open="sidebarOpen" @close="sidebarOpen = false" />
+  <AppSidebar :open="sidebarOpen" :class="{ collapsed: sidebarCollapsed }" @close="sidebarOpen = false" />
 
-  <main class="main">
+  <Transition name="reopen-fade">
+    <button v-if="sidebarCollapsed" class="sidebar-reopen" title="Open sidebar" @click="sidebarCollapsed = false">
+      <PanelLeftOpen :size="18" />
+    </button>
+  </Transition>
+
+  <main class="main" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
     <div class="main-content">
       <RouterView />
     </div>
