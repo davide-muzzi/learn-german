@@ -5,7 +5,7 @@ defineProps({ rows: Array, verb: String })
 <template>
   <table>
     <thead>
-      <tr><th>Pronoun</th><th>{{ verb }}</th><th>English</th></tr>
+      <tr><th>Pronoun</th><th>{{ verb }}</th><th>Meaning</th></tr>
     </thead>
     <tbody>
       <tr v-for="([pron, conj, en], i) in rows" :key="i">

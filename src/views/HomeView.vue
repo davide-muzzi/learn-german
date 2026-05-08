@@ -11,7 +11,7 @@ function goToLevel(lvl) {
 
 <template>
   <div class="page-header">
-    <h1>Deutsch A1 – C2</h1>
+    <h1>Deutsch A1 - C2</h1>
     <p class="sub">An interactive lesson book following the CEFR framework. Choose a level to begin.</p>
   </div>
   <div class="card">

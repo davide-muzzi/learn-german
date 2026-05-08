@@ -213,6 +213,8 @@ tbody tr:hover td { background: var(--surface); }
 .bold-conj { font-weight: 700; color: var(--blue); }
 .pron-col { color: var(--muted); font-size: 13.5px; }
 .en-col { color: var(--muted); font-size: 13.5px; }
+.note-col { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.note-plain { font-size: 12.5px; font-style: italic; }
 
 .badge {
   display: inline-block;

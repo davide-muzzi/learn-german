@@ -188,20 +188,20 @@ export const PROFESSIONS = [
 ]
 
 export const W_QUESTION_WORDS = [
-  ['wer', 'who', ''],
-  ['was', 'what', ''],
-  ['wo', 'where', ''],
-  ['woher', 'where from', ''],
-  ['wohin', 'where to', ''],
-  ['wie', 'how / what', ''],
-  ['wie viel', 'how much', ''],
-  ['wie viele', 'how many', ''],
-  ['wann', 'when', ''],
-  ['warum / weshalb / wieso', 'why', ''],
-  ['welcher / welche / welches', 'which (m / f / n)', ''],
-  ['wessen', 'whose', ''],
-  ['wem', 'to whom', 'dative'],
-  ['wen', 'whom', 'accusative'],
+  ['wer', 'who', 'Wer bist du?'],
+  ['was', 'what', 'Was machst du?'],
+  ['wo', 'where', 'Wo wohnst du?'],
+  ['woher', 'where from', 'Woher kommst du?'],
+  ['wohin', 'where to', 'Wohin gehst du?'],
+  ['wie', 'how / what', 'Wie heisst du?'],
+  ['wie viel', 'how much', 'Wie viel kostet das?'],
+  ['wie viele', 'how many', 'Wie viele Sprachen sprichst du?'],
+  ['wann', 'when', 'Wann hast du Geburtstag?'],
+  ['warum / weshalb / wieso', 'why', 'Warum lernst du Deutsch?'],
+  ['welcher / welche / welches', 'which (m / f / n)', 'Welche Sprache sprichst du?'],
+  ['wessen', 'whose', 'Wessen Buch ist das?'],
+  ['wem', 'to whom (dat.)', 'Wem gibst du das Buch?'],
+  ['wen', 'whom (acc.)', 'Wen siehst du?'],
 ]
 
 export const FORMING_QUESTIONS = [
@@ -307,7 +307,7 @@ export const FLASHCARD_SETS = [
   { id: 'your-name',   title: 'Deinen Namen sagen / Saying Your Name',    data: YOUR_NAME,   type: 'vocab',   level: 'A1', chapter: 1 },
   { id: 'where-from',  title: "Woher kommst du? / Where You're From",     data: WHERE_FROM,  type: 'vocab',   level: 'A1', chapter: 1 },
   { id: 'expressions', title: 'Häufige Ausdrücke / Common Expressions',   data: EXPRESSIONS, type: 'vocab',   level: 'A1', chapter: 1 },
-  { id: 'numbers',     title: 'Zahlen 0–20 / Numbers 0–20',              data: NUMBERS,     type: 'numbers', level: 'A1', chapter: 1 },
+  { id: 'numbers',     title: 'Zahlen 0-20 / Numbers 0-20',              data: NUMBERS,     type: 'numbers', level: 'A1', chapter: 1 },
   { id: 'sein',                title: 'sein — to be',                                       data: SEIN,                type: 'conjug', level: 'A1', chapter: 1 },
   { id: 'haben',               title: 'haben — to have',                                     data: HABEN,               type: 'conjug', level: 'A1', chapter: 1 },
   { id: 'age',                 title: 'Alter / Age',                                          data: AGE_PHRASES,         type: 'vocab',  level: 'A1', chapter: 2 },

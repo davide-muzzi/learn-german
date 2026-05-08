@@ -107,7 +107,7 @@ function backToChapter() {
             <hr class="section-divider">
             <div class="card-title">Special Sound Combinations</div>
             <table class="special-table">
-              <thead><tr><th>Combo</th><th>Sounds like</th><th>Note</th></tr></thead>
+              <thead><tr><th>Combo</th><th>Pronunciation</th><th>Note</th></tr></thead>
               <tbody>
                 <tr v-for="([c, p, note]) in DIPHTHONGS" :key="c">
                   <td class="de" style="font-size:16px;">{{ c }}</td>
@@ -123,25 +123,26 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">Begrüssungen / Greetings</div>
             <p class="card-sub">Essential phrases for saying hello and goodbye.</p>
-            <VocabTable :rows="GREETINGS" />
+            <VocabTable :rows="GREETINGS" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Deinen Namen sagen / Saying Your Name</div>
             <p class="card-sub">Introduce yourself and ask others their name.</p>
-            <VocabTable :rows="YOUR_NAME" />
+            <VocabTable :rows="YOUR_NAME" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Woher kommst du? / Where You're From</div>
             <p class="card-sub">Talk about your origin and where you live.</p>
-            <VocabTable :rows="WHERE_FROM" />
+            <VocabTable :rows="WHERE_FROM" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Häufige Ausdrücke / Common Expressions</div>
             <p class="card-sub">Everyday polite phrases every German speaker needs.</p>
-            <VocabTable :rows="EXPRESSIONS" />
+            <VocabTable :rows="EXPRESSIONS" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
-            <div class="card-title">Zahlen 0–20 / Numbers 0–20</div>
+            <div class="card-title">Zahlen 0-20 / Numbers 0-20</div>
+            <p class="card-sub">The foundation for counting, giving your age, and telling the time.</p>
             <div class="numbers-grid">
               <div v-for="([num, word]) in NUMBERS" :key="num" class="num-cell">
                 <span class="num-n">{{ num }}</span>
@@ -181,11 +182,11 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">Alter / Age</div>
             <p class="card-sub">Phrases for talking about age and birthdays.</p>
-            <VocabTable :rows="AGE_PHRASES" />
+            <VocabTable :rows="AGE_PHRASES" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
-            <div class="card-title">Zahlen 21–100 / Numbers 21–100</div>
-            <p class="card-sub">Building on 0–20 from Chapter 1 — notice the pattern: units + und + tens.</p>
+            <div class="card-title">Zahlen 21-100 / Numbers 21-100</div>
+            <p class="card-sub">Building on 0-20 from Chapter 1 — notice the pattern: units + und + tens.</p>
             <div class="numbers-grid">
               <div v-for="([num, word]) in NUMBERS_21_100" :key="num" class="num-cell">
                 <span class="num-n">{{ num }}</span>
@@ -196,27 +197,27 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">Nationalitäten / Nationalities</div>
             <p class="card-sub">Nationality adjectives change depending on gender — most add -in for feminine.</p>
-            <VocabTable :rows="NATIONALITIES" />
+            <VocabTable :rows="NATIONALITIES" :headers="['Phrase', 'Meaning']" />
           </div>
           <div class="card">
             <div class="card-title">Länder & Sprachen / Countries & Languages</div>
             <p class="card-sub">Country names and their languages. Note: country names have no article unless marked (die Schweiz, die Türkei, die USA).</p>
-            <VocabTable :rows="COUNTRIES_LANGUAGES" />
+            <VocabTable :rows="COUNTRIES_LANGUAGES" :headers="['Word', 'Meaning', 'Type']" />
           </div>
           <div class="card">
             <div class="card-title">Berufe / Professions</div>
             <p class="card-sub">In German you say "Ich bin Arzt" (no article!) — not "Ich bin ein Arzt".</p>
-            <VocabTable :rows="PROFESSIONS" />
+            <VocabTable :rows="PROFESSIONS" :headers="['Word', 'Meaning']" />
           </div>
           <div class="card">
             <div class="card-title">W-Fragen / W-Question Words</div>
             <p class="card-sub">These are the building blocks of every question in German.</p>
-            <VocabTable :rows="W_QUESTION_WORDS" />
+            <VocabTable :rows="W_QUESTION_WORDS" :headers="['Word', 'Meaning', 'Example']" />
           </div>
           <div class="card">
             <div class="card-title">Fragen bilden / Forming Questions</div>
             <p class="card-sub">W-questions and yes/no questions in context.</p>
-            <VocabTable :rows="FORMING_QUESTIONS" />
+            <VocabTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
           </div>
         </template>
 

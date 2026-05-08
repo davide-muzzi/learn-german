@@ -6,7 +6,7 @@
 
   <div class="card">
     <div class="card-title">What is this?</div>
-    <p>Deutsch A1–C2 is a free, interactive German learning app built for casual learners — no exams,
+    <p>Deutsch A1-C2 is a free, interactive German learning app built for casual learners — no exams,
     no pressure, no account required. The content follows the <strong>CEFR framework</strong> as a
     structural guide, but the goal is simply to make learning German approachable and enjoyable at
     your own pace.</p>

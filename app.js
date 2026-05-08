@@ -261,7 +261,7 @@ function renderNumbers() {
   const col2 = NUMBERS.slice(11);
   return `
     <div class="page-header">
-      <h1>Zahlen 0–20 / Numbers 0–20</h1>
+      <h1>Zahlen 0-20 / Numbers 0-20</h1>
       <p class="sub">Essential numbers for everyday German.</p>
     </div>
     <div class="card">
