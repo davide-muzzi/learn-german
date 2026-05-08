@@ -171,6 +171,7 @@ export const COUNTRIES_LANGUAGES = [
 export const PROFESSIONS = [
   ['der Beruf / die Berufe', 'profession / professions', ''],
   ['Was machst du beruflich?', 'What do you do for work?', ''],
+  ['Was ist dein Beruf?', 'What is your profession?', ''],
   ['Was bist du von Beruf?', 'What is your profession?', ''],
   ['Ich bin … (von Beruf).', 'I am a… (by profession).', ''],
   ['der Arzt / die Ärztin', 'doctor (m / f)', ''],
