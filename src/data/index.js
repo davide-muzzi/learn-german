@@ -141,6 +141,7 @@ export const NATIONALITIES = [
   ['Ich bin Russe / Russin.', 'I am Russian. (m / f)', ''],
   ['Ich bin Chinese / Chinesin.', 'I am Chinese. (m / f)', ''],
   ['Ich bin Japaner / Japanerin.', 'I am Japanese. (m / f)', ''],
+  ['Ich bin Finne / Finnin.', 'I am Finnish. (m / f)', ''],
 ]
 
 export const COUNTRIES_LANGUAGES = [
@@ -156,11 +157,13 @@ export const COUNTRIES_LANGUAGES = [
   ['Russland', 'Russia', ''],
   ['China', 'China', ''],
   ['Japan', 'Japan', ''],
+  ['Finnland', 'Finland', ''],
   ['Deutsch', 'German', 'language'],
   ['Englisch', 'English', 'language'],
   ['Französisch', 'French', 'language'],
   ['Italienisch', 'Italian', 'language'],
   ['Spanisch', 'Spanish', 'language'],
+  ['Finnisch', 'Finnish', 'language'],
   ['Welche Sprache sprichst du?', 'Which language do you speak?', ''],
   ['Ich spreche…', 'I speak…', ''],
 ]
@@ -194,7 +197,7 @@ export const W_QUESTION_WORDS = [
   ['wie viel', 'how much', ''],
   ['wie viele', 'how many', ''],
   ['wann', 'when', ''],
-  ['warum / weshalb', 'why', ''],
+  ['warum / weshalb / wieso', 'why', ''],
   ['welcher / welche / welches', 'which (m / f / n)', ''],
   ['wessen', 'whose', ''],
   ['wem', 'to whom', 'dative'],
@@ -228,7 +231,7 @@ export const W_QUESTION_TABLE = [
   ['wohin', 'where to', 'Wohin gehst du? — Where are you going?'],
   ['wie', 'how / what', 'Wie heisst du? — What is your name?'],
   ['wann', 'when', 'Wann hast du Geburtstag? — When is your birthday?'],
-  ['warum', 'why', 'Warum lernst du Deutsch? — Why are you learning German?'],
+  ['warum / weshalb / wieso', 'why', 'Warum / Weshalb / Wieso lernst du Deutsch? — Why are you learning German?'],
   ['wie viel', 'how much', 'Wie viel kostet das? — How much does that cost?'],
   ['wie viele', 'how many', 'Wie viele Sprachen sprichst du? — How many languages do you speak?'],
   ['welcher / welche / welches', 'which', 'Welche Sprache sprichst du? — Which language do you speak?'],
@@ -240,7 +243,7 @@ export const FILL_GAPS_CH2 = [
   { parts: ['Was ', ['bist'], ' du von Beruf? — Ich ', ['bin'], ' Ärztin.'] },
   { parts: ['', ['Welche'], ' Sprache sprichst du? — Ich ', ['spreche'], ' Englisch.'] },
   { parts: ['', ['Wann'], ' hast du Geburtstag? — Am fünfzehnten Juni.'] },
-  { parts: ['', ['Warum'], ' lernst du Deutsch? — Weil ich es interessant finde.'] },
+  { parts: ['', ['Warum', 'Weshalb', 'Wieso'], ' lernst du Deutsch? — Weil ich es interessant finde.'] },
   { parts: ['', ['Wo'], ' wohnst du? — Ich wohne in Luzern.'] },
 ]
 

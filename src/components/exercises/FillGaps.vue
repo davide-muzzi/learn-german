@@ -13,7 +13,7 @@ const questions = props.data.map((q, qi) => {
     qi,
     parts: q.parts.map(part => {
       if (Array.isArray(part)) {
-        return { type: 'blank', answer: part[0], key: `${qi}-${bi++}` }
+        return { type: 'blank', answer: part[0], answers: part, key: `${qi}-${bi++}` }
       }
       return { type: 'text', content: part }
     }),
@@ -41,7 +41,7 @@ function checkFill() {
   questions.forEach(({ parts }) => {
     parts.filter(p => p.type === 'blank').forEach(p => {
       const val = (inputs[p.key] || '').trim().toLowerCase()
-      if (val === p.answer.toLowerCase()) {
+      if (p.answers.some(a => val === a.toLowerCase())) {
         results[p.key] = 'correct'
         correct++
       } else {
