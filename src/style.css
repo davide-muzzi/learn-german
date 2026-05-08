@@ -137,12 +137,6 @@ body {
   border-left-width: 2px;
 }
 .nav-item.sub { padding-left: 30px; }
-.nav-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
 
 /* ── MAIN ── */
 .main {
@@ -578,6 +572,19 @@ tbody tr:hover td { background: var(--surface); }
   padding-left: 42px;
   font-size: 12.5px;
 }
+
+/* Third indent level: section links inside an open chapter */
+.nav-item.section-deep {
+  padding-left: 56px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 12px;
+  gap: 7px;
+  color: #71717a;
+}
+.nav-item.section-deep:hover { color: #e4e4e7; }
+.nav-item.section-deep.active { color: var(--gold); }
+.sec-icon { flex-shrink: 0; opacity: .75; }
 
 /* ── LEVEL / CHAPTER EYEBROWS ── */
 .level-eyebrow,

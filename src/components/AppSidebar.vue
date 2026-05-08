@@ -1,7 +1,9 @@
 <script setup>
 import { computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine } from '@lucide/vue'
+
+const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
 import { flashcardResetSignal } from '../composables/flashcardBus.js'
 import { useTheme } from '../composables/useTheme.js'
@@ -145,13 +147,13 @@ onUnmounted(() => {
                   v-slot="{ navigate }"
                 >
                   <div
-                    class="nav-item section-sub"
-                    style="padding-left: 58px;"
+                    class="nav-item section-deep"
                     :class="{ active: currentSection === sec.key }"
                     @click="navigate"
                     role="link"
                   >
-                    <span class="nav-dot"></span> {{ sec.label }}
+                    <component :is="sectionIcons[sec.key]" :size="12" class="sec-icon" />
+                    {{ sec.label }}
                   </div>
                 </RouterLink>
               </template>
