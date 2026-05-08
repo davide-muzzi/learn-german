@@ -48,5 +48,9 @@ const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
     </button>
   </Transition>
 
+  <button class="notes-fab" aria-label="Open notes" @click="toggleNotes">
+    <StickyNote :size="22" />
+  </button>
+
   <AppNotesPanel />
 </template>
