@@ -141,6 +141,7 @@ body {
 /* ── MAIN ── */
 .main {
   margin-left: var(--sidebar-w);
+  margin-right: var(--notes-panel-margin, 0);
   flex: 1;
   padding: 36px 44px;
   min-height: 100vh;
@@ -249,7 +250,7 @@ tbody tr:hover td { background: var(--surface); }
 /* ── Sidebar collapse (desktop only) ── */
 @media (min-width: 769px) {
   .sidebar { transition: transform .22s ease; }
-  .main   { transition: margin-left .22s ease; }
+  .main   { transition: margin-left .22s ease, margin-right .22s ease; }
   .sidebar.collapsed { transform: translateX(calc(-1 * var(--sidebar-w))); }
   .main.sidebar-collapsed { margin-left: 0; }
 }

@@ -8,11 +8,12 @@ const { dark, toggleTheme } = useTheme()
 const { username } = useUsername()
 
 const KEY_LABELS = {
-  'theme':      'Theme',
-  'sidebar-w':  'Sidebar width',
-  'notes-w':    'Notes panel width',
-  'username':   'Your name',
-  'notes-data': 'Notes',
+  'theme':        'Theme',
+  'sidebar-w':    'Sidebar width',
+  'notes-w':      'Notes panel width',
+  'notes-docked': 'Notes layout',
+  'username':     'Your name',
+  'notes-data':   'Notes',
 }
 
 const v = ref(0)

@@ -1,13 +1,13 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import {
-  X, Eye, Edit2,
+  X, Eye, Edit2, PanelRight,
   Bold, Italic, Heading1, Heading2, List, ListOrdered, Code,
   Columns2, Rows,
 } from '@lucide/vue'
 import { marked } from 'marked'
 import { useNotes } from '../composables/useNotes.js'
-import { notesOpen } from '../composables/useNotesOpen.js'
+import { notesOpen, notesDocked } from '../composables/useNotesOpen.js'
 
 const { globalNotes, pageNotes, allNotes } = useNotes()
 
@@ -111,6 +111,17 @@ function applyWidth(w) {
   document.documentElement.style.setProperty('--notes-w', w + 'px')
 }
 
+// ── Docked margin sync ────────────────────────────────────────────
+function syncDockedMargin() {
+  if (notesDocked.value && notesOpen.value) {
+    const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--notes-w')) || 360
+    document.documentElement.style.setProperty('--notes-panel-margin', w + 'px')
+  } else {
+    document.documentElement.style.removeProperty('--notes-panel-margin')
+  }
+}
+watch([notesOpen, notesDocked], syncDockedMargin)
+
 let dragging = false
 let startX = 0
 let startW = 0
@@ -128,6 +139,7 @@ function onMouseMove(e) {
   if (!dragging) return
   const w = Math.min(maxW(), Math.max(MIN_W, startW - (e.clientX - startX)))
   applyWidth(w)
+  if (notesDocked.value) document.documentElement.style.setProperty('--notes-panel-margin', w + 'px')
 }
 
 function onMouseUp() {
@@ -137,11 +149,13 @@ function onMouseUp() {
   document.body.style.userSelect = ''
   const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--notes-w'))
   localStorage.setItem(RESIZE_KEY, w)
+  if (notesDocked.value) document.documentElement.style.setProperty('--notes-panel-margin', w + 'px')
 }
 
 onMounted(() => {
   const saved = parseInt(localStorage.getItem(RESIZE_KEY))
   if (saved >= MIN_W && saved <= maxW()) applyWidth(saved)
+  syncDockedMargin()
   window.addEventListener('mousemove', onMouseMove)
   window.addEventListener('mouseup', onMouseUp)
 })
@@ -149,6 +163,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('mousemove', onMouseMove)
   window.removeEventListener('mouseup', onMouseUp)
+  document.documentElement.style.removeProperty('--notes-panel-margin')
 })
 </script>
 
@@ -172,6 +187,7 @@ onUnmounted(() => {
                 <button class="notes-icon-btn" :class="{ active: layout === 'split-h' }" title="Split side by side" @click="layout = 'split-h'"><Columns2 :size="14" /></button>
                 <button class="notes-icon-btn" :class="{ active: layout === 'preview' }" title="Preview only"   @click="layout = 'preview'"> <Eye      :size="14" /></button>
               </template>
+              <button class="notes-icon-btn" :class="{ active: notesDocked }" :title="notesDocked ? 'Switch to overlay' : 'Dock to sidebar'" @click="notesDocked = !notesDocked"><PanelRight :size="14" /></button>
               <button class="notes-icon-btn" title="Close" @click="notesOpen = false"><X :size="14" /></button>
             </div>
           </div>
