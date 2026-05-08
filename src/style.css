@@ -1564,23 +1564,61 @@ tbody tr:hover td { background: var(--surface); }
   transition: background .12s, color .12s;
 }
 .notes-icon-btn:hover { background: var(--surface); color: var(--text); }
-.notes-textarea {
+.notes-editor {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.notes-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  background: var(--card);
+}
+.notes-toolbar-btn {
+  background: none;
+  border: none;
+  padding: 5px 6px;
+  border-radius: 5px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background .12s, color .12s;
+}
+.notes-toolbar-btn:hover { background: var(--surface); color: var(--text); }
+.notes-toolbar-sep {
+  width: 1px;
+  background: var(--border);
+  margin: 4px 3px;
+  flex-shrink: 0;
+}
+.notes-input {
+  flex: 1 1 50%;
+  min-height: 100px;
   resize: none;
   border: none;
-  padding: 14px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  line-height: 1.65;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
+  font-family: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
   background: var(--card);
   color: var(--text);
   outline: none;
 }
-.notes-textarea[contenteditable]:empty:before {
-  content: attr(placeholder);
-  color: #888;
-  pointer-events: none;
+.notes-preview {
+  flex: 1 1 50%;
+  overflow-y: auto;
+  padding: 12px 14px;
+  background: var(--surface);
 }
+.notes-preview-empty { color: #888; font-size: 12px; font-style: italic; }
 .notes-rendered-main {
   flex: 1;
   overflow-y: auto;

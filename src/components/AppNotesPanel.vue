@@ -1,14 +1,14 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { X, Eye, Edit2 } from '@lucide/vue'
+import { ref, nextTick, onMounted, onUnmounted } from 'vue'
+import { X, Heading1, Heading2, Bold, Italic, Strikethrough, Code, Link2, List, ListOrdered, CheckSquare, Quote } from '@lucide/vue'
 import { useNotes } from '../composables/useNotes.js'
 import { notesOpen } from '../composables/useNotesOpen.js'
 import { render } from "../utils/render.js";
+import { computed, watch } from 'vue'
 
 const { globalNotes, pageNotes, allNotes } = useNotes()
 
 const tab = ref('page')
-const preview = ref(false)
 
 const currentNotes = computed({
   get: () => tab.value === 'global' ? globalNotes.value : pageNotes.value,
@@ -20,7 +20,6 @@ const currentNotes = computed({
 
 function switchTab(t) {
   tab.value = t
-  preview.value = false
 }
 
 // ── Resize ───────────────────────────────────────────────────────
@@ -72,30 +71,84 @@ onUnmounted(() => {
   window.removeEventListener('mouseup', onMouseUp)
 })
 
-const vSyncMarkdown = {
-  updated(el, binding) {
-    if (document.activeElement !== el) {
-      el.innerHTML = binding.value
+// ── Toolbar ──────────────────────────────────────────────────────
+const textareaRef = ref(null)
+
+const WRAP_FORMATS = {
+  bold:   { marker: '**', placeholder: 'bold text' },
+  italic: { marker: '*',  placeholder: 'italic text' },
+  strike: { marker: '~~', placeholder: 'strikethrough' },
+  code:   { marker: '`',  placeholder: 'code' },
+}
+
+const LINE_PREFIXES = {
+  h1:    '# ',
+  h2:    '## ',
+  h3:    '### ',
+  quote: '> ',
+  ul:    '- ',
+  ol:    '1. ',
+  check: '- [ ] ',
+}
+
+function applyFormat(kind) {
+  const el = textareaRef.value
+  if (!el) return
+  const start = el.selectionStart
+  const end   = el.selectionEnd
+  const text  = currentNotes.value ?? ''
+
+  if (kind === 'link') {
+    const sel = text.slice(start, end)
+    let replacement, newStart, newEnd
+    if (sel) {
+      replacement = `[${sel}](url)`
+      newStart = start + sel.length + 3
+      newEnd   = newStart + 3
+    } else {
+      replacement = '[text](url)'
+      newStart = start + 1
+      newEnd   = newStart + 4
     }
+    const next = text.slice(0, start) + replacement + text.slice(end)
+    currentNotes.value = next
+    nextTick(() => { el.focus(); el.setSelectionRange(newStart, newEnd) })
+    return
   }
-}
 
-function onNotesInput(e) {
-  currentNotes.value = e.target.innerText
-}
+  if (WRAP_FORMATS[kind]) {
+    const { marker, placeholder } = WRAP_FORMATS[kind]
+    const sel = text.slice(start, end)
+    let replacement, newStart, newEnd
+    if (sel) {
+      replacement = `${marker}${sel}${marker}`
+      newStart = start + marker.length
+      newEnd   = newStart + sel.length
+    } else {
+      replacement = `${marker}${placeholder}${marker}`
+      newStart = start + marker.length
+      newEnd   = newStart + placeholder.length
+    }
+    const next = text.slice(0, start) + replacement + text.slice(end)
+    currentNotes.value = next
+    nextTick(() => { el.focus(); el.setSelectionRange(newStart, newEnd) })
+    return
+  }
 
-function onNotesKeydown(e) {
-  if (e.key === 'Enter') {
-    setTimeout(() => {
-      const el = e.target
-      el.innerHTML = render(el.innerText)
-      const sel = window.getSelection()
-      const newRange = document.createRange()
-      newRange.selectNodeContents(el)
-      newRange.collapse(false)
-      sel.removeAllRanges()
-      sel.addRange(newRange)
-    }, 0)
+  if (LINE_PREFIXES[kind]) {
+    const prefix = LINE_PREFIXES[kind]
+    const lineStart = text.lastIndexOf('\n', start - 1) + 1
+    const lineEnd   = text.indexOf('\n', end)
+    const block     = text.slice(lineStart, lineEnd === -1 ? undefined : lineEnd)
+    const lines     = block.split('\n')
+    const prefixed  = lines.map(l => prefix + l).join('\n')
+    const next      = text.slice(0, lineStart) + prefixed + (lineEnd === -1 ? '' : text.slice(lineEnd))
+    const addedChars = lines.length * prefix.length
+    currentNotes.value = next
+    nextTick(() => {
+      el.focus()
+      el.setSelectionRange(start + prefix.length, end + addedChars)
+    })
   }
 }
 </script>
@@ -113,7 +166,7 @@ function onNotesKeydown(e) {
               <button class="notes-tab" :class="{ active: tab === 'global' }" @click="switchTab('global')">Global</button>
               <button class="notes-tab" :class="{ active: tab === 'all' }" @click="switchTab('all')">All</button>
             </div>
-           <div class="notes-actions">
+            <div class="notes-actions">
               <button class="notes-icon-btn" title="Close" @click="notesOpen = false">
                 <X :size="14" />
               </button>
@@ -124,19 +177,43 @@ function onNotesKeydown(e) {
             <template v-if="globalNotes.trim() || allNotes.length">
               <div v-if="globalNotes.trim()" class="notes-all-block">
                 <div class="notes-all-label">Global</div>
-               <div class="notes-rendered" v-html="render(globalNotes)" />
+                <div class="notes-rendered" v-html="render(globalNotes)" />
               </div>
               <div v-for="{ key, content } in allNotes" :key="key" class="notes-all-block">
                 <div class="notes-all-label">{{ key }}</div>
-               <div class="notes-rendered" v-html="render(content)" />
+                <div class="notes-rendered" v-html="render(content)" />
               </div>
             </template>
             <div v-else class="notes-empty">No notes yet.</div>
           </div>
 
-        <div class="notes-textarea" contenteditable="true" v-sync-markdown="render(currentNotes)"
-            @input="onNotesInput" @keydown="onNotesKeydown" @blur="$event.target.innerHTML = render(currentNotes)"
-            placeholder="Write notes in Markdown…" />
+          <div v-else class="notes-editor">
+            <div class="notes-toolbar">
+              <button class="notes-toolbar-btn" @click="applyFormat('h1')"    title="Title (H1)">        <Heading1    :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('h2')"    title="Subtitle (H2)">     <Heading2    :size="14" /></button>
+              <span class="notes-toolbar-sep" />
+              <button class="notes-toolbar-btn" @click="applyFormat('bold')"   title="Bold">             <Bold        :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('italic')" title="Italic">           <Italic      :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('strike')" title="Strikethrough">    <Strikethrough :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('code')"   title="Inline code">      <Code        :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('link')"   title="Link">             <Link2       :size="14" /></button>
+              <span class="notes-toolbar-sep" />
+              <button class="notes-toolbar-btn" @click="applyFormat('ul')"     title="Bullet list">      <List        :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('ol')"     title="Numbered list">    <ListOrdered :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('check')"  title="Checkbox">         <CheckSquare :size="14" /></button>
+              <button class="notes-toolbar-btn" @click="applyFormat('quote')"  title="Blockquote">       <Quote       :size="14" /></button>
+            </div>
+
+            <textarea
+              ref="textareaRef"
+              class="notes-input"
+              v-model="currentNotes"
+              placeholder="Write notes in Markdown… or use the toolbar above"
+              spellcheck="false"
+            />
+
+            <div class="notes-preview notes-rendered" v-html="render(currentNotes) || '<span class=\'notes-preview-empty\'>Preview appears here</span>'" />
+          </div>
 
           <div class="notes-footer">
             <button class="notes-save-btn" @click="notesOpen = false">Save & close</button>
