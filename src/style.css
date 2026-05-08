@@ -835,6 +835,7 @@ tbody tr:hover td { background: var(--surface); }
   /* Main content */
   .main {
     margin-left: 0;
+    margin-right: 0;
     padding: calc(52px + 20px) 16px 24px;
     max-width: 100%;
   }
@@ -1598,6 +1599,7 @@ tbody tr:hover td { background: var(--surface); }
 .notes-resizer:hover,
 .notes-resizer:active { background: rgba(240,180,41,.35); }
 @media (max-width: 768px) { .notes-resizer { display: none; } }
+@media (max-width: 768px) { .notes-dock-btn { display: none; } }
 .notes-header {
   display: flex;
   align-items: center;

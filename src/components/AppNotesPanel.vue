@@ -113,7 +113,7 @@ function applyWidth(w) {
 
 // ── Docked margin sync ────────────────────────────────────────────
 function syncDockedMargin() {
-  if (notesDocked.value && notesOpen.value) {
+  if (notesDocked.value && notesOpen.value && window.innerWidth > 768) {
     const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--notes-w')) || 360
     document.documentElement.style.setProperty('--notes-panel-margin', w + 'px')
   } else {
@@ -187,7 +187,7 @@ onUnmounted(() => {
                 <button class="notes-icon-btn" :class="{ active: layout === 'split-h' }" title="Split side by side" @click="layout = 'split-h'"><Columns2 :size="14" /></button>
                 <button class="notes-icon-btn" :class="{ active: layout === 'preview' }" title="Preview only"   @click="layout = 'preview'"> <Eye      :size="14" /></button>
               </template>
-              <button class="notes-icon-btn" :class="{ active: notesDocked }" :title="notesDocked ? 'Switch to overlay' : 'Dock to sidebar'" @click="notesDocked = !notesDocked"><PanelRight :size="14" /></button>
+              <button class="notes-icon-btn notes-dock-btn" :class="{ active: notesDocked }" :title="notesDocked ? 'Switch to overlay' : 'Dock to sidebar'" @click="notesDocked = !notesDocked"><PanelRight :size="14" /></button>
               <button class="notes-icon-btn" title="Close" @click="notesOpen = false"><X :size="14" /></button>
             </div>
           </div>
