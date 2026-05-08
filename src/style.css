@@ -286,6 +286,23 @@ tbody tr:hover td { background: var(--surface); }
 }
 .sidebar-reopen:hover { background: var(--surface); color: var(--text); }
 @media (max-width: 768px) { .sidebar-reopen { display: none; } }
+.notes-open-btn {
+  position: fixed;
+  top: 13px;
+  right: 14px;
+  z-index: 9;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 7px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  transition: background .12s, color .12s;
+}
+.notes-open-btn:hover { background: var(--surface); color: var(--text); }
+@media (max-width: 768px) { .notes-open-btn { display: none; } }
 .reopen-fade-enter-active,
 .reopen-fade-leave-active { transition: opacity .18s ease; }
 .reopen-fade-enter-from,

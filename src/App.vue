@@ -1,11 +1,12 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Languages, PanelLeftOpen } from '@lucide/vue'
+import { Languages, PanelLeftOpen, StickyNote } from '@lucide/vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppFooter from './components/AppFooter.vue'
 import AppNotesPanel from './components/AppNotesPanel.vue'
 import { useSidebarCollapsed } from './composables/useSidebarCollapsed.js'
+import { notesOpen, toggleNotes } from './composables/useNotesOpen.js'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
@@ -40,6 +41,12 @@ const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
     </div>
     <AppFooter />
   </main>
+
+  <Transition name="reopen-fade">
+    <button v-if="!notesOpen" class="notes-open-btn" title="Open notes" @click="toggleNotes">
+      <StickyNote :size="18" />
+    </button>
+  </Transition>
 
   <AppNotesPanel />
 </template>
