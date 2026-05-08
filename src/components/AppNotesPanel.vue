@@ -1,9 +1,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { X, Eye, Edit2 } from '@lucide/vue'
-import { marked } from 'marked'
 import { useNotes } from '../composables/useNotes.js'
 import { notesOpen } from '../composables/useNotesOpen.js'
+import { render } from "../utils/render.js";
 
 const { globalNotes, pageNotes, allNotes } = useNotes()
 
@@ -71,6 +71,33 @@ onUnmounted(() => {
   window.removeEventListener('mousemove', onMouseMove)
   window.removeEventListener('mouseup', onMouseUp)
 })
+
+const vSyncMarkdown = {
+  updated(el, binding) {
+    if (document.activeElement !== el) {
+      el.innerHTML = binding.value
+    }
+  }
+}
+
+function onNotesInput(e) {
+  currentNotes.value = e.target.innerText
+}
+
+function onNotesKeydown(e) {
+  if (e.key === 'Enter') {
+    setTimeout(() => {
+      const el = e.target
+      el.innerHTML = render(el.innerText)
+      const sel = window.getSelection()
+      const newRange = document.createRange()
+      newRange.selectNodeContents(el)
+      newRange.collapse(false)
+      sel.removeAllRanges()
+      sel.addRange(newRange)
+    }, 0)
+  }
+}
 </script>
 
 <template>
@@ -86,10 +113,7 @@ onUnmounted(() => {
               <button class="notes-tab" :class="{ active: tab === 'global' }" @click="switchTab('global')">Global</button>
               <button class="notes-tab" :class="{ active: tab === 'all' }" @click="switchTab('all')">All</button>
             </div>
-            <div class="notes-actions">
-              <button v-if="tab !== 'all'" class="notes-icon-btn" :title="preview ? 'Edit' : 'Preview'" @click="preview = !preview">
-                <component :is="preview ? Edit2 : Eye" :size="14" />
-              </button>
+           <div class="notes-actions">
               <button class="notes-icon-btn" title="Close" @click="notesOpen = false">
                 <X :size="14" />
               </button>
@@ -100,20 +124,19 @@ onUnmounted(() => {
             <template v-if="globalNotes.trim() || allNotes.length">
               <div v-if="globalNotes.trim()" class="notes-all-block">
                 <div class="notes-all-label">Global</div>
-                <div class="notes-rendered" v-html="marked(globalNotes)" />
+               <div class="notes-rendered" v-html="render(globalNotes)" />
               </div>
               <div v-for="{ key, content } in allNotes" :key="key" class="notes-all-block">
                 <div class="notes-all-label">{{ key }}</div>
-                <div class="notes-rendered" v-html="marked(content)" />
+               <div class="notes-rendered" v-html="render(content)" />
               </div>
             </template>
             <div v-else class="notes-empty">No notes yet.</div>
           </div>
 
-          <template v-else>
-            <div v-if="preview" class="notes-rendered notes-rendered-main" v-html="marked(currentNotes)" />
-            <textarea v-else class="notes-textarea" v-model="currentNotes" placeholder="Write notes in Markdown…" />
-          </template>
+        <div class="notes-textarea" contenteditable="true" v-sync-markdown="render(currentNotes)"
+            @input="onNotesInput" @keydown="onNotesKeydown" @blur="$event.target.innerHTML = render(currentNotes)"
+            placeholder="Write notes in Markdown…" />
 
           <div class="notes-footer">
             <button class="notes-save-btn" @click="notesOpen = false">Save & close</button>

@@ -1576,6 +1576,11 @@ tbody tr:hover td { background: var(--surface); }
   color: var(--text);
   outline: none;
 }
+.notes-textarea[contenteditable]:empty:before {
+  content: attr(placeholder);
+  color: #888;
+  pointer-events: none;
+}
 .notes-rendered-main {
   flex: 1;
   overflow-y: auto;
