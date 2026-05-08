@@ -36,7 +36,7 @@ const currentSection = computed(() =>
 // ── Sidebar resize ──────────────────────────────────────────────
 const RESIZE_KEY = 'sidebar-w'
 const MIN_W = 190
-const MAX_W = 480
+const maxW = () => Math.floor(window.innerWidth / 3)
 
 function applyWidth(w) {
   document.documentElement.style.setProperty('--sidebar-w', w + 'px')
@@ -57,7 +57,7 @@ function onResizerMouseDown(e) {
 
 function onMouseMove(e) {
   if (!dragging) return
-  const w = Math.min(MAX_W, Math.max(MIN_W, startW + e.clientX - startX))
+  const w = Math.min(maxW(), Math.max(MIN_W, startW + e.clientX - startX))
   applyWidth(w)
 }
 
@@ -72,7 +72,7 @@ function onMouseUp() {
 
 onMounted(() => {
   const saved = parseInt(localStorage.getItem(RESIZE_KEY))
-  if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved)
+  if (saved >= MIN_W) applyWidth(Math.min(saved, maxW()))
   window.addEventListener('mousemove', onMouseMove)
   window.addEventListener('mouseup', onMouseUp)
 })
