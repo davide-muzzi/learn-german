@@ -1,6 +1,6 @@
 <script setup>
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
-import { X, Heading1, Heading2, Bold, Italic, Strikethrough, Code, Link2, List, ListOrdered, CheckSquare, Quote } from '@lucide/vue'
+import { X, Heading1, Heading2, Bold, Italic, Strikethrough, Code, Link2, List, ListOrdered, CheckSquare, Quote, Rows2, Columns2, PenLine, Eye } from '@lucide/vue'
 import { useNotes } from '../composables/useNotes.js'
 import { notesOpen } from '../composables/useNotesOpen.js'
 import { render } from "../utils/render.js";
@@ -9,6 +9,16 @@ import { computed, watch } from 'vue'
 const { globalNotes, pageNotes, allNotes } = useNotes()
 
 const tab = ref('page')
+
+// ── Layout mode ───────────────────────────────────────────────────
+// modes: 'split-v' (top/bottom), 'split-h' (left/right), 'editor', 'preview'
+const LAYOUT_KEY = 'notes-layout'
+const layout = ref(localStorage.getItem(LAYOUT_KEY) || 'split-v')
+
+function setLayout(mode) {
+  layout.value = mode
+  localStorage.setItem(LAYOUT_KEY, mode)
+}
 
 const currentNotes = computed({
   get: () => tab.value === 'global' ? globalNotes.value : pageNotes.value,
@@ -167,6 +177,23 @@ function applyFormat(kind) {
               <button class="notes-tab" :class="{ active: tab === 'all' }" @click="switchTab('all')">All</button>
             </div>
             <div class="notes-actions">
+              <button class="notes-icon-btn" :class="{ active: layout === 'editor' }" title="Editor only"
+                @click="setLayout('editor')">
+                <PenLine :size="14" />
+              </button>
+              <button class="notes-icon-btn" :class="{ active: layout === 'split-v' }" title="Split top / bottom"
+                @click="setLayout('split-v')">
+                <Rows2 :size="14" />
+              </button>
+              <button class="notes-icon-btn" :class="{ active: layout === 'split-h' }" title="Split left / right"
+                @click="setLayout('split-h')">
+                <Columns2 :size="14" />
+              </button>
+              <button class="notes-icon-btn" :class="{ active: layout === 'preview' }" title="Preview only"
+                @click="setLayout('preview')">
+                <Eye :size="14" />
+              </button>
+              <span class="notes-toolbar-sep" style="height:18px;width:1px;margin:auto 4px;" />
               <button class="notes-icon-btn" title="Close" @click="notesOpen = false">
                 <X :size="14" />
               </button>
@@ -187,17 +214,20 @@ function applyFormat(kind) {
             <div v-else class="notes-empty">No notes yet.</div>
           </div>
 
-          <div v-else class="notes-editor">
-            <div class="notes-toolbar">
+          <div v-else class="notes-editor" :class="`layout-${layout}`">
+            <div class="notes-toolbar"
+              :style="layout === 'split-h' ? 'flex-direction: column; border-right: 1px solid var(--border); ' : '  border-bottom: 1px solid var(--border)'">
               <button class="notes-toolbar-btn" @click="applyFormat('h1')"    title="Title (H1)">        <Heading1    :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('h2')"    title="Subtitle (H2)">     <Heading2    :size="14" /></button>
-              <span class="notes-toolbar-sep" />
+              <span class="notes-toolbar-sep"
+                :style="layout === 'split-h' ? ' width: 70%; height: 1px;' : 'width: 1px'" />
               <button class="notes-toolbar-btn" @click="applyFormat('bold')"   title="Bold">             <Bold        :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('italic')" title="Italic">           <Italic      :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('strike')" title="Strikethrough">    <Strikethrough :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('code')"   title="Inline code">      <Code        :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('link')"   title="Link">             <Link2       :size="14" /></button>
-              <span class="notes-toolbar-sep" />
+              <span class="notes-toolbar-sep"
+                :style="layout === 'split-h' ? ' width: 70%; height: 1px;' : 'width: 1px'" />
               <button class="notes-toolbar-btn" @click="applyFormat('ul')"     title="Bullet list">      <List        :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('ol')"     title="Numbered list">    <ListOrdered :size="14" /></button>
               <button class="notes-toolbar-btn" @click="applyFormat('check')"  title="Checkbox">         <CheckSquare :size="14" /></button>
@@ -205,6 +235,7 @@ function applyFormat(kind) {
             </div>
 
             <textarea
+v-if="layout !== 'preview'"
               ref="textareaRef"
               class="notes-input"
               v-model="currentNotes"
@@ -212,7 +243,8 @@ function applyFormat(kind) {
               spellcheck="false"
             />
 
-            <div class="notes-preview notes-rendered" v-html="render(currentNotes) || '<span class=\'notes-preview-empty\'>Preview appears here</span>'" />
+            <div v-if="layout !== 'editor'" class="notes-preview notes-rendered"
+              v-html="render(currentNotes) || '<span class=\'notes-preview-empty\'>Preview appears here</span>'" />
           </div>
 
           <div class="notes-footer">

@@ -1576,7 +1576,6 @@ tbody tr:hover td { background: var(--surface); }
   flex-wrap: wrap;
   gap: 1px;
   padding: 5px 8px;
-  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   background: var(--card);
 }
@@ -1593,7 +1592,6 @@ tbody tr:hover td { background: var(--surface); }
 }
 .notes-toolbar-btn:hover { background: var(--surface); color: var(--text); }
 .notes-toolbar-sep {
-  width: 1px;
   background: var(--border);
   margin: 4px 3px;
   flex-shrink: 0;
@@ -1617,6 +1615,31 @@ tbody tr:hover td { background: var(--surface); }
   overflow-y: auto;
   padding: 12px 14px;
   background: var(--surface);
+}
+/* Layout modes */
+.notes-editor.layout-split-h {
+  flex-direction: row;
+}
+
+.notes-editor.layout-split-h .notes-input {
+  border-bottom: none;
+  border-right: 1px solid var(--border);
+  min-height: 0;
+}
+
+.notes-editor.layout-editor .notes-input {
+  flex: 1;
+  border-bottom: none;
+  min-height: 0;
+}
+
+.notes-editor.layout-preview .notes-preview {
+  flex: 1;
+}
+
+.notes-icon-btn.active {
+  background: var(--surface);
+  color: var(--text);
 }
 .notes-preview-empty { color: #888; font-size: 12px; font-style: italic; }
 .notes-rendered-main {
