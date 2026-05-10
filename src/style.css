@@ -669,17 +669,17 @@ tbody tr:hover td { background: var(--surface); }
 
 /* ── SIDEBAR SECTION SUB-ITEMS ── */
 .nav-item.section-sub {
-  padding-left: 42px;
+  padding-left: 59px;
   font-size: 12.5px;
 }
 
 /* Third indent level: section links inside an open chapter */
 .nav-item.section-deep {
-  padding-left: 56px;
+  padding-left: 88px;
   padding-top: 4px;
   padding-bottom: 4px;
   font-size: 12px;
-  gap: 7px;
+  gap: 9px;
   color: #71717a;
 }
 .nav-item.section-deep:hover { color: #e4e4e7; }
