@@ -191,7 +191,7 @@ onUnmounted(() => {
                 >
                   <div
                     class="nav-item section-deep"
-                    :class="{ active: currentSection === sec.key }"
+                    :class="{ active: currentSection === sec.key && currentChapterN === ch.n }"
                     @click="navigate"
                     role="link"
                   >
