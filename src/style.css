@@ -1818,6 +1818,11 @@ tbody tr:hover td { background: var(--surface); }
   transition: border-color .12s, background .12s;
 }
 .download-btn:hover { border-color: var(--gold); background: rgba(240,180,41,.06); }
+@media (max-width: 768px) {
+  .export-row { flex-wrap: wrap; }
+  .export-btns { flex-direction: column; width: 100%; }
+  .download-btn { justify-content: center; }
+}
 
 /* Notes slide transition */
 .notes-slide-enter-active,
