@@ -771,6 +771,22 @@ tbody tr:hover td { background: var(--surface); }
 }
 .ch-nav-title { flex: 1; }
 .ch-nav-lock { font-size: 10px; margin-left: auto; opacity: .45; }
+.ch-expand-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  flex-shrink: 0;
+  transition: color .12s, background .12s;
+}
+.ch-expand-btn:hover { color: var(--text); background: rgba(0,0,0,.06); }
+.ch-expand-btn svg { transition: transform .15s ease; }
+.ch-expand-btn .chevron-collapsed { transform: rotate(-90deg); }
 .nav-item.locked { color: #52525b; }
 .nav-item.locked:hover { color: #71717a; }
 .nav-item.locked.active { color: var(--gold); }

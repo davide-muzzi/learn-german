@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose, Home } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose, Home, ChevronDown } from '@lucide/vue'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
@@ -57,6 +57,13 @@ watch(currentChapterN, val => {
     expandedChapters.value = new Set([...expandedChapters.value, val])
   }
 })
+
+function toggleChapter(n) {
+  const s = new Set(expandedChapters.value)
+  if (s.has(n)) s.delete(n)
+  else s.add(n)
+  expandedChapters.value = s
+}
 
 // ── Sidebar resize ──────────────────────────────────────────────
 const RESIZE_KEY = 'sidebar-w'
@@ -170,6 +177,9 @@ onUnmounted(() => {
                   <span class="ch-nav-n">{{ ch.n }}</span>
                   <span class="ch-nav-title">{{ ch.title }}</span>
                   <Lock v-if="!ch.active" :size="11" class="ch-nav-lock" />
+                  <button v-else-if="CHAPTER_SECTIONS[ch.n]" class="ch-expand-btn" @click.stop="toggleChapter(ch.n)" :title="expandedChapters.has(ch.n) ? 'Collapse' : 'Expand'">
+                    <ChevronDown :size="11" :class="{ 'chevron-collapsed': !expandedChapters.has(ch.n) }" />
+                  </button>
                 </div>
               </RouterLink>
 
