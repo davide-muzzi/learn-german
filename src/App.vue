@@ -10,7 +10,7 @@ import { notesOpen, toggleNotes } from './composables/useNotesOpen.js'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
-watch(() => route.fullPath, () => { sidebarOpen.value = false })
+watch(() => route.name, name => { if (name !== 'level' && name !== 'chapter') sidebarOpen.value = false })
 
 const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
 const isHome = computed(() => route.name === 'home')
