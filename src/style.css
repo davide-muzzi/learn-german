@@ -196,7 +196,7 @@ body {
 }
 
 /* ── TABLES ── */
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed; }
 thead tr { border-bottom: 2px solid var(--border); }
 th {
   padding: 8px 14px;
@@ -206,8 +206,14 @@ th {
   text-transform: uppercase;
   letter-spacing: .6px;
   color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); overflow: hidden; text-overflow: ellipsis; }
+[data-density="compact"] table { font-size: 13px; }
+[data-density="compact"] th { padding: 5px 10px; }
+[data-density="compact"] td { padding: 6px 10px; }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: var(--surface); }
 .de { font-weight: 600; color: var(--text); }
@@ -1493,6 +1499,26 @@ tbody tr:hover td { background: var(--surface); }
 }
 .setting-input:focus { border-color: var(--gold); }
 .setting-input::placeholder { color: var(--muted); }
+.setting-btn-group {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.setting-btn-group button {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--muted);
+  border: none;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.setting-btn-group button:not(:last-child) { border-right: 1px solid var(--border); }
+.setting-btn-group button:hover { color: var(--text); }
+.setting-btn-group button.active { background: var(--gold); color: #18181b; font-weight: 600; }
 
 .link-btn {
   background: none;

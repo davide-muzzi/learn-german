@@ -4,6 +4,11 @@ defineProps({ rows: Array, verb: String })
 
 <template>
   <table>
+    <colgroup>
+      <col style="width: 22%" />
+      <col style="width: 33%" />
+      <col style="width: 45%" />
+    </colgroup>
     <thead>
       <tr><th>Pronoun</th><th>{{ verb }}</th><th>Meaning</th></tr>
     </thead>

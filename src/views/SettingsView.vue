@@ -3,17 +3,20 @@ import { ref, computed } from 'vue'
 import { RotateCcw, Trash2, Download } from '@lucide/vue'
 import { useTheme } from '../composables/useTheme.js'
 import { useUsername } from '../composables/useUsername.js'
+import { useTableDensity } from '../composables/useTableDensity.js'
 
 const { dark, toggleTheme } = useTheme()
 const { username } = useUsername()
+const { density } = useTableDensity()
 
 const KEY_LABELS = {
-  'theme':        'Theme',
-  'sidebar-w':    'Sidebar width',
-  'notes-w':      'Notes panel width',
-  'notes-docked': 'Notes layout',
-  'username':     'Your name',
-  'notes-data':   'Notes',
+  'theme':         'Theme',
+  'sidebar-w':     'Sidebar width',
+  'notes-w':       'Notes panel width',
+  'notes-docked':  'Notes layout',
+  'table-density': 'Table density',
+  'username':      'Your name',
+  'notes-data':    'Notes',
 }
 
 const v = ref(0)
@@ -85,6 +88,16 @@ function exportNotes(format) {
         <input type="checkbox" :checked="dark" @change="toggleTheme" />
         <span class="setting-toggle-track"></span>
       </label>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">
+        <div class="setting-name">Table density</div>
+        <div class="setting-desc">How compact vocabulary and grammar tables appear</div>
+      </div>
+      <div class="setting-btn-group">
+        <button :class="{ active: density === 'normal' }" @click="density = 'normal'">Normal</button>
+        <button :class="{ active: density === 'compact' }" @click="density = 'compact'">Compact</button>
+      </div>
     </div>
   </div>
 
