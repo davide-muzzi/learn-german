@@ -86,7 +86,7 @@ onUnmounted(() => {
   <nav class="sidebar" :class="{ 'is-open': open }">
     <div class="sidebar-logo">
       <RouterLink to="/" class="sidebar-logo-link">
-        <h1><Languages :size="17" /> Deutsch A1</h1>
+        <h1><Languages :size="17" /> Learn German (CH)</h1>
         <p>Interactive Lesson Book</p>
       </RouterLink>
       <button class="sidebar-collapse-btn" @click="collapsed = true" title="Collapse sidebar" aria-label="Collapse sidebar">

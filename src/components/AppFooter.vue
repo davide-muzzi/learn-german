@@ -7,7 +7,7 @@ import { Languages } from '@lucide/vue'
     <div class="footer-inner">
       <div class="footer-brand">
         <Languages :size="15" />
-        <span>Deutsch A1</span>
+        <span>Learn German (CH)</span>
       </div>
       <nav class="footer-nav">
         <RouterLink to="/about">About</RouterLink>
@@ -15,6 +15,6 @@ import { Languages } from '@lucide/vue'
         <RouterLink to="/contact">Contact</RouterLink>
       </nav>
     </div>
-    <p class="footer-copy">A free, open-source German A1 learning app. No account required.</p>
+    <p class="footer-copy">A free, open-source app for learning German. No account required.</p>
   </footer>
 </template>
