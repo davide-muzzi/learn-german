@@ -15,9 +15,9 @@ const hasNotes = computed(() => props.rows.some(r => r[2]))
 <template>
   <table>
     <colgroup>
-      <col style="width: 38%" />
-      <col :style="hasNotes ? 'width: 47%' : 'width: 62%'" />
-      <col v-if="hasNotes" style="width: 15%" />
+      <col style="width: 35%" />
+      <col :style="hasNotes ? 'width: 35%' : 'width: 65%'" />
+      <col v-if="hasNotes" style="width: 30%" />
     </colgroup>
     <thead>
       <tr>
