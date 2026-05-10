@@ -12,7 +12,7 @@ import {
 } from '../data/index.js'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
-import VocabTable from '../components/VocabTable.vue'
+import DataTable from '../components/DataTable.vue'
 import ConjugTable from '../components/ConjugTable.vue'
 import FillGaps from '../components/exercises/FillGaps.vue'
 import MultipleChoice from '../components/exercises/MultipleChoice.vue'
@@ -111,16 +111,7 @@ function backToChapter() {
             </div>
             <hr class="section-divider">
             <div class="card-title">Special Sound Combinations</div>
-            <table class="special-table">
-              <thead><tr><th>Combo</th><th>Pronunciation</th><th>Note</th></tr></thead>
-              <tbody>
-                <tr v-for="([c, p, note]) in DIPHTHONGS" :key="c">
-                  <td class="de" style="font-size:16px;">{{ c }}</td>
-                  <td style="font-weight:600;color:#1d4ed8;">{{ p }}</td>
-                  <td class="en-col">{{ note }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <DataTable :rows="DIPHTHONGS" :headers="['Combo', 'Pronunciation', 'Note']" />
           </div>
         </template>
 
@@ -128,22 +119,22 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">Begrüssungen / Greetings</div>
             <p class="card-sub">Essential phrases for saying hello and goodbye.</p>
-            <VocabTable :rows="GREETINGS" :headers="['Phrase', 'Meaning', 'Note']" />
+            <DataTable :rows="GREETINGS" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Deinen Namen sagen / Saying Your Name</div>
             <p class="card-sub">Introduce yourself and ask others their name.</p>
-            <VocabTable :rows="YOUR_NAME" :headers="['Phrase', 'Meaning', 'Note']" />
+            <DataTable :rows="YOUR_NAME" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Woher kommst du? / Where You're From</div>
             <p class="card-sub">Talk about your origin and where you live.</p>
-            <VocabTable :rows="WHERE_FROM" :headers="['Phrase', 'Meaning', 'Note']" />
+            <DataTable :rows="WHERE_FROM" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Häufige Ausdrücke / Common Expressions</div>
             <p class="card-sub">Everyday polite phrases every German speaker needs.</p>
-            <VocabTable :rows="EXPRESSIONS" :headers="['Phrase', 'Meaning', 'Note']" />
+            <DataTable :rows="EXPRESSIONS" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Zahlen 0-20 / Numbers 0-20</div>
@@ -187,7 +178,7 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">Alter / Age</div>
             <p class="card-sub">Phrases for talking about age and birthdays.</p>
-            <VocabTable :rows="AGE_PHRASES" :headers="['Phrase', 'Meaning', 'Note']" />
+            <DataTable :rows="AGE_PHRASES" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Zahlen 21-100 / Numbers 21-100</div>
@@ -202,27 +193,27 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">Nationalitäten / Nationalities</div>
             <p class="card-sub">Nationality adjectives change depending on gender — most add -in for feminine.</p>
-            <VocabTable :rows="NATIONALITIES" :headers="['Phrase', 'Meaning']" />
+            <DataTable :rows="NATIONALITIES" :headers="['Phrase', 'Meaning']" />
           </div>
           <div class="card">
             <div class="card-title">Länder & Sprachen / Countries & Languages</div>
             <p class="card-sub">Country names and their languages. Note: country names have no article unless marked (die Schweiz, die Türkei, die USA).</p>
-            <VocabTable :rows="COUNTRIES_LANGUAGES" :headers="['Word', 'Meaning', 'Type']" />
+            <DataTable :rows="COUNTRIES_LANGUAGES" :headers="['Word', 'Meaning', 'Type']" />
           </div>
           <div class="card">
             <div class="card-title">Berufe / Professions</div>
             <p class="card-sub">In German you say "Ich bin Arzt" (no article!) — not "Ich bin ein Arzt".</p>
-            <VocabTable :rows="PROFESSIONS" :headers="['Word', 'Meaning']" />
+            <DataTable :rows="PROFESSIONS" :headers="['Word', 'Meaning']" />
           </div>
           <div class="card">
             <div class="card-title">W-Fragen / W-Question Words</div>
             <p class="card-sub">These are the building blocks of every question in German.</p>
-            <VocabTable :rows="W_QUESTION_WORDS" :headers="['Word', 'Meaning', 'Example']" />
+            <DataTable :rows="W_QUESTION_WORDS" :headers="['Word', 'Meaning', 'Example']" />
           </div>
           <div class="card">
             <div class="card-title">Fragen bilden / Forming Questions</div>
             <p class="card-sub">W-questions and yes/no questions in context.</p>
-            <VocabTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
+            <DataTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
           </div>
         </template>
 
@@ -230,12 +221,12 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">W-Fragen — Question Words</div>
             <p class="card-sub">W-question words always come first, followed by the verb, then the subject.</p>
-            <VocabTable :rows="W_QUESTION_TABLE" :headers="['Word', 'Meaning', 'Example']" />
+            <DataTable :rows="W_QUESTION_TABLE" :headers="['Word', 'Meaning', 'Example']" />
           </div>
           <div class="card">
             <div class="card-title">Fragestruktur / Question Structure <span class="tag">Word order</span></div>
             <p class="card-sub">German questions follow two patterns:</p>
-            <VocabTable :rows="QUESTION_STRUCTURE" :headers="['Type', 'Structure', 'Example']" />
+            <DataTable :rows="QUESTION_STRUCTURE" :headers="['Type', 'Structure', 'Example']" />
           </div>
         </template>
 

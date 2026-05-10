@@ -450,8 +450,6 @@ tbody tr:hover td { background: var(--surface); }
 .alpha-letter { font-size: 20px; font-weight: 700; }
 .alpha-pron   { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-.special-table { margin-top: 8px; }
-
 /* ── EXERCISES ── */
 .ex-instruction {
   background: var(--info-bg);

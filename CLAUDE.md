@@ -24,7 +24,7 @@ This is a Vue 3 + Vite SPA — a German A1 lesson book with vocabulary tables, g
 
 **Component split:**
 - `src/views/` — page-level components; route-aware via `useRoute()`
-- `src/components/` — display-only (`VocabTable`, `ConjugTable`, `AppSidebar`)
+- `src/components/` — display-only (`DataTable`, `ConjugTable`, `AppSidebar`)
 - `App.vue` — thin shell: `AppSidebar` + `RouterView`
 
 **Legacy files** — `app.js` and `style.css` at the repo root are the original vanilla JS implementation kept for reference. They are not imported by the Vue app.
