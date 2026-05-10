@@ -1,7 +1,7 @@
 <script setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose, Home } from '@lucide/vue'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
@@ -10,6 +10,7 @@ import { useTheme } from '../composables/useTheme.js'
 import { useUsername } from '../composables/useUsername.js'
 import { toggleNotes } from '../composables/useNotesOpen.js'
 import { useSidebarCollapsed } from '../composables/useSidebarCollapsed.js'
+import { useNavAutoCollapse } from '../composables/useNavAutoCollapse.js'
 
 defineProps({ open: Boolean })
 defineEmits(['close'])
@@ -32,6 +33,30 @@ const currentChapterN = computed(() =>
 const currentSection = computed(() =>
   route.name === 'section' ? route.params.section : null
 )
+
+const { autoCollapse } = useNavAutoCollapse()
+
+const expandedLevels   = ref(new Set(currentLevel.value   ? [currentLevel.value]   : []))
+const expandedChapters = ref(new Set(currentChapterN.value ? [currentChapterN.value] : []))
+
+watch(currentLevel, val => {
+  if (!val) return
+  if (autoCollapse.value) {
+    expandedLevels.value   = new Set([val])
+    expandedChapters.value = new Set()
+  } else {
+    expandedLevels.value = new Set([...expandedLevels.value, val])
+  }
+})
+
+watch(currentChapterN, val => {
+  if (!val) return
+  if (autoCollapse.value) {
+    expandedChapters.value = new Set([val])
+  } else {
+    expandedChapters.value = new Set([...expandedChapters.value, val])
+  }
+})
 
 // ── Sidebar resize ──────────────────────────────────────────────
 const RESIZE_KEY = 'sidebar-w'
@@ -98,6 +123,12 @@ onUnmounted(() => {
       <div v-if="username.trim()" class="sidebar-greeting">Hi, {{ username.trim() }}!</div>
 
       <div class="nav-section">
+        <RouterLink to="/" custom v-slot="{ navigate, isExactActive }">
+          <div class="nav-item top" :class="{ active: isExactActive }" @click="navigate" role="link">
+            <Home :size="14" />
+            Level Overview
+          </div>
+        </RouterLink>
         <RouterLink to="/flashcards" custom v-slot="{ navigate, isExactActive }">
           <div class="nav-item top" :class="{ active: isExactActive }" @click="isExactActive ? flashcardResetSignal++ : navigate()" role="link">
             <Layers :size="14" />
@@ -127,8 +158,7 @@ onUnmounted(() => {
             </div>
           </RouterLink>
 
-          <!-- Chapters: only expand for the current active level -->
-          <template v-if="currentLevel === lvl.code && lvl.active">
+          <template v-if="expandedLevels.has(lvl.code) && lvl.active">
             <div v-for="ch in CHAPTERS" :key="ch.n">
               <RouterLink :to="`${lvl.path}/ch/${ch.n}`" custom v-slot="{ navigate }">
                 <div
@@ -143,8 +173,7 @@ onUnmounted(() => {
                 </div>
               </RouterLink>
 
-              <!-- Section sub-items -->
-              <template v-if="currentChapterN === ch.n && ch.active && CHAPTER_SECTIONS[ch.n]">
+              <template v-if="expandedChapters.has(ch.n) && ch.active && CHAPTER_SECTIONS[ch.n]">
                 <RouterLink
                   v-for="sec in CHAPTER_SECTIONS[ch.n]"
                   :key="sec.key"

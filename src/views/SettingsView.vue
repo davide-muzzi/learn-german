@@ -4,17 +4,20 @@ import { RotateCcw, Trash2, Download } from '@lucide/vue'
 import { useTheme } from '../composables/useTheme.js'
 import { useUsername } from '../composables/useUsername.js'
 import { useTableDensity } from '../composables/useTableDensity.js'
+import { useNavAutoCollapse } from '../composables/useNavAutoCollapse.js'
 
 const { dark, toggleTheme } = useTheme()
 const { username } = useUsername()
 const { density } = useTableDensity()
+const { autoCollapse } = useNavAutoCollapse()
 
 const KEY_LABELS = {
   'theme':         'Theme',
   'sidebar-w':     'Sidebar width',
   'notes-w':       'Notes panel width',
   'notes-docked':  'Notes layout',
-  'table-density': 'Table density',
+  'table-density':      'Table density',
+  'nav-auto-collapse':  'Nav sections',
   'username':      'Your name',
   'notes-data':    'Notes',
 }
@@ -97,6 +100,16 @@ function exportNotes(format) {
       <div class="setting-btn-group">
         <button :class="{ active: density === 'normal' }" @click="density = 'normal'">Normal</button>
         <button :class="{ active: density === 'compact' }" @click="density = 'compact'">Compact</button>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">
+        <div class="setting-name">Nav sections</div>
+        <div class="setting-desc">Collapse chapter sections when navigating away, or keep them open</div>
+      </div>
+      <div class="setting-btn-group">
+        <button :class="{ active: autoCollapse }"  @click="autoCollapse = true">Auto-collapse</button>
+        <button :class="{ active: !autoCollapse }" @click="autoCollapse = false">Keep open</button>
       </div>
     </div>
   </div>
