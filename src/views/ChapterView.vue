@@ -18,6 +18,11 @@ import FillGaps from '../components/exercises/FillGaps.vue'
 import MultipleChoice from '../components/exercises/MultipleChoice.vue'
 import Translation from '../components/exercises/Translation.vue'
 
+const QUESTION_STRUCTURE = [
+  ['W-question',    'W-word + verb + subject + …', 'Woher kommst du? — Where are you from?'],
+  ['Yes/No question', 'Verb + subject + …',          'Bist du Student? — Are you a student?'],
+]
+
 const route = useRoute()
 const router = useRouter()
 
@@ -225,35 +230,12 @@ function backToChapter() {
           <div class="card">
             <div class="card-title">W-Fragen — Question Words</div>
             <p class="card-sub">W-question words always come first, followed by the verb, then the subject.</p>
-            <table class="special-table">
-              <thead><tr><th>Word</th><th>Meaning</th><th>Example</th></tr></thead>
-              <tbody>
-                <tr v-for="([word, meaning, example]) in W_QUESTION_TABLE" :key="word">
-                  <td class="de" style="font-size:15px;font-weight:700;">{{ word }}</td>
-                  <td style="font-weight:600;color:#1d4ed8;">{{ meaning }}</td>
-                  <td class="en-col">{{ example }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <VocabTable :rows="W_QUESTION_TABLE" :headers="['Word', 'Meaning', 'Example']" />
           </div>
           <div class="card">
             <div class="card-title">Fragestruktur / Question Structure <span class="tag">Word order</span></div>
             <p class="card-sub">German questions follow two patterns:</p>
-            <table class="special-table">
-              <thead><tr><th>Type</th><th>Structure</th><th>Example</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td style="font-weight:700;">W-question</td>
-                  <td style="font-weight:600;color:#1d4ed8;">W-word + verb + subject + …</td>
-                  <td class="en-col">Woher <strong>kommst</strong> du? — Where are you from?</td>
-                </tr>
-                <tr>
-                  <td style="font-weight:700;">Yes/No question</td>
-                  <td style="font-weight:600;color:#1d4ed8;">Verb + subject + …</td>
-                  <td class="en-col"><strong>Bist</strong> du Student? — Are you a student?</td>
-                </tr>
-              </tbody>
-            </table>
+            <VocabTable :rows="QUESTION_STRUCTURE" :headers="['Type', 'Structure', 'Example']" />
           </div>
         </template>
 
