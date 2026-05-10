@@ -209,16 +209,16 @@ onUnmounted(() => {
     </div>
 
     <div class="sidebar-footer">
+      <button class="theme-toggle" @click="toggleTheme">
+        <component :is="dark ? Sun : Moon" :size="14" />
+        {{ dark ? 'Light mode' : 'Dark mode' }}
+      </button>
       <RouterLink to="/settings" custom v-slot="{ navigate, isExactActive }">
         <button class="theme-toggle" :class="{ 'toggle-active': isExactActive }" @click="navigate">
           <Settings :size="14" />
           Settings
         </button>
       </RouterLink>
-      <button class="theme-toggle" @click="toggleTheme">
-        <component :is="dark ? Sun : Moon" :size="14" />
-        {{ dark ? 'Light mode' : 'Dark mode' }}
-      </button>
     </div>
 
     <!-- Drag handle (desktop only via CSS) -->
