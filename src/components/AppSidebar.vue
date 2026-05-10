@@ -127,7 +127,7 @@ onUnmounted(() => {
       <button class="sidebar-close" @click="$emit('close')" aria-label="Close menu">✕</button>
     </div>
     <div class="sidebar-body">
-      <div v-if="username.trim()" class="sidebar-greeting">Hi, {{ username.trim() }}!</div>
+      <div v-if="username.trim()" class="sidebar-greeting">Guten Tag, {{ username.trim() }}!</div>
 
       <div class="nav-section">
         <RouterLink to="/" custom v-slot="{ navigate, isExactActive }">
