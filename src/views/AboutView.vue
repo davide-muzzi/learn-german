@@ -6,10 +6,10 @@
 
   <div class="card">
     <div class="card-title">What is this?</div>
-    <p>Deutsch A1-C2 is a free, interactive German learning app built for casual learners — no exams,
-    no pressure, no account required. The content follows the <strong>CEFR framework</strong> as a
-    structural guide, but the goal is simply to make learning German approachable and enjoyable at
-    your own pace.</p>
+    <p>Learn German (CH) is a free, interactive German learning app built for anyone who wants to
+    improve their German — no exams, no pressure, no account required. The content follows the
+    <strong>CEFR framework</strong> as a structural guide, with a focus on Swiss German context
+    and making the language genuinely approachable.</p>
   </div>
 
   <div class="card">
@@ -40,10 +40,9 @@
 
   <div class="card about-disclaimer">
     <div class="card-title">Disclaimer</div>
-    <p>This app was handcrafted by a student — a personal project born out of genuine curiosity, not
-    a polished commercial product. The content reflects someone learning both German and web
-    development at the same time, so occasional errors or rough edges are part of the deal. If you
-    spot a mistake, please do open an issue on GitHub.</p>
+    <p>This is a personal project, not a polished commercial product. The goal is to help people
+    improve their German for free, using a modern and structured approach — but occasional errors
+    or rough edges are part of the deal. If you spot a mistake, please open an issue on GitHub.</p>
   </div>
 
   <div class="card">
