@@ -813,6 +813,7 @@ tbody tr:hover td { background: var(--surface); }
     display: flex;
     align-items: center;
     gap: 7px;
+    text-decoration: none;
   }
   .hamburger {
     background: none;

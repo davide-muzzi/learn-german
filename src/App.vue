@@ -20,7 +20,7 @@ const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
     <button class="hamburger" @click="sidebarOpen = !sidebarOpen" aria-label="Toggle navigation">
       <span /><span /><span />
     </button>
-    <span class="mobile-title"><Languages :size="16" /> Learn German (CH)</span>
+    <RouterLink to="/" class="mobile-title"><Languages :size="16" /> Learn German (CH)</RouterLink>
   </header>
 
   <Transition name="overlay-fade">
