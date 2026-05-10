@@ -171,15 +171,13 @@ onUnmounted(() => {
                 <div
                   class="nav-item section-sub ch-nav-item"
                   :class="{ active: currentChapterN === ch.n, locked: !ch.active }"
-                  @click="navigate"
+                  @click="navigate(); toggleChapter(ch.n)"
                   role="link"
                 >
                   <span class="ch-nav-n">{{ ch.n }}</span>
                   <span class="ch-nav-title">{{ ch.title }}</span>
                   <Lock v-if="!ch.active" :size="11" class="ch-nav-lock" />
-                  <button v-else-if="CHAPTER_SECTIONS[ch.n]" class="ch-expand-btn" @click.stop="toggleChapter(ch.n)" :title="expandedChapters.has(ch.n) ? 'Collapse' : 'Expand'">
-                    <ChevronDown :size="11" :class="{ 'chevron-collapsed': !expandedChapters.has(ch.n) }" />
-                  </button>
+                  <ChevronDown v-else-if="CHAPTER_SECTIONS[ch.n]" :size="11" class="ch-expand-icon" :class="{ 'chevron-collapsed': !expandedChapters.has(ch.n) }" />
                 </div>
               </RouterLink>
 
