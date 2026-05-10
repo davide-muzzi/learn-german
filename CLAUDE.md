@@ -20,7 +20,12 @@ This is a Vue 3 + Vite SPA — a German A1 lesson book with vocabulary tables, g
 - `VocabView` serves all `/v-*` routes (greetings, names, origin, expressions)
 - `ConjugView` serves `/g-sein` and `/g-haben`
 
-**Data** lives entirely in [src/data/index.js](src/data/index.js) — every vocab list, conjugation table, fill-the-gap question, multiple-choice question, and translation exercise is exported from there. This is the only file to edit when adding or changing content.
+**Data** is split across `src/data/` by level and chapter:
+- `src/data/a1/chapter1.js`, `src/data/a1/chapter2.js`, … — vocab, conjugations, exercises for each chapter
+- `src/data/meta.js` — shared registry data: `LEVELS`, `CHAPTERS`, `CHAPTER_SECTIONS`, `FLASHCARD_SETS`
+- `src/data/index.js` — barrel re-export; all app imports go through here, so no view/component needs updating when adding new chapter files
+
+To add content for a chapter, edit (or create) the relevant `src/data/<level>/chapter<n>.js` file and re-export it from `index.js`.
 
 **Component split:**
 - `src/views/` — page-level components; route-aware via `useRoute()`
