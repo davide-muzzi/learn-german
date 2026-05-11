@@ -1619,7 +1619,7 @@ tbody tr:hover td { background: var(--surface); }
 
 /* ── Sidebar greeting ───────────────────────────────────────────── */
 .sidebar-greeting {
-  padding: 2px 12px 10px;
+  padding: 2px 18px 10px;
   font-size: 16px;
   font-weight: 700;
   color: var(--gold);
