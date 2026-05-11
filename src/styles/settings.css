@@ -1,0 +1,201 @@
+/* ── SETTINGS PAGE ── */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+}
+.setting-name { font-size: 14px; font-weight: 600; }
+.setting-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+.setting-toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.setting-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.setting-toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 12px;
+  transition: background .2s;
+}
+.setting-toggle input:checked + .setting-toggle-track { background: var(--gold); }
+.setting-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  transition: transform .2s;
+}
+.setting-toggle input:checked + .setting-toggle-track::after { transform: translateX(18px); }
+
+.setting-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .15s;
+}
+.setting-input:focus { border-color: var(--gold); }
+.setting-input::placeholder { color: var(--muted); }
+.setting-input-inline {
+  width: auto;
+  max-width: 180px;
+}
+.setting-btn-group {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.setting-btn-group button {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--muted);
+  border: none;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.setting-btn-group button:not(:last-child) { border-right: 1px solid var(--border); }
+.setting-btn-group button:hover { color: var(--text); }
+.setting-btn-group button.active { background: var(--gold); color: #18181b; font-weight: 600; }
+
+.link-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--gold-dark);
+  font-weight: 600;
+  padding: 0;
+  font-family: inherit;
+}
+.link-btn:hover { text-decoration: underline; }
+
+.storage-list {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.storage-empty { padding: 20px; text-align: center; color: var(--muted); font-size: 14px; }
+.storage-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.storage-row:last-child { border-bottom: none; }
+.storage-key { font-weight: 600; flex-shrink: 0; color: var(--text); }
+.storage-value {
+  flex: 1;
+  color: var(--muted);
+  word-break: break-all;
+  font-family: monospace;
+  font-size: 12px;
+  min-width: 0;
+}
+.storage-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color .12s, background .12s;
+}
+.storage-delete:hover { color: var(--red); background: rgba(220,38,38,.08); }
+
+.reset-zone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.reset-confirm-text { font-size: 13px; color: var(--text); }
+.reset-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color .12s, color .12s, background .12s;
+}
+.reset-all-btn:hover { border-color: var(--red); color: var(--red); }
+.reset-all-btn.danger { border-color: var(--red); color: var(--red); }
+.reset-all-btn.danger:hover { background: rgba(220,38,38,.08); }
+
+/* Sidebar footer settings link — active state */
+.theme-toggle.toggle-active {
+  color: var(--gold);
+  background: rgba(240,180,41,.06);
+}
+
+/* Export notes row */
+.export-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  gap: 12px;
+}
+.export-label { font-size: 15px; font-weight: 700; color: var(--text); }
+.export-btns { display: flex; gap: 8px; flex-shrink: 0; }
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 13px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color .12s, background .12s;
+}
+.download-btn:hover { border-color: var(--gold); background: rgba(240,180,41,.06); }
+@media (max-width: 768px) {
+  .export-row { flex-wrap: wrap; }
+  .export-btns { flex-direction: column; width: 100%; }
+  .download-btn { justify-content: center; }
+}
