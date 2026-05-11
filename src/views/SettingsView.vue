@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RotateCcw, Trash2, Download } from '@lucide/vue'
 import { useTheme } from '../composables/useTheme.js'
 import { useUsername } from '../composables/useUsername.js'
@@ -28,6 +28,15 @@ const entries = computed(() => {
   return Object.keys(localStorage).sort().map(key => ({ key, value: localStorage.getItem(key) }))
 })
 const refresh = () => v.value++
+
+let _origSetItem
+onMounted(() => {
+  _origSetItem = localStorage.setItem.bind(localStorage)
+  localStorage.setItem = (...args) => { _origSetItem(...args); refresh() }
+})
+onUnmounted(() => {
+  localStorage.setItem = _origSetItem
+})
 
 function deleteEntry(key) {
   localStorage.removeItem(key)
