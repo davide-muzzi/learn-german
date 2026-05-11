@@ -1,0 +1,68 @@
+export const SWISS_SECTIONS = [
+  {
+    id: 'greetings',
+    title: 'Greetings & Farewells',
+    phrases: [
+      { phrase: 'Guten Morgen',        meaning: 'Good morning',                swiss: 'Grüezi — the standard neutral greeting, used at any time of day' },
+      { phrase: 'Guten Tag',           meaning: 'Good day / Hello (formal)',   swiss: 'Grüezi is preferred over Guten Tag in everyday Swiss use' },
+      { phrase: 'Hallo / Hi',          meaning: 'Hello / Hi (informal)',       swiss: 'Hoi or Sali among friends and younger speakers' },
+      { phrase: 'Guten Abend',         meaning: 'Good evening',                swiss: 'Grüezi mitenand when addressing a group' },
+      { phrase: 'Auf Wiedersehen',     meaning: 'Goodbye (formal)',            swiss: 'Ade — the casual farewell, very common in Switzerland' },
+      { phrase: 'Tschüss',             meaning: 'Bye (informal)',              swiss: 'Tschau — borrowed from Italian ciao, widely used in CH' },
+      { phrase: 'Bis bald',            meaning: 'See you soon',                swiss: null },
+      { phrase: 'Bis später',          meaning: 'See you later',               swiss: null },
+    ],
+  },
+  {
+    id: 'politeness',
+    title: 'Politeness & Courtesy',
+    phrases: [
+      { phrase: 'Danke',                      meaning: 'Thank you',                     swiss: 'Merci — very commonly used instead of Danke, borrowed from French' },
+      { phrase: 'Vielen Dank / Danke schön',  meaning: 'Thank you very much',           swiss: 'Merci vielmal — the typical Swiss way to say "thank you very much"' },
+      { phrase: 'Bitte',                      meaning: 'Please / You\'re welcome',      swiss: null },
+      { phrase: 'Entschuldigung',             meaning: 'Excuse me / Sorry',             swiss: null },
+      { phrase: 'Es tut mir leid',            meaning: 'I\'m sorry',                   swiss: null },
+      { phrase: 'Kein Problem',               meaning: 'No problem',                   swiss: null },
+      { phrase: 'Gern geschehen',             meaning: 'You\'re welcome (gladly done)', swiss: null },
+    ],
+  },
+  {
+    id: 'conversation',
+    title: 'Everyday Conversation',
+    phrases: [
+      { phrase: 'Wie geht es Ihnen?',             meaning: 'How are you? (formal)',            swiss: null },
+      { phrase: 'Wie geht es dir?',               meaning: 'How are you? (informal)',          swiss: null },
+      { phrase: 'Gut, danke — und Ihnen?',        meaning: 'Good, thank you — and you? (formal)', swiss: 'Gut, merci — und Ihnen? (Merci replaces Danke)' },
+      { phrase: 'Ich verstehe nicht',             meaning: 'I don\'t understand',              swiss: null },
+      { phrase: 'Können Sie das wiederholen?',    meaning: 'Can you repeat that? (formal)',    swiss: null },
+      { phrase: 'Sprechen Sie Englisch?',         meaning: 'Do you speak English? (formal)',   swiss: null },
+      { phrase: 'Ich lerne Deutsch',              meaning: 'I\'m learning German',             swiss: null },
+      { phrase: 'Wie bitte?',                     meaning: 'Pardon? / Could you say that again?', swiss: null },
+    ],
+  },
+  {
+    id: 'dining',
+    title: 'Dining & Food',
+    phrases: [
+      { phrase: 'Guten Appetit',          meaning: 'Enjoy your meal',         swiss: 'En Guete — the standard Swiss expression said before eating' },
+      { phrase: 'Prost! / Zum Wohl!',     meaning: 'Cheers!',                 swiss: 'Proscht! — the Swiss variant' },
+      { phrase: 'Die Rechnung, bitte',    meaning: 'The bill, please',        swiss: null },
+      { phrase: 'Ich hätte gerne…',       meaning: 'I would like…',           swiss: null },
+      { phrase: 'Das schmeckt sehr gut',  meaning: 'This tastes very good',   swiss: null },
+      { phrase: 'Ich zahle getrennt',     meaning: 'I\'ll pay separately',    swiss: null },
+    ],
+  },
+  {
+    id: 'getting-around',
+    title: 'Getting Around',
+    phrases: [
+      { phrase: 'Wo ist…?',                           meaning: 'Where is…?',                   swiss: null },
+      { phrase: 'Wie komme ich zu…?',                 meaning: 'How do I get to…?',             swiss: null },
+      { phrase: 'Links / Rechts',                     meaning: 'Left / Right',                  swiss: null },
+      { phrase: 'Geradeaus',                          meaning: 'Straight ahead',                swiss: null },
+      { phrase: 'Wie viel kostet das?',               meaning: 'How much does this cost?',      swiss: null },
+      { phrase: 'Wo ist die nächste Haltestelle?',    meaning: 'Where is the next stop?',       swiss: null },
+      { phrase: 'Eine Fahrkarte nach…, bitte',        meaning: 'One ticket to…, please',        swiss: null },
+    ],
+  },
+]

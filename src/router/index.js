@@ -7,6 +7,7 @@ import PrivacyView from '../views/PrivacyView.vue'
 import ContactView from '../views/ContactView.vue'
 import FlashcardsView from '../views/FlashcardsView.vue'
 import SettingsView from '../views/SettingsView.vue'
+import SwissView from '../views/SwissView.vue'
 
 const LEVEL_RE = 'a1|a2|b1|b2|c1|c2'
 
@@ -14,6 +15,7 @@ export default createRouter({
   history: createWebHashHistory(),
   routes: [
     { path: '/',                                        name: 'home',      component: HomeView },
+    { path: '/swiss',                                   name: 'swiss',     component: SwissView },
     { path: '/flashcards',                              name: 'flashcards', component: FlashcardsView },
     { path: '/settings',                                name: 'settings',   component: SettingsView },
     { path: '/about',                                   name: 'about',     component: AboutView },

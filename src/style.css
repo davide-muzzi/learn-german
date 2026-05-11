@@ -837,6 +837,11 @@ tbody tr:hover td { background: var(--surface); }
 .tech-name { font-weight: 700; font-size: 14px; }
 .tech-desc { font-size: 12px; color: var(--muted); }
 
+/* ── SWISS PHRASES PAGE ── */
+.swiss-intro { font-size: 14px; line-height: 1.7; color: var(--text); }
+.swiss-phrase { font-weight: 600; }
+.swiss-note { font-size: 13px; color: var(--muted); }
+
 /* ── PRIVACY PAGE ── */
 .privacy-hero {
   display: flex;

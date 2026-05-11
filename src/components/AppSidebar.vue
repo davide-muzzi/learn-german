@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose, Home, ChevronDown } from '@lucide/vue'
+import { Languages, Lock, Layers, Moon, Sun, Settings, StickyNote, BookOpen, MessageSquare, Type, PenLine, PanelLeftClose, Home, ChevronDown, Mountain } from '@lucide/vue'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
 import { LEVELS, CHAPTERS, CHAPTER_SECTIONS } from '../data/index.js'
@@ -140,6 +140,12 @@ onUnmounted(() => {
           <div class="nav-item top" :class="{ active: isExactActive }" @click="isExactActive ? flashcardResetSignal++ : navigate()" role="link">
             <Layers :size="14" />
             Flashcards
+          </div>
+        </RouterLink>
+        <RouterLink to="/swiss" custom v-slot="{ navigate, isExactActive }">
+          <div class="nav-item top" :class="{ active: isExactActive }" @click="navigate" role="link">
+            <Mountain :size="14" />
+            Swiss Phrases
           </div>
         </RouterLink>
         <div class="nav-item top" @click="toggleNotes" role="button">
