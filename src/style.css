@@ -1459,7 +1459,7 @@ tbody tr:hover td { background: var(--surface); }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 2px 0;
+  padding: 12px 0;
 }
 .setting-name { font-size: 14px; font-weight: 600; }
 .setting-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
