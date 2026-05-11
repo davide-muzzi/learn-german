@@ -6,6 +6,9 @@ import {
   Columns2, Rows,
 } from '@lucide/vue'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
+
+const render = md => DOMPurify.sanitize(marked(md))
 import { useNotes } from '../composables/useNotes.js'
 import { notesOpen, notesDocked } from '../composables/useNotesOpen.js'
 
@@ -211,11 +214,11 @@ onUnmounted(() => {
             <template v-if="globalNotes.trim() || allNotes.length">
               <div v-if="globalNotes.trim()" class="notes-all-block">
                 <div class="notes-all-label">Global</div>
-                <div class="notes-rendered" v-html="marked(globalNotes)" />
+                <div class="notes-rendered" v-html="render(globalNotes)" />
               </div>
               <div v-for="{ key, content } in allNotes" :key="key" class="notes-all-block">
                 <div class="notes-all-label">{{ key }}</div>
-                <div class="notes-rendered" v-html="marked(content)" />
+                <div class="notes-rendered" v-html="render(content)" />
               </div>
             </template>
             <div v-else class="notes-empty">No notes yet.</div>
@@ -235,21 +238,21 @@ onUnmounted(() => {
             <div
               v-else-if="layout === 'preview'"
               class="notes-rendered notes-rendered-main"
-              v-html="marked(currentNotes)"
+              v-html="render(currentNotes)"
             />
 
             <!-- Split vertical (top / bottom) -->
             <div v-else-if="layout === 'split-v'" class="notes-split notes-split-v">
               <textarea ref="textarea" class="notes-textarea notes-split-pane" v-model="currentNotes" placeholder="Write notes…" />
               <div class="notes-split-divider" />
-              <div class="notes-rendered notes-rendered-main notes-split-pane" v-html="marked(currentNotes)" />
+              <div class="notes-rendered notes-rendered-main notes-split-pane" v-html="render(currentNotes)" />
             </div>
 
             <!-- Split horizontal (left / right) -->
             <div v-else-if="layout === 'split-h'" class="notes-split notes-split-h">
               <textarea ref="textarea" class="notes-textarea notes-split-pane" v-model="currentNotes" placeholder="Write notes…" />
               <div class="notes-split-divider" />
-              <div class="notes-rendered notes-rendered-main notes-split-pane" v-html="marked(currentNotes)" />
+              <div class="notes-rendered notes-rendered-main notes-split-pane" v-html="render(currentNotes)" />
             </div>
           </template>
 
