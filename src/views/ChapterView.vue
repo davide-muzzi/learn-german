@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { BookOpen, MessageSquare, PenLine, Lock, Hammer } from '@lucide/vue'
 import {
@@ -19,32 +19,56 @@ import MultipleChoice from '../components/exercises/MultipleChoice.vue'
 import Translation from '../components/exercises/Translation.vue'
 
 const QUESTION_STRUCTURE = [
-  ['W-question',    'W-word + verb + subject + …', 'Woher kommst du? — Where are you from?'],
-  ['Yes/No question', 'Verb + subject + …',          'Bist du Student? — Are you a student?'],
+  ['W-question',      'W-word + verb + subject + …', 'Woher kommst du? — Where are you from?'],
+  ['Yes/No question', 'Verb + subject + …',           'Bist du Student? — Are you a student?'],
 ]
 
-const route = useRoute()
+const route  = useRoute()
 const router = useRouter()
 
-const levelParam = computed(() => route.params.level || 'a1')
-const n = computed(() => parseInt(route.params.n))
-const section = computed(() => route.params.section || null)
-const chapter = computed(() => CHAPTERS.find(c => c.n === n.value))
-const sections = computed(() => CHAPTER_SECTIONS[n.value] || [])
+const levelParam     = computed(() => route.params.level   || 'a1')
+const n              = computed(() => parseInt(route.params.n))
+const section        = computed(() => route.params.section || null)
+const topic          = computed(() => route.params.topic   || null)
+const chapter        = computed(() => CHAPTERS.find(c => c.n === n.value))
+const sections       = computed(() => CHAPTER_SECTIONS[n.value] || [])
 const currentSection = computed(() => sections.value.find(s => s.key === section.value))
+const currentTopic   = computed(() => currentSection.value?.topics?.find(t => t.key === topic.value))
+const multiTopic     = computed(() => (currentSection.value?.topics?.length ?? 0) > 1)
+
+// Auto-skip topic picker when a section has only one topic (handles direct URL access)
+watchEffect(() => {
+  if (section.value && !topic.value && currentSection.value?.topics?.length === 1) {
+    router.replace(`/${levelParam.value}/ch/${n.value}/${section.value}/${currentSection.value.topics[0].key}`)
+  }
+})
 
 function goToSection(key) {
-  router.push(`/${levelParam.value}/ch/${n.value}/${key}`)
+  const sec = sections.value.find(s => s.key === key)
+  if ((sec?.topics?.length ?? 0) === 1) {
+    router.push(`/${levelParam.value}/ch/${n.value}/${key}/${sec.topics[0].key}`)
+  } else {
+    router.push(`/${levelParam.value}/ch/${n.value}/${key}`)
+  }
 }
+
+function goToTopic(key) {
+  router.push(`/${levelParam.value}/ch/${n.value}/${section.value}/${key}`)
+}
+
 function backToChapter() {
   router.push(`/${levelParam.value}/ch/${n.value}`)
+}
+
+function backToSection() {
+  router.push(`/${levelParam.value}/ch/${n.value}/${section.value}`)
 }
 </script>
 
 <template>
   <template v-if="chapter">
 
-    <!-- ── No section selected: show section picker ── -->
+    <!-- ── No section: section picker ── -->
     <template v-if="!section">
       <div class="page-header">
         <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }}</div>
@@ -54,12 +78,7 @@ function backToChapter() {
 
       <template v-if="chapter.active">
         <div class="section-grid">
-          <div
-            v-for="s in sections"
-            :key="s.key"
-            class="section-card"
-            @click="goToSection(s.key)"
-          >
+          <div v-for="s in sections" :key="s.key" class="section-card" @click="goToSection(s.key)">
             <div class="section-card-icon"><component :is="sectionIcons[s.key]" :size="22" /></div>
             <div class="section-card-label">{{ s.label }}</div>
             <div class="section-card-desc">{{ s.desc }}</div>
@@ -74,24 +93,42 @@ function backToChapter() {
           <h2>Coming Soon</h2>
           <p>Chapter {{ n }} · <strong>{{ chapter.title }}</strong> is not yet available.</p>
           <ul v-if="chapter.topics?.length">
-            <li v-for="topic in chapter.topics" :key="topic">{{ topic }}</li>
+            <li v-for="t in chapter.topics" :key="t">{{ t }}</li>
           </ul>
         </div>
       </template>
     </template>
 
-    <!-- ── Section selected: show content ── -->
-    <template v-else>
+    <!-- ── Section, no topic: topic picker ── -->
+    <template v-else-if="!topic">
       <div class="page-header">
         <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }} · {{ chapter.title }}</div>
         <h1>{{ currentSection?.label }}</h1>
       </div>
       <div class="back-link" @click="backToChapter">← Chapter overview</div>
+      <div class="section-grid">
+        <div v-for="t in currentSection?.topics" :key="t.key" class="section-card" @click="goToTopic(t.key)">
+          <div class="section-card-label">{{ t.label }}</div>
+          <div class="section-card-desc">{{ t.desc }}</div>
+          <div class="section-card-arrow">→</div>
+        </div>
+      </div>
+    </template>
 
-      <!-- Chapter 1 sections -->
+    <!-- ── Section + topic: content ── -->
+    <template v-else>
+      <div class="page-header">
+        <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }} · {{ chapter.title }} · {{ currentSection?.label }}</div>
+        <h1>{{ currentTopic?.label }}</h1>
+      </div>
+      <div class="back-link" @click="multiTopic ? backToSection() : backToChapter()">
+        {{ multiTopic ? '← Section overview' : '← Chapter overview' }}
+      </div>
+
+      <!-- ── Chapter 1 ── -->
       <template v-if="n === 1">
 
-        <template v-if="section === 'theory'">
+        <template v-if="section === 'theory' && topic === 'alphabet'">
           <div class="card">
             <div class="card-title">Alphabet &amp; Special Characters</div>
             <p class="card-sub">The German alphabet has 26 letters plus 3 umlauts. Swiss German always writes <strong>ss</strong> — the ß (Eszett) is used in Germany and Austria but not in Switzerland.</p>
@@ -113,6 +150,9 @@ function backToChapter() {
             <div class="card-title">Special Sound Combinations</div>
             <DataTable :rows="DIPHTHONGS" :headers="['Combo', 'Pronunciation', 'Note']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'theory' && topic === 'sein-haben'">
           <div class="card">
             <div class="card-title">sein — to be</div>
             <ConjugTable :rows="SEIN" verb="sein" />
@@ -123,7 +163,7 @@ function backToChapter() {
           </div>
         </template>
 
-        <template v-else-if="section === 'vocab'">
+        <template v-else-if="section === 'vocab' && topic === 'greetings'">
           <div class="card">
             <div class="card-title">Begrüssungen / Greetings</div>
             <p class="card-sub">Essential phrases for saying hello and goodbye.</p>
@@ -139,13 +179,19 @@ function backToChapter() {
             <p class="card-sub">Talk about your origin and where you live.</p>
             <DataTable :rows="WHERE_FROM" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'vocab' && topic === 'expressions'">
           <div class="card">
             <div class="card-title">Häufige Ausdrücke / Common Expressions</div>
             <p class="card-sub">Everyday polite phrases every German speaker needs.</p>
             <DataTable :rows="EXPRESSIONS" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'vocab' && topic === 'numbers'">
           <div class="card">
-            <div class="card-title">Zahlen 0-20 / Numbers 0-20</div>
+            <div class="card-title">Zahlen 0–20 / Numbers 0–20</div>
             <p class="card-sub">The foundation for counting, giving your age, and telling the time.</p>
             <div class="numbers-grid">
               <div v-for="([num, word]) in NUMBERS" :key="num" class="num-cell">
@@ -156,22 +202,18 @@ function backToChapter() {
           </div>
         </template>
 
-        <template v-else-if="section === 'exercises'">
+        <template v-else-if="section === 'exercises' && topic === 'practice'">
           <FillGaps />
           <MultipleChoice />
           <Translation />
         </template>
 
-        <template v-else>
-          <div class="card"><p>Section "{{ section }}" not found.</p></div>
-        </template>
-
       </template>
 
-      <!-- Chapter 2 sections -->
+      <!-- ── Chapter 2 ── -->
       <template v-else-if="n === 2">
 
-        <template v-if="section === 'theory'">
+        <template v-if="section === 'theory' && topic === 'dates'">
           <div class="card">
             <div class="card-title">Daten sagen / Saying Dates</div>
             <p class="card-sub">Dates use <strong>Am + ordinal number + month</strong>. The ordinal is always in dative form.</p>
@@ -194,11 +236,17 @@ function backToChapter() {
             <p class="card-sub">All ordinals in dative form as used after <em>am</em>.</p>
             <DataTable :rows="DATE_ORDINALS" :headers="['Day', 'Am …']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'theory' && topic === 'forming-questions'">
           <div class="card">
             <div class="card-title">Fragen bilden / Forming Questions</div>
             <p class="card-sub">W-questions and yes/no questions in context.</p>
             <DataTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'theory' && topic === 'question-formation'">
           <div class="card">
             <div class="card-title">W-Fragen — Question Words</div>
             <p class="card-sub">W-question words always come first, followed by the verb, then the subject.</p>
@@ -211,7 +259,7 @@ function backToChapter() {
           </div>
         </template>
 
-        <template v-else-if="section === 'vocab'">
+        <template v-else-if="section === 'vocab' && topic === 'age-numbers'">
           <div class="card">
             <div class="card-title">Alter / Age</div>
             <p class="card-sub">Phrases for talking about age and birthdays.</p>
@@ -232,6 +280,9 @@ function backToChapter() {
             <p class="card-sub">Months are always capitalised and masculine: <em>der Monat</em>. Use <em>im</em> + month to say "in January" etc.</p>
             <DataTable :rows="MONTHS" :headers="['Word', 'Meaning', 'Note']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'vocab' && topic === 'countries-languages'">
           <div class="card">
             <div class="card-title">Nationalitäten / Nationalities</div>
             <p class="card-sub">Nationality adjectives change depending on gender — most add -in for feminine.</p>
@@ -247,11 +298,17 @@ function backToChapter() {
             <p class="card-sub">Language names are always capitalised in German. Use <em>sprechen</em> (to speak) to say which languages you know.</p>
             <DataTable :rows="LANGUAGES" :headers="['Word', 'Meaning']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'vocab' && topic === 'professions'">
           <div class="card">
             <div class="card-title">Berufe / Professions</div>
             <p class="card-sub">In German you say "Ich bin Arzt" (no article!) — not "Ich bin ein Arzt".</p>
             <DataTable :rows="PROFESSIONS" :headers="['Word', 'Meaning']" />
           </div>
+        </template>
+
+        <template v-else-if="section === 'vocab' && topic === 'questions'">
           <div class="card">
             <div class="card-title">W-Fragen / W-Question Words</div>
             <p class="card-sub">These are the building blocks of every question in German.</p>
@@ -259,7 +316,7 @@ function backToChapter() {
           </div>
         </template>
 
-        <template v-else-if="section === 'exercises'">
+        <template v-else-if="section === 'exercises' && topic === 'practice'">
           <FillGaps
             :data="FILL_GAPS_CH2"
             instruction="Fill each blank with the correct W-question word or verb form."
@@ -268,13 +325,9 @@ function backToChapter() {
           <Translation :data="TRANSLATIONS_CH2" />
         </template>
 
-        <template v-else>
-          <div class="card"><p>Section "{{ section }}" not found.</p></div>
-        </template>
-
       </template>
 
-      <!-- Other chapters not yet implemented -->
+      <!-- ── Other chapters ── -->
       <template v-else>
         <div class="card coming-soon-card">
           <div class="coming-soon-icon"><Hammer :size="36" /></div>
@@ -287,7 +340,7 @@ function backToChapter() {
 
   </template>
 
-  <!-- Chapter number not in data -->
+  <!-- Chapter not found -->
   <template v-else>
     <div class="page-header">
       <h1>Chapter not found</h1>

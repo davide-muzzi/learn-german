@@ -22,8 +22,9 @@ export default createRouter({
     { path: '/privacy',                                 name: 'privacy',   component: PrivacyView },
     { path: '/contact',                                 name: 'contact',   component: ContactView },
     { path: `/:level(${LEVEL_RE})`,                     name: 'level',     component: LevelView },
-    { path: `/:level(${LEVEL_RE})/ch/:n`,               name: 'chapter',   component: ChapterView },
-    { path: `/:level(${LEVEL_RE})/ch/:n/:section`,      name: 'section',   component: ChapterView },
+    { path: `/:level(${LEVEL_RE})/ch/:n`,                        name: 'chapter',   component: ChapterView },
+    { path: `/:level(${LEVEL_RE})/ch/:n/:section`,              name: 'section',   component: ChapterView },
+    { path: `/:level(${LEVEL_RE})/ch/:n/:section/:topic`,       name: 'topic',     component: ChapterView },
   ],
   scrollBehavior: () => ({ top: 0 }),
 })

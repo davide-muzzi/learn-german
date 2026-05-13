@@ -28,14 +28,34 @@ export const CHAPTERS = [
 
 export const CHAPTER_SECTIONS = {
   1: [
-    { key: 'theory',    label: 'Theory',     desc: 'Alphabet, special characters & sein / haben' },
-    { key: 'vocab',     label: 'Vocabulary', desc: 'Greetings, names, expressions & numbers' },
-    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },
+    { key: 'theory',    label: 'Theory',     desc: 'Alphabet, special characters & sein / haben', topics: [
+      { key: 'alphabet',   label: 'Alphabet & Special Characters', desc: 'Letters, umlauts, and sound combinations' },
+      { key: 'sein-haben', label: 'sein & haben',                  desc: 'The two most essential German verbs' },
+    ]},
+    { key: 'vocab',     label: 'Vocabulary', desc: 'Greetings, names, expressions & numbers', topics: [
+      { key: 'greetings',   label: 'Greetings & Introduction', desc: 'Greetings, names, and where you\'re from' },
+      { key: 'expressions', label: 'Common Expressions',        desc: 'Everyday polite phrases' },
+      { key: 'numbers',     label: 'Numbers 0–20',              desc: 'The foundation for counting' },
+    ]},
+    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation', topics: [
+      { key: 'practice', label: 'Practice', desc: 'Fill the gaps, multiple choice, and translation' },
+    ]},
   ],
   2: [
-    { key: 'theory',    label: 'Theory',     desc: 'Dates, ordinals & question formation' },
-    { key: 'vocab',     label: 'Vocabulary', desc: 'Age, nationalities, countries & languages, professions, questions' },
-    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },
+    { key: 'theory',    label: 'Theory',     desc: 'Dates, ordinals & question formation', topics: [
+      { key: 'dates',              label: 'Dates & Ordinals',     desc: 'How to say and write dates in German' },
+      { key: 'forming-questions',  label: 'Forming Questions',    desc: 'W-questions and yes/no questions in context' },
+      { key: 'question-formation', label: 'Question Formation',   desc: 'Structure of W-questions and yes/no questions' },
+    ]},
+    { key: 'vocab',     label: 'Vocabulary', desc: 'Age, nationalities, countries & languages, professions, questions', topics: [
+      { key: 'age-numbers',         label: 'Age, Numbers & Months',              desc: 'Age phrases, numbers 21–1,000,000, and months' },
+      { key: 'countries-languages', label: 'Countries, Languages & Nationalities', desc: 'Where people are from and what they speak' },
+      { key: 'professions',         label: 'Professions',                         desc: 'Jobs and how to talk about what you do' },
+      { key: 'questions',           label: 'W-Question Words',                    desc: 'The building blocks of every German question' },
+    ]},
+    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation', topics: [
+      { key: 'practice', label: 'Practice', desc: 'Fill the gaps, multiple choice, and translation' },
+    ]},
   ],
 }
 
