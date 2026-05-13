@@ -23,6 +23,8 @@ export const NUMBERS_21_100 = [
   [30, 'dreissig'], [40, 'vierzig'], [50, 'fünfzig'],
   [60, 'sechzig'], [70, 'siebzig'], [80, 'achtzig'],
   [90, 'neunzig'], [100, 'hundert'],
+  ["1'000", 'tausend'],
+  ["1'000'000", 'eine Million'],
 ]
 
 export const NATIONALITIES = [
@@ -166,6 +168,20 @@ export const MC_QS_CH2 = [
   { text: '___ gehst du? — Ich gehe nach Hause.', opts: ['Wohin', 'Woher'], ans: ['Wohin'] },
   { text: '___ ist dein Name? — Ich heisse Lea.', opts: ['Wie', 'Was'], ans: ['Wie'] },
   { text: '___ hast du Geburtstag? — Am dritten Mai.', opts: ['Wann', 'Wer'], ans: ['Wann'] },
+]
+
+export const DATE_ORDINALS = [
+  ['1.',  'ersten'],              ['2.',  'zweiten'],             ['3.',  'dritten'],
+  ['4.',  'vierten'],             ['5.',  'fünften'],             ['6.',  'sechsten'],
+  ['7.',  'siebten'],             ['8.',  'achten'],              ['9.',  'neunten'],
+  ['10.', 'zehnten'],             ['11.', 'elften'],              ['12.', 'zwölften'],
+  ['13.', 'dreizehnten'],         ['14.', 'vierzehnten'],         ['15.', 'fünfzehnten'],
+  ['16.', 'sechzehnten'],         ['17.', 'siebzehnten'],         ['18.', 'achtzehnten'],
+  ['19.', 'neunzehnten'],         ['20.', 'zwanzigsten'],         ['21.', 'einundzwanzigsten'],
+  ['22.', 'zweiundzwanzigsten'],  ['23.', 'dreiundzwanzigsten'],  ['24.', 'vierundzwanzigsten'],
+  ['25.', 'fünfundzwanzigsten'],  ['26.', 'sechsundzwanzigsten'], ['27.', 'siebenundzwanzigsten'],
+  ['28.', 'achtundzwanzigsten'],  ['29.', 'neunundzwanzigsten'],  ['30.', 'dreissigsten'],
+  ['31.', 'einunddreissigsten'],
 ]
 
 export const TRANSLATIONS_CH2 = [

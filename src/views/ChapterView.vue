@@ -8,7 +8,7 @@ import {
   ALPHABET, UMLAUTS, DIPHTHONGS, SEIN, HABEN,
   AGE_PHRASES, NUMBERS_21_100, NATIONALITIES, COUNTRIES, LANGUAGES,
   PROFESSIONS, W_QUESTION_WORDS, FORMING_QUESTIONS, W_QUESTION_TABLE,
-  FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2,
+  FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2, DATE_ORDINALS,
 } from '../data/index.js'
 
 const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
@@ -169,6 +169,28 @@ function backToChapter() {
       <template v-else-if="n === 2">
 
         <template v-if="section === 'theory'">
+          <div class="card">
+            <div class="card-title">Daten sagen / Saying Dates</div>
+            <p class="card-sub">Dates use <strong>Am + ordinal number + month</strong>. The ordinal is always in dative form.</p>
+            <DataTable
+              :rows="[
+                ['1.',      'ersten',  'Am ersten Mai'],
+                ['2.',      'zweiten', 'Am zweiten Juni'],
+                ['3.',      'dritten', 'Am dritten März'],
+                ['4. – 19.','+ ten',   'Am vierten, zehnten, achtzehnten …'],
+                ['20. +',   '+ sten',  'Am zwanzigsten, dreissigsten …'],
+              ]"
+              :headers="['Day', 'Ending', 'Example']"
+            />
+            <p class="card-sub" style="margin-top: 12px;">
+              <strong>Exception:</strong> 7. → <strong>siebten</strong> (not <em>siebentten</em> — the <em>-en</em> from <em>sieben</em> is dropped).
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title">Ordinalzahlen 1–31 / Reference Table</div>
+            <p class="card-sub">All ordinals in dative form as used after <em>am</em>.</p>
+            <DataTable :rows="DATE_ORDINALS" :headers="['Day', 'Am …']" />
+          </div>
         </template>
 
         <template v-else-if="section === 'vocab'">
@@ -178,8 +200,8 @@ function backToChapter() {
             <DataTable :rows="AGE_PHRASES" :headers="['Phrase', 'Meaning', 'Note']" />
           </div>
           <div class="card">
-            <div class="card-title">Zahlen 21-100 / Numbers 21-100</div>
-            <p class="card-sub">Building on 0-20 from Chapter 1 — notice the pattern: units + und + tens.</p>
+            <div class="card-title">Zahlen 21–1'000'000 / Numbers 21–1,000,000</div>
+            <p class="card-sub">Tens + units follow the pattern: units + und + tens (e.g. einundzwanzig). Hundreds and thousands stack the same way: hundert, tausend, eine Million.</p>
             <div class="numbers-grid">
               <div v-for="([num, word]) in NUMBERS_21_100" :key="num" class="num-cell">
                 <span class="num-n">{{ num }}</span>
