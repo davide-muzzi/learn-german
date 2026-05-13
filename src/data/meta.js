@@ -34,6 +34,7 @@ export const CHAPTER_SECTIONS = {
     { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },
   ],
   2: [
+    { key: 'theory',    label: 'Theory',     desc: '' },
     { key: 'vocab',     label: 'Vocabulary', desc: 'Age, nationalities, countries & languages, professions, questions' },
     { key: 'grammar',   label: 'Grammar',    desc: 'W-question words and question formation' },
     { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation' },

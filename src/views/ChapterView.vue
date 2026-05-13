@@ -174,7 +174,10 @@ function backToChapter() {
       <!-- Chapter 2 sections -->
       <template v-else-if="n === 2">
 
-        <template v-if="section === 'vocab'">
+        <template v-if="section === 'theory'">
+        </template>
+
+        <template v-else-if="section === 'vocab'">
           <div class="card">
             <div class="card-title">Alter / Age</div>
             <p class="card-sub">Phrases for talking about age and birthdays.</p>
