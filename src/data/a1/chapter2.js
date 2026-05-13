@@ -6,6 +6,7 @@ export const AGE_PHRASES = [
   ['Wie alt ist er / sie?', 'How old is he / she?', ''],
   ['Wann bist du geboren?', 'When were you born?', ''],
   ['Wann sind Sie geboren?', 'When were you born?', 'form.'],
+  ['In welchem Jahr bist du geboren?', 'In which year were you born?', 'more commonly said'],
   ['Ich bin am … geboren.', 'I was born on the …', '(+ date)'],
   ['Ich bin … geboren.', 'I was born in …', '(+ year)'],
   ['Mein Geburtstag ist am…', 'My birthday is on the…', ''],
