@@ -44,7 +44,7 @@ export const NATIONALITIES = [
   ['Ich bin Finne / Finnin.', 'I am Finnish. (m / f)', ''],
 ]
 
-export const COUNTRIES_LANGUAGES = [
+export const COUNTRIES = [
   ['die Schweiz', 'Switzerland', ''],
   ['Deutschland', 'Germany', ''],
   ['Österreich', 'Austria', ''],
@@ -58,12 +58,15 @@ export const COUNTRIES_LANGUAGES = [
   ['China', 'China', ''],
   ['Japan', 'Japan', ''],
   ['Finnland', 'Finland', ''],
-  ['Deutsch', 'German', 'language'],
-  ['Englisch', 'English', 'language'],
-  ['Französisch', 'French', 'language'],
-  ['Italienisch', 'Italian', 'language'],
-  ['Spanisch', 'Spanish', 'language'],
-  ['Finnisch', 'Finnish', 'language'],
+]
+
+export const LANGUAGES = [
+  ['Deutsch', 'German', ''],
+  ['Englisch', 'English', ''],
+  ['Französisch', 'French', ''],
+  ['Italienisch', 'Italian', ''],
+  ['Spanisch', 'Spanish', ''],
+  ['Finnisch', 'Finnish', ''],
   ['Welche Sprache sprichst du?', 'Which language do you speak?', ''],
   ['Ich spreche…', 'I speak…', ''],
 ]

@@ -2,7 +2,7 @@ import {
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS, SEIN, HABEN,
 } from './a1/chapter1.js'
 import {
-  AGE_PHRASES, NATIONALITIES, COUNTRIES_LANGUAGES, PROFESSIONS,
+  AGE_PHRASES, NATIONALITIES, COUNTRIES, LANGUAGES, PROFESSIONS,
   W_QUESTION_WORDS, FORMING_QUESTIONS,
 } from './a1/chapter2.js'
 
@@ -51,7 +51,8 @@ export const FLASHCARD_SETS = [
   { id: 'haben',               title: 'haben — to have',                                     data: HABEN,               type: 'conjug', level: 'A1', chapter: 1 },
   { id: 'age',                 title: 'Alter / Age',                                          data: AGE_PHRASES,         type: 'vocab',  level: 'A1', chapter: 2 },
   { id: 'nationalities',       title: 'Nationalitäten / Nationalities',                       data: NATIONALITIES,       type: 'vocab',  level: 'A1', chapter: 2 },
-  { id: 'countries-languages', title: 'Länder & Sprachen / Countries & Languages',            data: COUNTRIES_LANGUAGES, type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'countries',           title: 'Länder / Countries',                                   data: COUNTRIES,           type: 'vocab',  level: 'A1', chapter: 2 },
+  { id: 'languages',           title: 'Sprachen / Languages',                                 data: LANGUAGES,           type: 'vocab',  level: 'A1', chapter: 2 },
   { id: 'professions',         title: 'Berufe / Professions',                                 data: PROFESSIONS,         type: 'vocab',  level: 'A1', chapter: 2 },
   { id: 'w-questions',         title: 'W-Fragen / W-Question Words',                          data: W_QUESTION_WORDS,    type: 'vocab',  level: 'A1', chapter: 2 },
   { id: 'forming-questions',   title: 'Fragen bilden / Forming Questions',                    data: FORMING_QUESTIONS,   type: 'vocab',  level: 'A1', chapter: 2 },

@@ -6,7 +6,7 @@ import {
   CHAPTERS, CHAPTER_SECTIONS,
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS,
   ALPHABET, UMLAUTS, DIPHTHONGS, SEIN, HABEN,
-  AGE_PHRASES, NUMBERS_21_100, NATIONALITIES, COUNTRIES_LANGUAGES,
+  AGE_PHRASES, NUMBERS_21_100, NATIONALITIES, COUNTRIES, LANGUAGES,
   PROFESSIONS, W_QUESTION_WORDS, FORMING_QUESTIONS, W_QUESTION_TABLE,
   FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2,
 } from '../data/index.js'
@@ -82,12 +82,6 @@ function backToChapter() {
 
     <!-- ── Section selected: show content ── -->
     <template v-else>
-      <div class="page-header">
-        <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }} · {{ chapter.title }}</div>
-        <h1>{{ currentSection?.label || section }}</h1>
-      </div>
-      <div class="back-link" @click="backToChapter">← Chapter overview</div>
-
       <!-- Chapter 1 sections -->
       <template v-if="n === 1">
 
@@ -199,9 +193,14 @@ function backToChapter() {
             <DataTable :rows="NATIONALITIES" :headers="['Phrase', 'Meaning']" />
           </div>
           <div class="card">
-            <div class="card-title">Länder & Sprachen / Countries & Languages</div>
-            <p class="card-sub">Country names and their languages. Note: country names have no article unless marked (die Schweiz, die Türkei, die USA).</p>
-            <DataTable :rows="COUNTRIES_LANGUAGES" :headers="['Word', 'Meaning', 'Type']" />
+            <div class="card-title">Länder / Countries</div>
+            <p class="card-sub">Country names have no article unless marked (die Schweiz, die Türkei, die USA).</p>
+            <DataTable :rows="COUNTRIES" :headers="['Word', 'Meaning']" />
+          </div>
+          <div class="card">
+            <div class="card-title">Sprachen / Languages</div>
+            <p class="card-sub">Language names are always capitalised in German. Use <em>sprechen</em> (to speak) to say which languages you know.</p>
+            <DataTable :rows="LANGUAGES" :headers="['Word', 'Meaning']" />
           </div>
           <div class="card">
             <div class="card-title">Berufe / Professions</div>
