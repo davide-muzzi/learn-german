@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { BookOpen, MessageSquare, Type, PenLine, Lock, Hammer } from '@lucide/vue'
+import { BookOpen, MessageSquare, PenLine, Lock, Hammer } from '@lucide/vue'
 import {
   CHAPTERS, CHAPTER_SECTIONS,
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS,
@@ -11,7 +11,7 @@ import {
   FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2, DATE_ORDINALS,
 } from '../data/index.js'
 
-const sectionIcons = { theory: BookOpen, vocab: MessageSquare, grammar: Type, exercises: PenLine }
+const sectionIcons = { theory: BookOpen, vocab: MessageSquare, exercises: PenLine }
 import DataTable from '../components/DataTable.vue'
 import ConjugTable from '../components/ConjugTable.vue'
 import FillGaps from '../components/exercises/FillGaps.vue'
@@ -82,6 +82,12 @@ function backToChapter() {
 
     <!-- ── Section selected: show content ── -->
     <template v-else>
+      <div class="page-header">
+        <div class="chapter-eyebrow">{{ levelParam.toUpperCase() }} · Chapter {{ n }} · {{ chapter.title }}</div>
+        <h1>{{ currentSection?.label }}</h1>
+      </div>
+      <div class="back-link" @click="backToChapter">← Chapter overview</div>
+
       <!-- Chapter 1 sections -->
       <template v-if="n === 1">
 
@@ -106,6 +112,14 @@ function backToChapter() {
             <hr class="section-divider">
             <div class="card-title">Special Sound Combinations</div>
             <DataTable :rows="DIPHTHONGS" :headers="['Combo', 'Pronunciation', 'Note']" />
+          </div>
+          <div class="card">
+            <div class="card-title">sein — to be</div>
+            <ConjugTable :rows="SEIN" verb="sein" />
+          </div>
+          <div class="card">
+            <div class="card-title">haben — to have</div>
+            <ConjugTable :rows="HABEN" verb="haben" />
           </div>
         </template>
 
@@ -139,17 +153,6 @@ function backToChapter() {
                 <span class="num-word">{{ word }}</span>
               </div>
             </div>
-          </div>
-        </template>
-
-        <template v-else-if="section === 'grammar'">
-          <div class="card">
-            <div class="card-title">sein — to be</div>
-            <ConjugTable :rows="SEIN" verb="sein" />
-          </div>
-          <div class="card">
-            <div class="card-title">haben — to have</div>
-            <ConjugTable :rows="HABEN" verb="haben" />
           </div>
         </template>
 
@@ -195,6 +198,16 @@ function backToChapter() {
             <div class="card-title">Fragen bilden / Forming Questions</div>
             <p class="card-sub">W-questions and yes/no questions in context.</p>
             <DataTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
+          </div>
+          <div class="card">
+            <div class="card-title">W-Fragen — Question Words</div>
+            <p class="card-sub">W-question words always come first, followed by the verb, then the subject.</p>
+            <DataTable :rows="W_QUESTION_TABLE" :headers="['Word', 'Meaning', 'Example']" />
+          </div>
+          <div class="card">
+            <div class="card-title">Fragestruktur / Question Structure <span class="tag">Word order</span></div>
+            <p class="card-sub">German questions follow two patterns:</p>
+            <DataTable :rows="QUESTION_STRUCTURE" :headers="['Type', 'Structure', 'Example']" />
           </div>
         </template>
 
@@ -243,19 +256,6 @@ function backToChapter() {
             <div class="card-title">W-Fragen / W-Question Words</div>
             <p class="card-sub">These are the building blocks of every question in German.</p>
             <DataTable :rows="W_QUESTION_WORDS" :headers="['Word', 'Meaning', 'Example']" />
-          </div>
-        </template>
-
-        <template v-else-if="section === 'grammar'">
-          <div class="card">
-            <div class="card-title">W-Fragen — Question Words</div>
-            <p class="card-sub">W-question words always come first, followed by the verb, then the subject.</p>
-            <DataTable :rows="W_QUESTION_TABLE" :headers="['Word', 'Meaning', 'Example']" />
-          </div>
-          <div class="card">
-            <div class="card-title">Fragestruktur / Question Structure <span class="tag">Word order</span></div>
-            <p class="card-sub">German questions follow two patterns:</p>
-            <DataTable :rows="QUESTION_STRUCTURE" :headers="['Type', 'Structure', 'Example']" />
           </div>
         </template>
 
