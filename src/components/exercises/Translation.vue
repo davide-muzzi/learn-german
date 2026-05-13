@@ -26,7 +26,7 @@ function toggle(qi) {
       <button class="reveal-btn" @click="toggle(qi)">
         {{ visible[qi] ? 'Hide Answer' : 'Reveal Answer' }}
       </button>
-      <div class="tr-answer" :class="{ visible: visible[qi] }">🇩🇪 {{ q.de }}</div>
+      <div class="tr-answer" :class="{ visible: visible[qi] }">{{ q.de }}</div>
     </div>
   </div>
 </template>
