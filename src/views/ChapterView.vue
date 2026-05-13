@@ -6,8 +6,16 @@ import {
   CHAPTERS, CHAPTER_SECTIONS,
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS,
   ALPHABET, UMLAUTS, DIPHTHONGS, SEIN, HABEN,
+  MC_QS_GREETINGS, TRANSLATIONS_GREETINGS,
+  MC_QS_EXPRESSIONS, TRANSLATIONS_EXPRESSIONS,
+  MC_QS_NUMBERS, TRANSLATIONS_NUMBERS,
+  FILL_GAPS, MC_QS, TRANSLATIONS,
   AGE_PHRASES, MONTHS, NUMBERS_21_100, NATIONALITIES, COUNTRIES, LANGUAGES,
   PROFESSIONS, W_QUESTION_WORDS, FORMING_QUESTIONS, W_QUESTION_TABLE,
+  MC_QS_AGE_NUMBERS, TRANSLATIONS_AGE_NUMBERS,
+  MC_QS_COUNTRIES_LANGUAGES, TRANSLATIONS_COUNTRIES_LANGUAGES,
+  MC_QS_PROFESSIONS, TRANSLATIONS_PROFESSIONS,
+  MC_QS_QUESTIONS_VOCAB, TRANSLATIONS_QUESTIONS_VOCAB,
   FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2, DATE_ORDINALS,
 } from '../data/index.js'
 
@@ -128,6 +136,7 @@ function backToSection() {
       <!-- ── Chapter 1 ── -->
       <template v-if="n === 1">
 
+        <!-- Theory: Alphabet -->
         <template v-if="section === 'theory' && topic === 'alphabet'">
           <div class="card">
             <div class="card-title">Alphabet &amp; Special Characters</div>
@@ -152,6 +161,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Theory: sein & haben -->
         <template v-else-if="section === 'theory' && topic === 'sein-haben'">
           <div class="card">
             <div class="card-title">sein — to be</div>
@@ -163,6 +173,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: Greetings & Introduction -->
         <template v-else-if="section === 'vocab' && topic === 'greetings'">
           <div class="card">
             <div class="card-title">Begrüssungen / Greetings</div>
@@ -181,6 +192,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: Common Expressions -->
         <template v-else-if="section === 'vocab' && topic === 'expressions'">
           <div class="card">
             <div class="card-title">Häufige Ausdrücke / Common Expressions</div>
@@ -189,6 +201,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: Numbers 0-20 -->
         <template v-else-if="section === 'vocab' && topic === 'numbers'">
           <div class="card">
             <div class="card-title">Zahlen 0–20 / Numbers 0–20</div>
@@ -202,9 +215,33 @@ function backToSection() {
           </div>
         </template>
 
-        <template v-else-if="section === 'exercises' && topic === 'practice'">
+        <!-- Exercises: Greetings & Introduction -->
+        <template v-else-if="section === 'exercises' && topic === 'greetings'">
+          <MultipleChoice :data="MC_QS_GREETINGS" />
+          <Translation :data="TRANSLATIONS_GREETINGS" />
+        </template>
+
+        <!-- Exercises: Common Expressions -->
+        <template v-else-if="section === 'exercises' && topic === 'expressions'">
+          <MultipleChoice :data="MC_QS_EXPRESSIONS" />
+          <Translation :data="TRANSLATIONS_EXPRESSIONS" />
+        </template>
+
+        <!-- Exercises: Numbers 0-20 -->
+        <template v-else-if="section === 'exercises' && topic === 'numbers'">
+          <MultipleChoice :data="MC_QS_NUMBERS" />
+          <Translation :data="TRANSLATIONS_NUMBERS" />
+        </template>
+
+        <!-- Exercises: sein & haben -->
+        <template v-else-if="section === 'exercises' && topic === 'sein-haben'">
           <FillGaps />
           <MultipleChoice />
+        </template>
+
+        <!-- Exercises: Mixed -->
+        <template v-else-if="section === 'exercises' && topic === 'mixed'">
+          <FillGaps />
           <Translation />
         </template>
 
@@ -213,6 +250,7 @@ function backToSection() {
       <!-- ── Chapter 2 ── -->
       <template v-else-if="n === 2">
 
+        <!-- Theory: Dates & Ordinals -->
         <template v-if="section === 'theory' && topic === 'dates'">
           <div class="card">
             <div class="card-title">Daten sagen / Saying Dates</div>
@@ -238,6 +276,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Theory: Forming Questions -->
         <template v-else-if="section === 'theory' && topic === 'forming-questions'">
           <div class="card">
             <div class="card-title">Fragen bilden / Forming Questions</div>
@@ -246,6 +285,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Theory: Question Formation -->
         <template v-else-if="section === 'theory' && topic === 'question-formation'">
           <div class="card">
             <div class="card-title">W-Fragen — Question Words</div>
@@ -259,6 +299,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: Age, Numbers & Months -->
         <template v-else-if="section === 'vocab' && topic === 'age-numbers'">
           <div class="card">
             <div class="card-title">Alter / Age</div>
@@ -282,6 +323,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: Countries, Languages & Nationalities -->
         <template v-else-if="section === 'vocab' && topic === 'countries-languages'">
           <div class="card">
             <div class="card-title">Nationalitäten / Nationalities</div>
@@ -300,6 +342,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: Professions -->
         <template v-else-if="section === 'vocab' && topic === 'professions'">
           <div class="card">
             <div class="card-title">Berufe / Professions</div>
@@ -308,6 +351,7 @@ function backToSection() {
           </div>
         </template>
 
+        <!-- Vocab: W-Question Words -->
         <template v-else-if="section === 'vocab' && topic === 'questions'">
           <div class="card">
             <div class="card-title">W-Fragen / W-Question Words</div>
@@ -316,7 +360,32 @@ function backToSection() {
           </div>
         </template>
 
-        <template v-else-if="section === 'exercises' && topic === 'practice'">
+        <!-- Exercises: Age, Numbers & Months -->
+        <template v-else-if="section === 'exercises' && topic === 'age-numbers'">
+          <MultipleChoice :data="MC_QS_AGE_NUMBERS" />
+          <Translation :data="TRANSLATIONS_AGE_NUMBERS" />
+        </template>
+
+        <!-- Exercises: Countries, Languages & Nationalities -->
+        <template v-else-if="section === 'exercises' && topic === 'countries-languages'">
+          <MultipleChoice :data="MC_QS_COUNTRIES_LANGUAGES" />
+          <Translation :data="TRANSLATIONS_COUNTRIES_LANGUAGES" />
+        </template>
+
+        <!-- Exercises: Professions -->
+        <template v-else-if="section === 'exercises' && topic === 'professions'">
+          <MultipleChoice :data="MC_QS_PROFESSIONS" />
+          <Translation :data="TRANSLATIONS_PROFESSIONS" />
+        </template>
+
+        <!-- Exercises: W-Question Words -->
+        <template v-else-if="section === 'exercises' && topic === 'questions'">
+          <MultipleChoice :data="MC_QS_QUESTIONS_VOCAB" />
+          <Translation :data="TRANSLATIONS_QUESTIONS_VOCAB" />
+        </template>
+
+        <!-- Exercises: Mixed -->
+        <template v-else-if="section === 'exercises' && topic === 'mixed'">
           <FillGaps
             :data="FILL_GAPS_CH2"
             instruction="Fill each blank with the correct W-question word or verb form."

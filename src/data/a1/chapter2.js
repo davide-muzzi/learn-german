@@ -164,6 +164,64 @@ export const W_QUESTION_TABLE = [
   ['welcher / welche / welches', 'which', 'Welche Sprache sprichst du? — Which language do you speak?'],
 ]
 
+export const MC_QS_AGE_NUMBERS = [
+  { text: 'Wie ___ bist du? — Ich bin zwanzig Jahre alt.', opts: ['alt', 'jung'], ans: ['alt'] },
+  { text: '"Dreissig" means:', opts: ['30', '13'], ans: ['30'] },
+  { text: 'Wann ___ du Geburtstag? — Am dritten März.', opts: ['hast', 'bist'], ans: ['hast'] },
+  { text: 'To say "in January" in German:', opts: ['im Januar', 'am Januar'], ans: ['im Januar'] },
+  { text: '"Eine Million" is:', opts: ["1'000'000", "1'000"], ans: ["1'000'000"] },
+  { text: 'Ich bin am achten ___ geboren. (August — no preposition here)', opts: ['August', 'im August'], ans: ['August'] },
+]
+
+export const TRANSLATIONS_AGE_NUMBERS = [
+  { en: 'How old are you? — I am 32 years old.', de: 'Wie alt bist du? — Ich bin zweiunddreissig Jahre alt.' },
+  { en: 'When is your birthday? — My birthday is on the 8th of March.', de: 'Wann hast du Geburtstag? — Mein Geburtstag ist am achten März.' },
+  { en: 'He was born in August. She is nineteen years old.', de: 'Er ist im August geboren. Sie ist neunzehn Jahre alt.' },
+]
+
+export const MC_QS_COUNTRIES_LANGUAGES = [
+  { text: 'Ich komme aus ___. (Switzerland)', opts: ['der Schweiz', 'die Schweiz'], ans: ['der Schweiz'] },
+  { text: 'A woman from Germany is called:', opts: ['Deutsche', 'Österreicherin'], ans: ['Deutsche'] },
+  { text: 'Welche Sprache ___ man in Österreich?', opts: ['spricht', 'sprechst'], ans: ['spricht'] },
+  { text: '"Russisch" is the German word for:', opts: ['Russian', 'Prussian'], ans: ['Russian'] },
+  { text: 'Ich ___ Spanisch und ein bisschen Italienisch.', opts: ['spreche', 'bin'], ans: ['spreche'] },
+]
+
+export const TRANSLATIONS_COUNTRIES_LANGUAGES = [
+  { en: 'I am Swiss (f). I come from Basel.', de: 'Ich bin Schweizerin. Ich komme aus Basel.' },
+  { en: 'Which language do you speak? — I speak German and English.', de: 'Welche Sprache sprichst du? — Ich spreche Deutsch und Englisch.' },
+  { en: 'He is French and speaks French, English, and a little German.', de: 'Er ist Franzose und spricht Französisch, Englisch und ein bisschen Deutsch.' },
+]
+
+export const MC_QS_PROFESSIONS = [
+  { text: 'In German, you say "Ich ___ Ärztin." (no article!)', opts: ['bin', 'bin eine'], ans: ['bin'] },
+  { text: '"Die Lehrerin" is:', opts: ['female teacher', 'male teacher'], ans: ['female teacher'] },
+  { text: '"Der Anwalt" means:', opts: ['lawyer', 'architect'], ans: ['lawyer'] },
+  { text: 'Was ___ du von Beruf? — Ich bin Ingenieur.', opts: ['bist', 'machst'], ans: ['bist', 'machst'], note: 'Both are correct ways to ask about someone\'s profession.' },
+  { text: 'Ich ___ als Köchin in einem Restaurant.', opts: ['arbeite', 'bin'], ans: ['arbeite', 'bin'], note: 'Both work — "arbeiten als" = to work as, "sein" = to be.' },
+]
+
+export const TRANSLATIONS_PROFESSIONS = [
+  { en: 'What do you do for work? — I am a teacher (f).', de: 'Was machst du beruflich? — Ich bin Lehrerin.' },
+  { en: 'She is a doctor. He works as a chef.', de: 'Sie ist Ärztin. Er arbeitet als Koch.' },
+  { en: 'I am a lawyer by profession. What is your profession?', de: 'Ich bin Anwältin von Beruf. Was ist dein Beruf?' },
+]
+
+export const MC_QS_QUESTIONS_VOCAB = [
+  { text: '___ kommst du? — Ich komme aus Spanien.', opts: ['Woher', 'Wohin'], ans: ['Woher'] },
+  { text: '___ wohnst du? — Ich wohne in Genf.', opts: ['Wo', 'Wann'], ans: ['Wo'] },
+  { text: '___ lernst du Deutsch? — Weil ich es brauche.', opts: ['Warum', 'Wer'], ans: ['Warum'] },
+  { text: 'Wie ___ Sprachen sprichst du? — Drei.', opts: ['viele', 'viel'], ans: ['viele'] },
+  { text: '___ Sprache sprichst du? — Portugiesisch.', opts: ['Welche', 'Wie'], ans: ['Welche'] },
+  { text: '"Wessen" asks about:', opts: ['whose', 'where'], ans: ['whose'] },
+]
+
+export const TRANSLATIONS_QUESTIONS_VOCAB = [
+  { en: 'Where are you from? — I am from Italy. And you?', de: 'Woher kommst du? — Ich komme aus Italien. Und du?' },
+  { en: 'Where are you going? — I am going to school.', de: 'Wohin gehst du? — Ich gehe in die Schule.' },
+  { en: 'Why are you learning German? — Because I live in Switzerland.', de: 'Warum lernst du Deutsch? — Weil ich in der Schweiz wohne.' },
+]
+
 export const FILL_GAPS_CH2 = [
   { parts: ['Wie alt ', ['bist'], ' du? — Ich ', ['bin'], ' zwanzig Jahre alt.'] },
   { parts: ['', ['Woher'], ' kommst du? — Ich komme aus Deutschland.'] },

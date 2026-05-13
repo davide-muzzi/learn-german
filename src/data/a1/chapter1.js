@@ -96,6 +96,51 @@ export const HABEN = [
   ['Sie (form.)', 'haben', 'you have (form.)'],
 ]
 
+export const MC_QS_GREETINGS = [
+  { text: 'Guten ___! — used during the daytime.', opts: ['Tag', 'Abend'], ans: ['Tag'] },
+  { text: 'Wie ___ du? — What is your name?', opts: ['heisst', 'bist'], ans: ['heisst'] },
+  { text: '"Freut mich!" means:', opts: ['Nice to meet you!', 'How are you?'], ans: ['Nice to meet you!'] },
+  { text: '___ geht es dir? — How are you doing?', opts: ['Wie', 'Was'], ans: ['Wie'] },
+  { text: 'Ich ___ aus Italien. (origin)', opts: ['komme', 'bin'], ans: ['komme'] },
+  { text: '"Bis bald!" means:', opts: ['See you soon!', 'Good day!'], ans: ['See you soon!'] },
+]
+
+export const TRANSLATIONS_GREETINGS = [
+  { en: 'Hello! My name is Nina. Nice to meet you!', de: 'Hallo! Ich heisse Nina. Freut mich!' },
+  { en: 'Good day! How are you? — I\'m doing well, thank you.', de: 'Guten Tag! Wie geht es Ihnen? — Mir geht es gut, danke.' },
+  { en: 'Where are you from? — I come from Germany. And you?', de: 'Woher kommst du? — Ich komme aus Deutschland. Und du?' },
+  { en: 'I live in Bern. See you later!', de: 'Ich wohne in Bern. Bis später!' },
+]
+
+export const MC_QS_EXPRESSIONS = [
+  { text: 'To say "You\'re welcome" after being thanked:', opts: ['Bitte', 'Danke'], ans: ['Bitte'] },
+  { text: '"Es tut mir leid" means:', opts: ['I\'m sorry', 'No problem'], ans: ['I\'m sorry'] },
+  { text: 'You accidentally bump into someone. You say:', opts: ['Entschuldigung!', 'Vielleicht!'], ans: ['Entschuldigung!'] },
+  { text: '"Kein Problem" means:', opts: ['No problem', 'Maybe'], ans: ['No problem'] },
+  { text: 'How do you say "Thank you very much"?', opts: ['Vielen Dank!', 'Danke, gleichfalls.'], ans: ['Vielen Dank!'] },
+]
+
+export const TRANSLATIONS_EXPRESSIONS = [
+  { en: 'Excuse me! — No problem, all good!', de: 'Entschuldigung! — Kein Problem, alles gut!' },
+  { en: 'Thank you very much! — You\'re welcome.', de: 'Vielen Dank! — Bitte.' },
+  { en: 'I\'m sorry. — It\'s fine!', de: 'Es tut mir leid. — Alles gut!' },
+]
+
+export const MC_QS_NUMBERS = [
+  { text: '"Sieben" is the German word for:', opts: ['7', '17'], ans: ['7'] },
+  { text: 'How do you say 12 in German?', opts: ['zwölf', 'zwanzig'], ans: ['zwölf'] },
+  { text: '"Fünfzehn" means:', opts: ['15', '50'], ans: ['15'] },
+  { text: 'How do you say 0?', opts: ['null', 'neun'], ans: ['null'] },
+  { text: '"Neunzehn" is:', opts: ['19', '9'], ans: ['19'] },
+  { text: 'How do you say 20?', opts: ['zwanzig', 'dreizehn'], ans: ['zwanzig'] },
+]
+
+export const TRANSLATIONS_NUMBERS = [
+  { en: 'I am seventeen years old.', de: 'Ich bin siebzehn Jahre alt.' },
+  { en: 'She has three brothers and two sisters.', de: 'Sie hat drei Brüder und zwei Schwestern.' },
+  { en: 'We have eleven students in our class.', de: 'Wir haben elf Schüler in unserer Klasse.' },
+]
+
 export const FILL_GAPS = [
   { parts: ['Hallo! Ich ', ['bin'], ' Dave.'] },
   { parts: ['Ich ', ['bin'], ' neunzehn Jahre alt.'] },

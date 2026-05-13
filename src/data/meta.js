@@ -37,8 +37,12 @@ export const CHAPTER_SECTIONS = {
       { key: 'expressions', label: 'Common Expressions',        desc: 'Everyday polite phrases' },
       { key: 'numbers',     label: 'Numbers 0–20',              desc: 'The foundation for counting' },
     ]},
-    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation', topics: [
-      { key: 'practice', label: 'Practice', desc: 'Fill the gaps, multiple choice, and translation' },
+    { key: 'exercises', label: 'Exercises',  desc: 'Practice by topic, then mixed review', topics: [
+      { key: 'greetings',   label: 'Greetings & Introduction', desc: 'Practice greetings, names, and origin' },
+      { key: 'expressions', label: 'Common Expressions',        desc: 'Practice everyday polite phrases' },
+      { key: 'numbers',     label: 'Numbers 0–20',              desc: 'Practice counting and number words' },
+      { key: 'sein-haben',  label: 'sein & haben',              desc: 'Practice the two core verbs' },
+      { key: 'mixed',       label: 'Mixed Practice',            desc: 'Review all Chapter 1 topics together' },
     ]},
   ],
   2: [
@@ -53,8 +57,12 @@ export const CHAPTER_SECTIONS = {
       { key: 'professions',         label: 'Professions',                         desc: 'Jobs and how to talk about what you do' },
       { key: 'questions',           label: 'W-Question Words',                    desc: 'The building blocks of every German question' },
     ]},
-    { key: 'exercises', label: 'Exercises',  desc: 'Fill the gaps, multiple choice, translation', topics: [
-      { key: 'practice', label: 'Practice', desc: 'Fill the gaps, multiple choice, and translation' },
+    { key: 'exercises', label: 'Exercises',  desc: 'Practice by topic, then mixed review', topics: [
+      { key: 'age-numbers',         label: 'Age, Numbers & Months',              desc: 'Practice age phrases, numbers, and months' },
+      { key: 'countries-languages', label: 'Countries, Languages & Nationalities', desc: 'Practice country and language vocab' },
+      { key: 'professions',         label: 'Professions',                         desc: 'Practice profession vocabulary' },
+      { key: 'questions',           label: 'W-Question Words',                    desc: 'Practice question words in context' },
+      { key: 'mixed',               label: 'Mixed Practice',                      desc: 'Review all Chapter 2 topics together' },
     ]},
   ],
 }
