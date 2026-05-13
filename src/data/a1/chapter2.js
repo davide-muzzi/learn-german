@@ -27,6 +27,22 @@ export const NUMBERS_21_100 = [
   ["1'000'000", 'eine Million'],
 ]
 
+export const MONTHS = [
+  ['der Monat / die Monate', 'month / months', ''],
+  ['Januar', 'January', ''],
+  ['Februar', 'February', ''],
+  ['März', 'March', ''],
+  ['April', 'April', ''],
+  ['Mai', 'May', ''],
+  ['Juni', 'June', ''],
+  ['Juli', 'July', ''],
+  ['August', 'August', ''],
+  ['September', 'September', ''],
+  ['Oktober', 'October', ''],
+  ['November', 'November', ''],
+  ['Dezember', 'December', ''],
+]
+
 export const NATIONALITIES = [
   ['die Nationalität', 'nationality', ''],
   ['Was ist deine Nationalität?', 'What is your nationality?', ''],

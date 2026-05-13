@@ -6,7 +6,7 @@ import {
   CHAPTERS, CHAPTER_SECTIONS,
   GREETINGS, YOUR_NAME, WHERE_FROM, EXPRESSIONS, NUMBERS,
   ALPHABET, UMLAUTS, DIPHTHONGS, SEIN, HABEN,
-  AGE_PHRASES, NUMBERS_21_100, NATIONALITIES, COUNTRIES, LANGUAGES,
+  AGE_PHRASES, MONTHS, NUMBERS_21_100, NATIONALITIES, COUNTRIES, LANGUAGES,
   PROFESSIONS, W_QUESTION_WORDS, FORMING_QUESTIONS, W_QUESTION_TABLE,
   FILL_GAPS_CH2, MC_QS_CH2, TRANSLATIONS_CH2, DATE_ORDINALS,
 } from '../data/index.js'
@@ -191,6 +191,11 @@ function backToChapter() {
             <p class="card-sub">All ordinals in dative form as used after <em>am</em>.</p>
             <DataTable :rows="DATE_ORDINALS" :headers="['Day', 'Am …']" />
           </div>
+          <div class="card">
+            <div class="card-title">Fragen bilden / Forming Questions</div>
+            <p class="card-sub">W-questions and yes/no questions in context.</p>
+            <DataTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
+          </div>
         </template>
 
         <template v-else-if="section === 'vocab'">
@@ -208,6 +213,11 @@ function backToChapter() {
                 <span class="num-word">{{ word }}</span>
               </div>
             </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Monate / Months</div>
+            <p class="card-sub">Months are always capitalised and masculine: <em>der Monat</em>. Use <em>im</em> + month to say "in January" etc.</p>
+            <DataTable :rows="MONTHS" :headers="['Word', 'Meaning', 'Note']" />
           </div>
           <div class="card">
             <div class="card-title">Nationalitäten / Nationalities</div>
@@ -233,11 +243,6 @@ function backToChapter() {
             <div class="card-title">W-Fragen / W-Question Words</div>
             <p class="card-sub">These are the building blocks of every question in German.</p>
             <DataTable :rows="W_QUESTION_WORDS" :headers="['Word', 'Meaning', 'Example']" />
-          </div>
-          <div class="card">
-            <div class="card-title">Fragen bilden / Forming Questions</div>
-            <p class="card-sub">W-questions and yes/no questions in context.</p>
-            <DataTable :rows="FORMING_QUESTIONS" :headers="['Question', 'Meaning', 'Type']" />
           </div>
         </template>
 
