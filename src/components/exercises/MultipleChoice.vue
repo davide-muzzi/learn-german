@@ -9,6 +9,10 @@ const props = defineProps({
 const mcDone = ref({})
 const mcCorrect = ref(0)
 
+const shuffledData = computed(() =>
+  props.data.map(q => ({ ...q, opts: [...q.opts].sort(() => Math.random() - 0.5) }))
+)
+
 const allAnswered = computed(() => Object.keys(mcDone.value).length === props.data.length)
 
 function pick(qi, opt) {
@@ -43,7 +47,7 @@ const scoreDisplay = computed(() => {
       Click the correct option to fill each gap. You'll get instant feedback.
     </div>
 
-    <div v-for="(q, qi) in data" :key="qi" class="q-block">
+    <div v-for="(q, qi) in shuffledData" :key="qi" class="q-block">
       <span class="q-label">Frage {{ qi + 1 }}</span>
       <div style="font-weight:500;margin-bottom:6px;">{{ q.text }}</div>
       <div class="mc-opts">
