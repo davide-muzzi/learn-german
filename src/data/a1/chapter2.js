@@ -183,7 +183,7 @@ export const MC_QS_CH2 = [
   { text: '___ lernst du Deutsch?', opts: ['Warum', 'Wer'], ans: ['Warum'] },
   { text: 'Welche Sprache ___ du?', opts: ['sprichst', 'bist'], ans: ['sprichst'] },
   { text: '___ gehst du? — Ich gehe nach Hause.', opts: ['Wohin', 'Woher'], ans: ['Wohin'] },
-  { text: '___ ist dein Name? — Ich heisse Lea.', opts: ['Wie', 'Was'], ans: ['Wie'] },
+  { text: '___ ist dein Name? — Ich heisse Lea.', opts: ['Wie', 'Was'], ans: ['Wie', 'Was'], note: 'Both correct — "Was ist dein Name?" is more logical with sein, but "Wie ist dein Name?" is a common set phrase carried over from "Wie heisst du?"' },
   { text: '___ hast du Geburtstag? — Am dritten Mai.', opts: ['Wann', 'Wer'], ans: ['Wann'] },
 ]
 

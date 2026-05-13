@@ -60,7 +60,7 @@ const scoreDisplay = computed(() => {
           @click="pick(qi, opt)"
         >{{ opt }}</button>
       </div>
-      <div v-if="q.note" class="mc-note">💡 {{ q.note }}</div>
+      <div v-if="q.note && mcDone[qi]" class="mc-note">💡 {{ q.note }}</div>
     </div>
 
     <div v-if="scoreDisplay" class="score-bar" :class="scoreDisplay.cls" style="margin-top:8px;">
