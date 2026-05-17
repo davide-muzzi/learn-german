@@ -20,15 +20,15 @@ watch(() => route.name, name => {
 </script>
 
 <template>
-  <header class="mobile-header" :class="{ 'home-header': isHome }">
-    <button v-if="!isHome" class="hamburger" @click="sidebarOpen = !sidebarOpen" aria-label="Toggle navigation">
+  <header class="mobile-header">
+    <button class="hamburger" @click="sidebarOpen = !sidebarOpen" aria-label="Toggle navigation">
       <span /><span /><span />
     </button>
     <RouterLink to="/" class="mobile-title"><Languages :size="16" /> Learn German (CH)</RouterLink>
   </header>
 
   <Transition name="overlay-fade">
-    <div v-if="sidebarOpen && !isHome" class="sidebar-overlay" @click="sidebarOpen = false" />
+    <div v-if="sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false" />
   </Transition>
 
   <AppSidebar :open="sidebarOpen" :class="{ collapsed: sidebarCollapsed }" @close="sidebarOpen = false" />

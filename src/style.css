@@ -1064,7 +1064,6 @@ tbody tr:hover td { background: var(--surface); }
 
 /* Mobile homepage */
 @media (max-width: 768px) {
-  .mobile-header.home-header { justify-content: center; }
   .home-hero { padding: 36px 16px 32px; }
   .home-title { font-size: 30px; }
   .home-sub { font-size: 15px; }
