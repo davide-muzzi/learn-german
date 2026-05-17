@@ -235,14 +235,14 @@ function backToSection() {
 
         <!-- Exercises: sein & haben -->
         <template v-else-if="section === 'exercises' && topic === 'sein-haben'">
-          <FillGaps />
-          <MultipleChoice />
+          <FillGaps :data="FILL_GAPS" />
+          <MultipleChoice :data="MC_QS" />
         </template>
 
         <!-- Exercises: Mixed -->
         <template v-else-if="section === 'exercises' && topic === 'mixed'">
-          <FillGaps />
-          <Translation />
+          <FillGaps :data="FILL_GAPS" />
+          <Translation :data="TRANSLATIONS" />
         </template>
 
       </template>

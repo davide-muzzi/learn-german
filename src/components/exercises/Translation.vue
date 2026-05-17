@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { TRANSLATIONS } from '../../data/index.js'
 
 const props = defineProps({
-  data: { type: Array, default: () => TRANSLATIONS },
+  data: { type: Array, required: true },
 })
 
 const visible = ref({})

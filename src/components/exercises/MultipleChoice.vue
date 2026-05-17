@@ -1,9 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { MC_QS } from '../../data/index.js'
 
 const props = defineProps({
-  data: { type: Array, default: () => MC_QS },
+  data: { type: Array, required: true },
 })
 
 const mcDone = ref({})

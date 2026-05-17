@@ -1,9 +1,8 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { FILL_GAPS } from '../../data/index.js'
 
 const props = defineProps({
-  data:        { type: Array,  default: () => FILL_GAPS },
+  data:        { type: Array,  required: true },
   instruction: { type: String, default: 'Fill each blank with the correct conjugation of <strong>sein</strong> (to be) or <strong>haben</strong> (to have).' },
 })
 
