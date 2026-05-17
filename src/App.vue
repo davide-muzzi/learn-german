@@ -16,6 +16,7 @@ const isHome = computed(() => route.name === 'home')
 watch(() => route.name, name => {
   if (name !== 'level' && name !== 'chapter') sidebarOpen.value = false
   if (name === 'home') sidebarCollapsed.value = true
+  if (name === 'level') sidebarCollapsed.value = false
 }, { immediate: true })
 </script>
 
