@@ -16,9 +16,10 @@ No test runner or linter is configured.
 
 This is a Vue 3 + Vite SPA — a German A1 lesson book with vocabulary tables, grammar conjugations, and interactive exercises.
 
-**Routing** uses `createWebHashHistory` (hash URLs). Multiple routes share the same view component, distinguished by `route.name` at runtime:
-- `VocabView` serves all `/v-*` routes (greetings, names, origin, expressions)
-- `ConjugView` serves `/g-sein` and `/g-haben`
+**Routing** uses `createWebHashHistory` (hash URLs). `ChapterView` handles three nested route levels distinguished by `route.name` at runtime:
+- `chapter` — `/:level/ch/:n` — section picker
+- `section` — `/:level/ch/:n/:section` — topic picker (auto-skipped when section has only one topic)
+- `topic` — `/:level/ch/:n/:section/:topic` — actual content
 
 **Data** is split across `src/data/` by level and chapter:
 - `src/data/a1/chapter1.js`, `src/data/a1/chapter2.js`, … — vocab, conjugations, exercises for each chapter
@@ -33,5 +34,3 @@ To add content for a chapter, edit (or create) the relevant `src/data/<level>/ch
 - `App.vue` — thin shell: `AppSidebar` + `RouterView`
 
 **Legacy files** — `app.js` and `style.css` at the repo root are the original vanilla JS implementation kept for reference. They are not imported by the Vue app.
-
-**Unused scaffold** — `src/components/HelloWorld.vue` is a leftover from the Vite template and is not used anywhere.
