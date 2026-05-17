@@ -10,10 +10,13 @@ import { notesOpen, toggleNotes } from './composables/useNotesOpen.js'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
-watch(() => route.name, name => { if (name !== 'level' && name !== 'chapter') sidebarOpen.value = false })
-
 const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
 const isHome = computed(() => route.name === 'home')
+
+watch(() => route.name, name => {
+  if (name !== 'level' && name !== 'chapter') sidebarOpen.value = false
+  if (name === 'home') sidebarCollapsed.value = true
+})
 </script>
 
 <template>
@@ -28,15 +31,15 @@ const isHome = computed(() => route.name === 'home')
     <div v-if="sidebarOpen && !isHome" class="sidebar-overlay" @click="sidebarOpen = false" />
   </Transition>
 
-  <AppSidebar v-if="!isHome" :open="sidebarOpen" :class="{ collapsed: sidebarCollapsed }" @close="sidebarOpen = false" />
+  <AppSidebar :open="sidebarOpen" :class="{ collapsed: sidebarCollapsed }" @close="sidebarOpen = false" />
 
   <Transition name="reopen-fade">
-    <button v-if="!isHome && sidebarCollapsed" class="sidebar-reopen" title="Open sidebar" @click="sidebarCollapsed = false">
+    <button v-if="sidebarCollapsed" class="sidebar-reopen" title="Open sidebar" @click="sidebarCollapsed = false">
       <PanelLeftOpen :size="18" />
     </button>
   </Transition>
 
-  <main class="main" :class="{ 'sidebar-collapsed': sidebarCollapsed, 'no-sidebar': isHome }">
+  <main class="main" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
     <div class="main-content">
       <RouterView />
     </div>
