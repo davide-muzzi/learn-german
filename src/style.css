@@ -148,9 +148,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-.main.no-sidebar {
-  margin-left: 0;
-}
 
 /* ── PAGE HEADER ── */
 .page-header {
