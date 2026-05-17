@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { Languages, PanelLeftOpen, StickyNote } from '@lucide/vue'
 import AppSidebar from './components/AppSidebar.vue'
@@ -11,7 +11,6 @@ import { notesOpen, toggleNotes } from './composables/useNotesOpen.js'
 const sidebarOpen = ref(false)
 const route = useRoute()
 const { collapsed: sidebarCollapsed } = useSidebarCollapsed()
-const isHome = computed(() => route.name === 'home')
 
 watch(() => route.name, name => {
   if (name !== 'level' && name !== 'chapter') sidebarOpen.value = false
@@ -48,12 +47,12 @@ watch(() => route.name, name => {
   </main>
 
   <Transition name="reopen-fade">
-    <button v-if="!isHome && !notesOpen" class="notes-open-btn" title="Open notes" @click="toggleNotes">
+    <button v-if="!notesOpen" class="notes-open-btn" title="Open notes" @click="toggleNotes">
       <StickyNote :size="18" />
     </button>
   </Transition>
 
-  <button v-if="!isHome" class="notes-fab" aria-label="Open notes" @click="toggleNotes">
+  <button class="notes-fab" aria-label="Open notes" @click="toggleNotes">
     <StickyNote :size="22" />
   </button>
 
